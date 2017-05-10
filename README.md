@@ -3,7 +3,8 @@ generazione classi java da schema  ufficiali del Processo Civile Telematico http
 
 Per generare le classi:
 
+```bash
 $mvn clean install generate-sources
-
+```
 il plug-in maven-jaxb2-plugin genera le classi nella cartella target/generated-sources
  
