@@ -1,0 +1,1173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Nik (.) -->
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/cassazione/introduttivi/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tn="http://schemi.processotelematico.giustizia.it/cassazione/introduttivi/v1" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" targetNamespace="http://schemi.processotelematico.giustizia.it/cassazione/introduttivi/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+  <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+  <xs:simpleType name="TipoRicorso">
+    <xs:annotation>
+      <xs:documentation>Enumerato per la tipologia di ricorso</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CN">
+        <xs:annotation>
+          <xs:documentation>CONTR. CON CERTIFICATO NEG.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CU">
+        <xs:annotation>
+          <xs:documentation>REG. DI COMPETENZA D'UFFICIO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DI">
+        <xs:annotation>
+          <xs:documentation>DIVERSE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DM">
+        <xs:annotation>
+          <xs:documentation>DISCIPLINA MAGISTRATI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DN">
+        <xs:annotation>
+          <xs:documentation>DISCIPLINA NOTAI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EL">
+        <xs:annotation>
+          <xs:documentation>ELETTORALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ER">
+        <xs:annotation>
+          <xs:documentation>ERRORE MATERIALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GI">
+        <xs:annotation>
+          <xs:documentation>REGOLAMENTO DI GIURISDIZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IU">
+        <xs:annotation>
+          <xs:documentation>CONTR. ISCRITTO D'UFF. CON C.N</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RA">
+        <xs:annotation>
+          <xs:documentation>RICORSO ANOMALO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RC">
+        <xs:annotation>
+          <xs:documentation>REGOLAMENTO DI COMPETENZA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RE">
+        <xs:annotation>
+          <xs:documentation>REG.GIURISDIZIONE ELETTORALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RO">
+        <xs:annotation>
+          <xs:documentation>RICORSO ORDINARIO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RP">
+        <xs:annotation>
+          <xs:documentation>REG.PREVENTI. DI GIURISDIZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UR">
+        <xs:annotation>
+          <xs:documentation>EX ART.420BIS CPC URGENTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ON">
+        <xs:annotation>
+          <xs:documentation>SPESE ONORARI AVVOCATI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DA">
+        <xs:annotation>
+          <xs:documentation>DISCIPLINA AVVOCATI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DS">
+        <xs:annotation>
+          <xs:documentation>DISCIPLINARE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RV">
+        <xs:annotation>
+          <xs:documentation>REVOCAZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DP">
+        <xs:annotation>
+          <xs:documentation>DECRETO DI ESPULSIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RN">
+        <xs:annotation>
+          <xs:documentation>RICORSO NON NOTIFICATO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RM">
+        <xs:annotation>
+          <xs:documentation>RESPONS MAGISTR A.5 L.117/88</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MN">
+        <xs:annotation>
+          <xs:documentation>MINORI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RD">
+        <xs:annotation>
+          <xs:documentation>RICORSO NON DEPOSITATO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RI">
+        <xs:annotation>
+          <xs:documentation>NULLO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EI">
+        <xs:annotation>
+          <xs:documentation>EQUO INDENNIZZO A.3 L.89 24/03/01</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MaterieRicorso">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="01">
+        <xs:annotation>
+          <xs:documentation>ACQUE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="02">
+        <xs:annotation>
+          <xs:documentation>ARBITRATO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="03">
+        <xs:annotation>
+          <xs:documentation>ARRICCHIMENTO SENZA CAUSA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="04">
+        <xs:annotation>
+          <xs:documentation>AZIENDA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="05">
+        <xs:annotation>
+          <xs:documentation>BENI IMMATERIALI E DIRITTO DI AUTORE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="06">
+        <xs:annotation>
+          <xs:documentation>CITTADINANZA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="07">
+        <xs:annotation>
+          <xs:documentation>COMUNIONE E CONDOMINIO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="08">
+        <xs:annotation>
+          <xs:documentation>CONCORRENZA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="09">
+        <xs:annotation>
+          <xs:documentation>AGENZIA (TRANNE RITO LAVORO)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="10">
+        <xs:annotation>
+          <xs:documentation>APPALTI PUBBLICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="11">
+        <xs:annotation>
+          <xs:documentation>APPALTO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="12">
+        <xs:annotation>
+          <xs:documentation>BANCA E BORSA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="13">
+        <xs:annotation>
+          <xs:documentation>DONAZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="14">
+        <xs:annotation>
+          <xs:documentation>RENDITA PERPETUA E VITALIZIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="15">
+        <xs:annotation>
+          <xs:documentation>VENDITA,PERMUTA,RIPORTO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="16">
+        <xs:annotation>
+          <xs:documentation>CONTRATTI: TUTTI GLI ALTRI TIPI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="17">
+        <xs:annotation>
+          <xs:documentation>CONTRATTI E OBBLIGAZIONI IN GENERE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="18">
+        <xs:annotation>
+          <xs:documentation>DIRITTI REALI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="19">
+        <xs:annotation>
+          <xs:documentation>DISCIPLINARI AVV. E MAG.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="20">
+        <xs:annotation>
+          <xs:documentation>DISCIPLINARI PROFESSIONISTI,DIVERSI DA AVV.E MAG.E ISCR.ALBI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="21">
+        <xs:annotation>
+          <xs:documentation>DIVISIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="22">
+        <xs:annotation>
+          <xs:documentation>EDILIZIA E URBANISTICA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="23">
+        <xs:annotation>
+          <xs:documentation>EDILIZIA POP. ED ECONOM.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="24">
+        <xs:annotation>
+          <xs:documentation>ELETTORATO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="25">
+        <xs:annotation>
+          <xs:documentation>ESECUZIONE FORZATA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="26">
+        <xs:annotation>
+          <xs:documentation>ESPROPRIAZIONE E ISTITUTI AFFINI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="27">
+        <xs:annotation>
+          <xs:documentation>FALLIMENTO E ISTITUTI AFFINI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="28">
+        <xs:annotation>
+          <xs:documentation>FAMIGLIA E ISTITUTI AFFINI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="29">
+        <xs:annotation>
+          <xs:documentation>GESTIONE DI AFFARI E PROMESSE UNILATERALI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="30">
+        <xs:annotation>
+          <xs:documentation>INDEBITO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="31">
+        <xs:annotation>
+          <xs:documentation>INTERNAZIONALE (DELIBAZIONI)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="32">
+        <xs:annotation>
+          <xs:documentation>IPOTECA, PEGNO E PRIVILEGI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="33">
+        <xs:annotation>
+          <xs:documentation>LAVORO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="34">
+        <xs:annotation>
+          <xs:documentation>LAVORO AUTONOMO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="35">
+        <xs:annotation>
+          <xs:documentation>NAVIGAZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="36">
+        <xs:annotation>
+          <xs:documentation>PERSONE FISICHE E GIURIDICHE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="37">
+        <xs:annotation>
+          <xs:documentation>POSSESSO E ISTITUTI AFFINI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="38">
+        <xs:annotation>
+          <xs:documentation>PRESCRIZIONE E DECADENZA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="39">
+        <xs:annotation>
+          <xs:documentation>PREVIDENZA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="40">
+        <xs:annotation>
+          <xs:documentation>PROCEDURA CIVILE (IN GENERE, SALVO ESECUZIONI)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="41">
+        <xs:annotation>
+          <xs:documentation>PUBBLICA AMMINISTRAZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="42">
+        <xs:annotation>
+          <xs:documentation>REGOLAMENTI DI GIURISDIZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="43">
+        <xs:annotation>
+          <xs:documentation>RESPONSABILITA' CIVILE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="44">
+        <xs:annotation>
+          <xs:documentation>RESPONSABILITA' CIVILE DEI GIUDICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="45">
+        <xs:annotation>
+          <xs:documentation>RICORSI CON MOTIVI ATTINENTI ALLA GIURISDIZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="46">
+        <xs:annotation>
+          <xs:documentation>RIC.CONTRO DECISIONI DI GIUDICI SPECIALI(CONS.DI STATO ETC.)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="47">
+        <xs:annotation>
+          <xs:documentation>RIFORMA FONDIARIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="48">
+        <xs:annotation>
+          <xs:documentation>SANZIONI AMMINISTRATIVE IN MATERIA DI LAVORO E PREVIDENZA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="49">
+        <xs:annotation>
+          <xs:documentation>SANZIONI AMMINISTRATIVE IN MATERIA FINANZIARIA E TRIBUTARIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="50">
+        <xs:annotation>
+          <xs:documentation>SANZIONI AMM.VE DIVERSE DA LAVORO,PREVIDENZA,FINANZ. E TRIB.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="51">
+        <xs:annotation>
+          <xs:documentation>SOCIETA'</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="52">
+        <xs:annotation>
+          <xs:documentation>STATO CIVILE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="53">
+        <xs:annotation>
+          <xs:documentation>SUCCESSIONI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="54">
+        <xs:annotation>
+          <xs:documentation>TITOLI DI CREDITO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="55">
+        <xs:annotation>
+          <xs:documentation>TRASCRIZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="56">
+        <xs:annotation>
+          <xs:documentation>TRIBUTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="57">
+        <xs:annotation>
+          <xs:documentation>USI CIVICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="58">
+        <xs:annotation>
+          <xs:documentation>EQUA RIPARAZIONE PER VIOLAZ. DEL TERMINE RAGION. DEL PROCES</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="59">
+        <xs:annotation>
+          <xs:documentation>IMMIGRAZIONE (ESPULSIONE DELLO STRANIERO,SOGGIORNO)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TipoNotifica">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:documentation>EX ART  139 CPC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="2">
+        <xs:annotation>
+          <xs:documentation>EX ART 149 CPC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3">
+        <xs:annotation>
+          <xs:documentation>EX ART 140 CPC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="4">
+        <xs:annotation>
+          <xs:documentation>EX ART 142 CPC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="5">
+        <xs:annotation>
+          <xs:documentation>EX ART 143 CPC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="6">
+        <xs:annotation>
+          <xs:documentation>ALTRI TIPI DI NOTIFICA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="7">
+        <xs:annotation>
+          <xs:documentation>EX  L 53 -1994</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="8">
+        <xs:annotation>
+          <xs:documentation>DL N.546-92</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TipoAtto">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="A">
+        <xs:annotation>
+          <xs:documentation>COPIA AUTENTICA PROV.IMPUGNATO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AA">
+        <xs:annotation>
+          <xs:documentation>MEMORIA DIF.REG.COMP. (D'UFF.)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AB">
+        <xs:annotation>
+          <xs:documentation>ISTANZA ASSEGN.NE  SEZIONI UNITE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AC">
+        <xs:annotation>
+          <xs:documentation>ISTANZA SOSPENSIONE EX ART.398 CPC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B">
+        <xs:annotation>
+          <xs:documentation>ISTANZA EX ART.369 CPC (DUPLO)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="C">
+        <xs:annotation>
+          <xs:documentation>ATTI PRECEDENTI GRADI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CR">
+        <xs:annotation>
+          <xs:documentation>CONTRORICORSO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D">
+        <xs:annotation>
+          <xs:documentation>PROCURA SPECIALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E">
+        <xs:annotation>
+          <xs:documentation>PROCURA SPECIALE DI REVOCA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F">
+        <xs:annotation>
+          <xs:documentation>PROCURA SPECIALE IN SOSTITUZ.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FU">
+        <xs:annotation>
+          <xs:documentation>FASCICOLO DI UFFICIO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="G">
+        <xs:annotation>
+          <xs:documentation>DELEGA IN CALCE AL RICORSO AVV</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="H">
+        <xs:annotation>
+          <xs:documentation>ISTANZA SOLLECITA FISSAZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="I">
+        <xs:annotation>
+          <xs:documentation>ISTANZA RINUNCIA AL RICORSO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="J">
+        <xs:annotation>
+          <xs:documentation>ACCETTAZIONE RINUNCIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="K">
+        <xs:annotation>
+          <xs:documentation>ISTANZA RINUNCIA AL MANDATO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="L">
+        <xs:annotation>
+          <xs:documentation>RINNOVAZIONE NOTIFICA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="M">
+        <xs:annotation>
+          <xs:documentation>INTEGRAZIONE CONTRADDITORIO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="N">
+        <xs:annotation>
+          <xs:documentation>AVVISO RICEV.AVVENUTA NOTIFICA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NC">
+        <xs:annotation>
+          <xs:documentation>NOTIFICA CONTRORICORSO IN C.C.C.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="O">
+        <xs:annotation>
+          <xs:documentation>CORREZ.ERR.MATERIALE SENT.IMP.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="P">
+        <xs:annotation>
+          <xs:documentation>VARIAZIONE DOMICILIO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PM">
+        <xs:annotation>
+          <xs:documentation>PROCURA MINISTERIALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PT">
+        <xs:annotation>
+          <xs:documentation>VARIAZIONE DOMICILIO DIF. PER TUTTI I RICORSI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Q">
+        <xs:annotation>
+          <xs:documentation>RICHIESTA EX ART.135 DISP.CPC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="R">
+        <xs:annotation>
+          <xs:documentation>SECONDO ORIGINALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="S">
+        <xs:annotation>
+          <xs:documentation>DEPOSITO EX ART. 372 CPC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="T">
+        <xs:annotation>
+          <xs:documentation>MEMORIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="U">
+        <xs:annotation>
+          <xs:documentation>ISTANZA RITIRO ATTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="V">
+        <xs:annotation>
+          <xs:documentation>ISTANZA RIUNIONE DEI RICORSI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="W">
+        <xs:annotation>
+          <xs:documentation>ISTANZA PROROGA RITIRO ATTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="X">
+        <xs:annotation>
+          <xs:documentation>SOSTITUZIONE ATTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="XY">
+        <xs:annotation>
+          <xs:documentation>NUMERAZIONE DEL CARTELLINO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Y">
+        <xs:annotation>
+          <xs:documentation>CONDONO FISCALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="YY">
+        <xs:annotation>
+          <xs:documentation>INTEGR.CONTRIBUTO LEGGE 488-99</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Z">
+        <xs:annotation>
+          <xs:documentation>RESTITUZIONE ATTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZZ">
+        <xs:annotation>
+          <xs:documentation>VARIE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CodiceAutorita">
+    <xs:annotation>
+      <xs:documentation>Codici delle autorità emittenti dei procedimenti</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AE">
+        <xs:annotation>
+          <xs:documentation>AGENZIA DELLE ENTRATE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AI">
+        <xs:annotation>
+          <xs:documentation>CONS.NAZ.ARCH.ING.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AL">
+        <xs:annotation>
+          <xs:documentation>ALTRE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AP">
+        <xs:annotation>
+          <xs:documentation>TRIB.REG. ACQUE PUBBL.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AR">
+        <xs:annotation>
+          <xs:documentation>CONS.NAZ.ARCHITET.PIANIF.PAESAGG.CONSERV.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BR">
+        <xs:annotation>
+          <xs:documentation>COMM.RIC.PROV.UFF.CEN.BR</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CA">
+        <xs:annotation>
+          <xs:documentation>CORTE D'APPELLO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CB">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI EMILIA ROMAGNA sez.giurisdiz.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CC">
+        <xs:annotation>
+          <xs:documentation>CORTE DEI CONTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CD">
+        <xs:annotation>
+          <xs:documentation>COMM.TRIB.REG.SEZ.DIST.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CE">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI II SEZ.GIURISD.CENTR.APP.ROMA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CF">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI SICILIA sez.giurisdiz.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CG">
+        <xs:annotation>
+          <xs:documentation>COMM.TRIB. I GRADO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CH">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI CAMPANIA sez.giurisdiz.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CI">
+        <xs:annotation>
+          <xs:documentation>COMM.TRIB.REG.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CJ">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI TOSCANA SEZ.GIURISD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CK">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI lazio sez.giurisdiz.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CL">
+        <xs:annotation>
+          <xs:documentation>CONS.NAZ.CONSUL.LAV.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CM">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI VENETO SEZ.GIURISD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CN">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI I SEZ.GIURISD.CENTR.APP.ROMA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CO">
+        <xs:annotation>
+          <xs:documentation>CONSIGLIO DI STATO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CP">
+        <xs:annotation>
+          <xs:documentation>COMM. TRIBUTARIA PROVINCIALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CQ">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI PUGLIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CR">
+        <xs:annotation>
+          <xs:documentation>COMMISSAR.REGIONALE USI CIVICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CS">
+        <xs:annotation>
+          <xs:documentation>CONSIGLIO SUP.MAGISTRATURA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CT">
+        <xs:annotation>
+          <xs:documentation>COMM. TRIBUTARIA CENTRALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CU">
+        <xs:annotation>
+          <xs:documentation>COMM.REG.PER RIORD. USI CIVILI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CV">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI VALLE D'AOSTA SEZ.GIURISD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CW">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI ABRUZZO SEZ.GIURISD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CX">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI CALABRIA SEZ.GIURISD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CY">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI FRIULI V.G.SEZ.GIURISD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CZ">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI LOMBARDIA SEZ.GIURISD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DC">
+        <xs:annotation>
+          <xs:documentation>CONS.NAZ.DOTT.COMMERC.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DO">
+        <xs:annotation>
+          <xs:documentation>CONS.NAZ.SPEDIZ.DOG.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DP">
+        <xs:annotation>
+          <xs:documentation>SEZ. DIST. DI PRETURA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EP">
+        <xs:annotation>
+          <xs:documentation>COMM.CENTR.ESERC.PROFESSIONI SANITARIE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ES">
+        <xs:annotation>
+          <xs:documentation>COLLEGIO ARBITRALE ESPRO. C.A.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GC">
+        <xs:annotation>
+          <xs:documentation>GIUDICE CONCILIATORE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GD">
+        <xs:annotation>
+          <xs:documentation>SEZIONE DISTACC GIUDICE PACE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GE">
+        <xs:annotation>
+          <xs:documentation>CONSIGLIO NAZIONALE GEOMETRI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GF">
+        <xs:annotation>
+          <xs:documentation>GIUDICE DELEGATO AL FALLIMENTO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GP">
+        <xs:annotation>
+          <xs:documentation>GIUDICE DI PACE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GU">
+        <xs:annotation>
+          <xs:documentation>GIUDICE UDIENZA PRELIMINARE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="II">
+        <xs:annotation>
+          <xs:documentation>COMM. TRIBUTARIA II GRADO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IR">
+        <xs:annotation>
+          <xs:documentation>CONSIGLIO NAZ.DEGLI INGEGNERI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MI">
+        <xs:annotation>
+          <xs:documentation>TRIBUNALE PER I MINORENNI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NF">
+        <xs:annotation>
+          <xs:documentation>CONSIGLIO NAZIONALE FORENSE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PC">
+        <xs:annotation>
+          <xs:documentation>CONS.NAZ.RAG.PERITI COMMERC.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PI">
+        <xs:annotation>
+          <xs:documentation>CONS.NAZ.PERITI INDUSTRIALI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PR">
+        <xs:annotation>
+          <xs:documentation>PRETORE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RS">
+        <xs:annotation>
+          <xs:documentation>CONS.DI GIUST. AMM.SICILIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SD">
+        <xs:annotation>
+          <xs:documentation>SEZ.DIST.CORTE D'APPELLO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SE">
+        <xs:annotation>
+          <xs:documentation>GIUNTA SPEC.ESPROP. C.A.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SG">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI SEZ.GIURISD.MARCHE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SL">
+        <xs:annotation>
+          <xs:documentation>CORTE CONTI SEZ.GIURISDIZ. LIGURIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SM">
+        <xs:annotation>
+          <xs:documentation>TRIBUNALE SUPREMO MILITARE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP">
+        <xs:annotation>
+          <xs:documentation>TRIB.SUP. DELLE ACQUE PUBBLICHE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ST">
+        <xs:annotation>
+          <xs:documentation>SEZ DISTACCATA DI TAR</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SU">
+        <xs:annotation>
+          <xs:documentation>CORTE SUPREMA DI CASSAZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TA">
+        <xs:annotation>
+          <xs:documentation>TRIBUNALE AMM. REGIONALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TD">
+        <xs:annotation>
+          <xs:documentation>SEDE DISTACCATA DI TRIBUNALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TM">
+        <xs:annotation>
+          <xs:documentation>TRIBUNALE MILITARE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TR">
+        <xs:annotation>
+          <xs:documentation>TRIBUNALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UC">
+        <xs:annotation>
+          <xs:documentation>COMM.LIQUIDATORE USI CIVICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UE">
+        <xs:annotation>
+          <xs:documentation>UFF.ELETT.CENTR.NAZIONALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Ricorso">
+    <xs:annotation>
+      <xs:documentation>Iscrizione ricorso</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="pt:AnagraficaProcedimento"/>
+            <xs:element name="DomiciliazioneDifensore" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>Tipologia della domiciliazione difensore. E' possibile specificare combinazioni di tipologie per ogni difensore</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="domiciliatario" minOccurs="0"/>
+                  <xs:element name="difensore" minOccurs="0"/>
+                  <xs:element name="pressoCorteCassazione" minOccurs="0"/>
+                  <xs:element name="exArt135" minOccurs="0"/>
+                </xs:all>
+                <xs:attribute name="codiceFiscale" type="bt:CodiceFiscale">
+                  <xs:annotation>
+                    <xs:documentation>Codice fiscale del difensore iscritto</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:complexType>
+              <xs:keyref name="FK_DIFENSORE_AVVOCATO" refer="pt:PK_AVVOCATO">
+                <xs:selector xpath="."/>
+                <xs:field xpath="@codiceFiscale"/>
+              </xs:keyref>
+            </xs:element>
+            <xs:element name="RichiestaNotifica" type="xs:date" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Data richiesta della notifica</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Notifica" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Data della notifica</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:simpleContent>
+                  <xs:extension base="xs:date">
+                    <xs:attribute name="tipo" type="TipoNotifica"/>
+                  </xs:extension>
+                </xs:simpleContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="InizioGiudizioPrimoGrado" minOccurs="0">
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="anno" type="xs:string"/>
+                  <xs:element name="autorita" type="xs:string"/>
+                  <xs:element name="localita"/>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Materia" type="MaterieRicorso" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>Materie oggetto del ricorso</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Provvedimento" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>Provvedimenti oggetto del ricorso</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Numero" type="xs:string"/>
+                  <xs:element name="Luogo" type="xs:string"/>
+                  <xs:element name="DataDeposito" type="xs:date"/>
+                  <xs:element name="NRG" type="pt:RiferimentoFascicolo" minOccurs="0"/>
+                  <xs:element name="DataNotifica" type="xs:date" minOccurs="0"/>
+                  <xs:element name="DataComunicato" type="xs:date" minOccurs="0"/>
+                </xs:sequence>
+                <xs:attribute name="tipo" use="required">
+                  <xs:annotation>
+                    <xs:documentation>Tipologia del provvedimento</xs:documentation>
+                  </xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="Definitivo">
+                        <xs:annotation>
+                          <xs:documentation>Provvedimento definitivo</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="NonDefinitivo">
+                        <xs:annotation>
+                          <xs:documentation>Provvedimento non definitivo</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="GiudizioPendente">
+                        <xs:annotation>
+                          <xs:documentation>Provvedimento con giudizio pendente</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="natura" use="required">
+                  <xs:annotation>
+                    <xs:documentation>Natura del provvedimento</xs:documentation>
+                  </xs:annotation>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="PR">
+                        <xs:annotation>
+                          <xs:documentation>Provvedimento</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="SE">
+                        <xs:annotation>
+                          <xs:documentation>Sentenza</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="AL">
+                        <xs:annotation>
+                          <xs:documentation>Altro</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="OR">
+                        <xs:annotation>
+                          <xs:documentation>Ordinanza</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="DC">
+                        <xs:annotation>
+                          <xs:documentation>Decreto</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="DE">
+                        <xs:annotation>
+                          <xs:documentation>Decisione</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                      <xs:enumeration value="GP">
+                        <xs:annotation>
+                          <xs:documentation>Giudizio pendente</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="autorita" type="CodiceAutorita" use="required">
+                  <xs:annotation>
+                    <xs:documentation>Autorità emittente</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="tipo" type="TipoRicorso" use="required"/>
+          <xs:attribute name="annoIGPG">
+            <xs:annotation>
+              <xs:documentation>Anno di inizio giudizio di primo grado</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="\d{4,4}"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

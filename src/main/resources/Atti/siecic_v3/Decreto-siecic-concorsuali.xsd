@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/magistrato/Decreto/v3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" xmlns:ns1="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/magistrato/Decreto/v3" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/magistrato/Decreto/v3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="../tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="../tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="../eventi.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI  DEL GIUDICE DELEGATO PER LE PROCEDURE CONCORSUALI</xs:documentation>
+		<xs:documentation>Gli atti qui definiti si riferiscono a procedimenti in essere</xs:documentation>
+    <xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+ </xs:annotation>
+	<xs:element name="FissazioneUdienza">
+		<xs:annotation>
+			<xs:documentation>Fissazione prima udienza giudice relatore e fissazione udienza nuovo rito per tardive (convocazione creditori)</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:fissazionePrimaUdienza"/>
+									<xs:element ref="evt:fissazioneUdienzaTardiva"/>
+									<xs:element ref="evt:rinvioUdienza"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DecretoGenerico">
+		<xs:annotation>
+			<xs:documentation>Decreto Generico</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:decretoRigettoFallimento"/>
+									<xs:element ref="evt:decretoEsecutivitaStatoPassivo"/>
+									<xs:element ref="evt:decretoChiusura"/>
+									<xs:element ref="evt:approvazioneRipartoParziale"/>
+									<xs:element ref="evt:approvazioneRipartoFinale"/>
+									<xs:element ref="evt:approvazioneProgrammaLiquidazione"/>
+                                    <xs:element ref="evt:accoglimentoIstanza"/>
+                                    <xs:element ref="evt:rigettoIstanza"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RigettoDomanda">
+		<xs:annotation>
+			<xs:documentation>Rigetto domanda di ammissione al passivo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence minOccurs="0">
+						<xs:element name="Insinuazione" type="st:RiferimentoCronologico">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AmmissionePassivo">
+		<xs:annotation>
+			<xs:documentation>Ammissione stato passivo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence minOccurs="0">
+						<xs:element name="Domanda" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="st:RiferimentoCronologico">
+										<xs:sequence>
+											<xs:element ref="pt:ModificheAnagrafica" minOccurs="0"/>
+											<xs:choice>
+												<xs:element ref="st:precisazioneCredito" minOccurs="0" maxOccurs="unbounded"/>
+												<xs:element name="ElencoBeni" type="st:BeneMobile" minOccurs="0" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Elenco dei beni rivendicati dai creditori insinuati</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:choice>
+											<xs:element name="Motivazioni" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

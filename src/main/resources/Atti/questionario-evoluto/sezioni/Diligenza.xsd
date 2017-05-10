@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="Diligenza">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element name="DiligenzaSpiegataAmministratori" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Diligenza spiegata dagli amministratori nell’esercizio dell’attività imprenditoriale</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="TentativiEsperiti">
+              <xs:annotation>
+                <xs:documentation>entativi esperiti per fronteggiare lo stato di crisi</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eAnnotazione">
+                    <xs:sequence>
+                      <xs:element name="RidimensionamentoAttivita" type="eSioNo">
+                      </xs:element>
+                      <xs:element name="RistrutturazioneDebito">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eSioNo">
+                              <xs:sequence>
+                                <xs:element name="AccordiStragiudiziali" type="eSioNo">
+                                </xs:element>
+                                <xs:element name="AccordiGiudiziali" type="eSioNo">
+                                </xs:element>
+                                <xs:element name="Concordato" type="eSioNo">
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="RistrutturazioneIndustriale" type="eSioNo">
+                        <xs:annotation>
+                          <xs:documentation>Ristrutturazione industriale (gestionale e/o organizzativa)</xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                      <xs:element name="FinanzaStraordinaria">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eSioNo">
+                              <xs:sequence>
+                                <xs:element name="CessionePartecipazioniAzionarie" type="eSioNo">
+                                </xs:element>
+                                <xs:element name="CessioneImmobili" type="eSioNo">
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="AccordiAlleanzeStrategiche" type="eSioNo">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ResponsabilitaCivili">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eAnnotazione">
+                    <xs:sequence>
+                      <xs:element name="ViolazioneObbligoGenerico">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="DovereVigilanza" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Violazione del dovere di diligenza ex art. 2392, primo comma c.c.</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="DovereVigilanzaIntervento" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Violazione del dovere di vigilanza ed intervento ex art. 2392, secondo comma c.c.</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ViolazioneObblighiSpecifici">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="ObbligoConvocazioneAssemblea" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Violazione dell’obbligo di convocare senza indugio l’assemblea in caso di perdite</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="ObbligoGestioneSocietaFiniConservativi" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Violazione dell’obbligo di gestire la società ai soli fini conservativi ex art. 2486 c.c.</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="ObbligoRedazioneTempestivaBilancio" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Violazione dell’obbligo di redazione tempestiva del bilancio</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="ObbligoRedazioneBilancioCriteriCivilistici" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Violazione dell’obbligo di redazione del bilancio secondo criteri civilistici</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="LeggiFiscaliPrevidenziali" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Violazioni di leggi fiscali e previdenziali</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ViolazioneConflittoInteressi">
+                        <xs:annotation>
+                          <xs:documentation>Violazione del dovere di non agire in conflitto di interessi</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="OperazioniSenzaAdeguatoCorrispettivo" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Operazioni concluse senza adeguato corrispettivo</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="OperazioniVantaggioseSfruttate" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Operazioni vantaggiose sfruttate personalmente</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="OperazioniSocietaStessoGruppo" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>Operazioni tra società dello stesso gruppo</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                            <xs:element name="OperazioniInConcorrenza" type="eBoolean">
+                            </xs:element>
+                            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ResponsabilitaTerzi">
+                        <xs:annotation>
+                          <xs:documentation>Responsabilità di terzi estranei alla società fallita</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ResponsabilitaCollegioSindacale">
+                        <xs:annotation>
+                          <xs:documentation>Responsabilità del collegio sindacale</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ResponsabilitaSocietaRevisione">
+                        <xs:annotation>
+                          <xs:documentation>Responsabilità della società di revisione</xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ResponsabilitaPenali">
+              <xs:annotation>
+                <xs:documentation>Responsabilità penali (si veda lo schema per la rilevazione di dati penalmente rilevanti)</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

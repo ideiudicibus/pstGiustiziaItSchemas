@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by silvio (company) -->
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/magistrato/Ordinanza/v3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" xmlns:ns1="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/magistrato/Ordinanza/v3" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/magistrato/Ordinanza/v3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="../tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="../tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="../eventi.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI  DEL GIUDICE DELEGATO PER LE PROCEDURE CONCORSUALI</xs:documentation>
+		<xs:documentation>Gli atti qui definiti si riferiscono a procedimenti in essere</xs:documentation>
+		<xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+	</xs:annotation>
+	<xs:element name="OrdinanzaGenerica">
+		<xs:annotation>
+			<xs:documentation>ordinanza generica</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:choice minOccurs="0">
+						<xs:element ref="evt:RimessionePresidenteSezione"/>
+						<xs:element ref="evt:RimessionePresidenteTribunale"/>
+					</xs:choice>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdinanzaVendita">
+		<xs:annotation>
+			<xs:documentation>Ordinanza di vendita vecchio rito e progetto di liquidazione nuovo rito</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:choice>
+							<xs:sequence>
+								<xs:element ref="st:importo"/>
+								<xs:element name="UdienzaSenzaIncanto" type="xs:dateTime"/>
+								<xs:element name="UdienzaIncanto" type="xs:dateTime" nillable="true"/>
+								<xs:element name="Cauzione" type="bt:Percentuale" default="10"/>
+								<xs:element name="Spese" type="bt:Percentuale" nillable="true"/>
+							</xs:sequence>
+							<xs:element name="Delegata">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:complexContent>
+										<xs:extension base="at:Soggetto">
+											<xs:sequence>
+												<xs:element name="TipologiaDelega">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="IVG"/>
+															<xs:enumeration value="Commissionario"/>
+															<xs:enumeration value="Notaio"/>
+															<xs:enumeration value="Professionista"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:extension>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ComplessoAziendale">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="st:importo"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="Lotto" type="xs:positiveInteger">
+								<xs:annotation>
+									<xs:documentation>Ideintificazione numerica del lotto oggetto di ordinanza se noto e già censito nel sistema informativo</xs:documentation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+							</xs:element>
+							<xs:choice>
+								<xs:annotation>
+									<xs:documentation>Beni che costituiscono il lotto di cui all'ordinanza in oggetto nell'ipotesi in cui il lotto non sia ancora stato costituito</xs:documentation>
+								</xs:annotation>
+								<xs:element ref="st:beneImmobile" maxOccurs="unbounded"/>
+								<xs:element ref="st:beneMobile" maxOccurs="unbounded"/>
+							</xs:choice>
+						</xs:choice>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

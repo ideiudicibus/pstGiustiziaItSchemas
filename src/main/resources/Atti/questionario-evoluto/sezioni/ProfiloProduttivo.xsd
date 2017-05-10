@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ProfiloProduttivo">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element name="ImpreseIndustriali">
+              <xs:complexType>
+                <xs:complexContent mixed="false">
+                  <xs:extension base="eAnnotazione">
+                    <xs:sequence>
+                      <xs:element name="ImposizioneSubFornituraFase" type="eSioNo" />
+                      <xs:element name="AssemblaggioProdottoFinale" type="eSioNo" />
+                      <xs:element name="ProgettazioneProdottoFinale" type="eSioNo" />
+                      <xs:element name="ProduzioneProdottoFinale" type="eSioNo" />
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ImpreseCommerciali">
+              <xs:complexType>
+                <xs:complexContent mixed="false">
+                  <xs:extension base="eAnnotazione">
+                    <xs:sequence>
+                      <xs:element name="ImportExport" type="eSioNo" />
+                      <xs:element name="GrandeDistribuzione" type="eSioNo" />
+                      <xs:element name="CommercioIngrosso" type="eSioNo" />
+                      <xs:element name="CommercioDettaglio" type="eSioNo" />
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ImpreseServizi">
+              <xs:complexType>
+                <xs:complexContent mixed="false">
+                  <xs:extension base="eAnnotazione">
+                    <xs:sequence>
+                      <xs:element name="Consulenza">
+                        <xs:complexType>
+                          <xs:complexContent mixed="false">
+                            <xs:extension base="eSioNo">
+                              <xs:sequence>
+                                <xs:element minOccurs="0" name="SpecificareConsulenza" type="xs:string" />
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="Immobiliari" type="eSioNo" />
+                      <xs:element name="Intermediazione" type="eSioNo" />
+                      <xs:element name="AltriProfiliProduttivi">
+                        <xs:complexType>
+                          <xs:complexContent mixed="false">
+                            <xs:extension base="eSioNo">
+                              <xs:sequence>
+                                <xs:element minOccurs="0" name="Indicare" type="xs:string" />
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/magistrato/Ordinanza/v1" xmlns:evt="http://schemi.processotelematico.giustizia.it/eventi/magistrato" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/magistrato/Ordinanza/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="../tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/eventi/magistrato" schemaLocation="../eventi-magistrato.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DEL MAGISTRATO</xs:documentation>
+		<xs:documentation>
+      Ordinanze producibili dal giudice.
+      Compone e/o definisce le sequenze accettabili di eventi di Ordinanze emesse dal giudice.
+    </xs:documentation>
+    <xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="tCalendarioProcesso">
+		<xs:annotation>
+			<xs:documentation>Calendario del processo previsto dall’art. 81 bis delle Disp. Att. C.p.c.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DataProposta" type="xs:dateTime" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Ordinanza">
+		<xs:annotation>
+			<xs:documentation>Ordinanza generica del giudice.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:sequence minOccurs="0">
+									<xs:group ref="evt:tEventiOrdinanza"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+						<xs:element name="CalendarioProcesso" type="tCalendarioProcesso" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="pubblicazioneRichiesta" type="xs:boolean"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdinanzaMisureTempUrgenti">
+		<xs:annotation>
+			<xs:documentation>Ordinanza del Presidente con misure temporanee e urgenti, designazione del Giudice per l'istruttoria ed eventale rinvio ad altra udienza</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="CTU" type="at:CTU" minOccurs="0"/>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="evt:DesignazioneGiudiceFaseIstruttoria" minOccurs="0"/>
+									<xs:element ref="evt:FissazioneUdienzaPrimaComparizione" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="opzioni" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="evt:RinvioAltraUdienza" minOccurs="0"/>
+									<xs:element ref="evt:NominaCTU" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="OrdinanzaMisureTempUrgenti_PK_CTU">
+			<xs:selector xpath="CTU"/>
+			<xs:field xpath="at:codiceFiscale"/>
+		</xs:key>
+		<xs:keyref name="OrdinanzaMisureTempUrgenti_FK_NOMINA_CTU" refer="OrdinanzaMisureTempUrgenti_PK_CTU">
+			<xs:selector xpath="opzioni/nominaCTU/evt:ctu"/>
+			<xs:field xpath="@codiceFiscale"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="OrdinanzaSepGiudInCons">
+		<xs:annotation>
+			<xs:documentation>Ordinanza di trasformazione della separazione giudiziale in consensuale</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:sequence minOccurs="0">
+									<xs:element ref="evt:TrasformazioneInSeparazioneConsensuale"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="opzioni" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="evt:RinvioAltraUdienza" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdinanzaDivorzioGiudInCong">
+		<xs:annotation>
+			<xs:documentation>Ordinanza di trasformazione del divorzio giudiziale in consensuale</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:sequence minOccurs="0">
+									<xs:element ref="evt:TrasformazioneInDivorzioCongiunto"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="opzioni" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="evt:RinvioAltraUdienza" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdinanzaArt662Cpc">
+		<xs:annotation>
+			<xs:documentation>Ordinanza cessazione effetti intimazione Art. 662 cpc</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:sequence minOccurs="0">
+									<xs:element ref="evt:CessatiEffettiIntimazioneArt662Cpc"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="opzioni" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:RinvioAltraUdienza"/>
+									<xs:element ref="evt:OrdinanzaEstinzione"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

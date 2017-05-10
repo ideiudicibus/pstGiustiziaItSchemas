@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Nik (.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="ImpugnazioneDeliberazione">
+    <xs:annotation>
+      <xs:documentation>Impugnazione di deliberazione adottata con il voto determinante di soci che abbiano, per conto proprio o di terzi, un interesse in conflitto con quello della societ�, qualora possa recarle danno</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="DataImpugnazione" type="xs:date"/>
+            <xs:element name="NumeroDeliberazioniImpugnate" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di deliberazioni impugnate</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnnullamentoDeliberazioneApprovazioneBilancio">
+    <xs:annotation>
+      <xs:documentation>Annullamento di deliberazione di approvazione del bilancio prima che sia stato approvato il bilancio dellesercizio successivo</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="Adozione">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Assemblea" type="eBoolean"/>
+                  <xs:element name="AssembleaAzioniPrestatoriLavoro" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>assemblea speciale della categoria delle azioni a favore dei prestatori di lavoro</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AssembleaAzioniVotoLimitato" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>assemblea speciale della categoria delle azioni a voto limitato</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AssembleaAzioniVotoPlurimo" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>assemblea speciale della categoria delle azioni a voto plurimo (art. 212 disp. att. c.c.)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AssembleaAzioniRisultatoSettore" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>assemblea speciale della categoria delle azioni correlate ai risultati di un determinato settore</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AssembleaAzioniGodimento" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>assemblea speciale della categoria delle azioni di godimento</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AssembleaAzioniRisparmio" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>assemblea speciale della categoria delle azioni di risparmio</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AssembleaAzioniPrivilegiate" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>assemblea speciale della categoria delle azioni privilegiate</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AssembleaObbligazionisti" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>assemblea degli obbligazionisti</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AssembleaPossessoriStrumentiFinanziari">
+                    <xs:annotation>
+                      <xs:documentation>assemblea speciale dei possessori di strumenti finanziari di partecipazione allaffare in difformit�</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="DifformitaDellaLegge" type="eBoolean"/>
+                        <xs:element name="DifformitaDelloStatuto" type="eBoolean"/>
+                        <xs:element name="DifformitaNormeDisciplinanti" type="eBoolean">
+                          <xs:annotation>
+                            <xs:documentation>norme che disciplinano i criteri di redazione del bilancio ex art. 157 T.U.F.</xs:documentation>
+                          </xs:annotation>
+                        </xs:element>
+                        <xs:element name="PromozioneAttiCitazione">
+                          <xs:complexType>
+                            <xs:sequence>
+                              <xs:element name="SociAssenti">
+                                <xs:annotation>
+                                  <xs:documentation>soci assenti, aventi diritto di voto con riferimento alla deliberazione, che rappresentino, anche congiuntamente una 
+percentuale del capitale sociale (o, in caso di impugnazione di deliberazione delle assemblee speciali, del capitale rappresentato 
+dalle azioni della categoria/dellammontare del prestito obbligazionario/ammontare degli strumenti finanziari di partecipazione allaffare)</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                  <xs:complexContent>
+                                    <xs:extension base="eBoolean">
+                                      <xs:sequence>
+                                        <xs:element name="CinquePerCentoSociAssenti" type="eBoolean"/>
+                                        <xs:element name="UndiciPerCentoSociAssenti" type="eBoolean"/>
+                                      </xs:sequence>
+                                    </xs:extension>
+                                  </xs:complexContent>
+                                </xs:complexType>
+                              </xs:element>
+                              <xs:element name="SociDissenzienti">
+                                <xs:annotation>
+                                  <xs:documentation>soci dissenzienti, aventi diritto di voto con riferimento alla deliberazione, che rappresentino, anche congiuntamente
+ una percentuale del capitale sociale (o, in caso di impugnazione di deliberazione delle assemblee speciali, del capitale 
+rappresentato dalle azioni della categoria/dellammontare del prestito obbligazionario/ammontare degli strumenti finanziari di
+ partecipazione allaffare)</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                  <xs:complexContent>
+                                    <xs:extension base="eBoolean">
+                                      <xs:sequence>
+                                        <xs:element name="CinquePerCentoSociDissenzienti" type="eBoolean"/>
+                                        <xs:element name="UnoPerCentoSociDissenzienti" type="eBoolean"/>
+                                      </xs:sequence>
+                                    </xs:extension>
+                                  </xs:complexContent>
+                                </xs:complexType>
+                              </xs:element>
+                              <xs:element name="SociAstenuti">
+                                <xs:annotation>
+                                  <xs:documentation>soci astenuti, aventi diritto di voto con riferimento alla deliberazione, che rappresentino, anche congiuntamente una percentuale del capitale sociale (o, in caso di impugnazione di deliberazione delle assemblee speciali, del capitale rappresentato dalle azioni della categoria/dellammontare del prestito obbligazionario/ammontare degli strumenti finanziari di partecipazione allaffare)</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                  <xs:complexContent>
+                                    <xs:extension base="eBoolean">
+                                      <xs:sequence>
+                                        <xs:element name="CinquePerCentoSociAstenuti" type="eBoolean"/>
+                                        <xs:element name="UnoPerCentoSociAstenuti" type="eBoolean"/>
+                                      </xs:sequence>
+                                    </xs:extension>
+                                  </xs:complexContent>
+                                </xs:complexType>
+                              </xs:element>
+                              <xs:element name="NullitaBilancioPromossaDaAmministratori" type="eBoolean"/>
+                              <xs:element name="NullitaBilancioPromossaDaCollegioSindacale" type="eBoolean"/>
+                              <xs:element name="NullitaBilancioPromossaDaConsiglioSorveglianza" type="eBoolean"/>
+                              <xs:element name="DataDeliberazioneNullitaBilancio" type="xs:date"/>
+                              <xs:element name="NumeroDeliberazioniAnnulate" type="xs:integer">
+                                <xs:annotation>
+                                  <xs:documentation>numero complessivo di deliberazioni annullate</xs:documentation>
+                                </xs:annotation>
+                              </xs:element>
+                            </xs:sequence>
+                          </xs:complexType>
+                        </xs:element>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NullitaDeliberazione">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="AumentoCapitale" type="eBoolean"/>
+            <xs:element name="RiduzioneCapitale" type="eBoolean"/>
+            <xs:element name="EmissioneObbligazioni" type="eBoolean"/>
+            <xs:element name="ApprovazioneBilancio">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="AdottatoDa">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="Assemblea" type="eBoolean"/>
+                            <xs:element name="AssembleaAzioniPrestatoriLavoro" type="eBoolean"/>
+                            <xs:element name="AssembleaAzioniVotoLimitato" type="eBoolean"/>
+                            <xs:element name="AssembleaAzioniVotoPlurimo" type="eBoolean"/>
+                            <xs:element name="AssembleaAzioniRisultatoSettore" type="eBoolean"/>
+                            <xs:element name="AssembleaAzioniGodimento" type="eBoolean"/>
+                            <xs:element name="AssembleaAzioniRisparmio" type="eBoolean"/>
+                            <xs:element name="AssembleaAzioniPrivilegiate" type="eBoolean"/>
+                            <xs:element name="AssembleaObbligazionisti" type="eBoolean"/>
+                            <xs:element name="AssembleaPossessoriStrumentiFinanziari">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="Cause">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="MancataConvocazioneAssemblea" type="eBoolean"/>
+                                        <xs:element name="MancanzaVerbale" type="eBoolean"/>
+                                        <xs:element name="ImpossibilitaOggetto" type="eBoolean"/>
+                                        <xs:element name="IlliceitaOggetto" type="eBoolean"/>
+                                        <xs:element name="ModificaOggetto" type="eBoolean"/>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="DataImpugnazione" type="xs:date"/>
+            <xs:element name="NumeroDeliberazioniNulle" type="xs:integer"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnnullamentoDeliberazioneLesivaDirittiSoci">
+    <xs:annotation>
+      <xs:documentation>Annullamento di deliberazione lesiva dei diritti dei soci</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="Adozione">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DifformitaDellaLegge" type="eBoolean"/>
+                  <xs:element name="DifformitaDelloStatuto" type="eBoolean"/>
+                  <xs:element name="PromossoDa">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="AnnullamentoPromossoDaCollegioSindacale" type="eBoolean"/>
+                        <xs:element name="AnnullamentoPromossoDaAmministratoriAssenti" type="eBoolean"/>
+                        <xs:element name="AnnullamentoPromossoDaAmministratoriDissenzienti" type="eBoolean"/>
+                        <xs:element name="AnnullamentoPromossoDaSociLesi" type="eBoolean"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="DataAnnullamento" type="xs:date"/>
+            <xs:element name="NumeroDeliberazioniAnnulate" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di deliberazioni impugnate</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImpugnazioneDeliberazioneAventeInteresse">
+    <xs:annotation>
+      <xs:documentation>Impugnazione di deliberazione avente interesse, per conto proprio o di terzi, in una determinata operazione della societ�</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="AdozioneDa">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ImpugnazioneAdottataDaCda" type="eBoolean"/>
+                  <xs:element name="ImpugnazioneAdottataDaComitatoEsecutivo" type="eBoolean"/>
+                  <xs:element name="ImpugnazioneAdottataDaConsiglioGestione">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="VotiDeterminanti">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="VotoAmministratore" type="eBoolean"/>
+                                  <xs:element name="VotoConsigliere">
+                                    <xs:complexType>
+                                      <xs:complexContent>
+                                        <xs:extension base="eBoolean">
+                                          <xs:sequence>
+                                            <xs:element name="PromossoDa">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="VotoConsiglierePromossoDaAmministratori" type="eBoolean"/>
+                                                  <xs:element name="VotoConsiglierePromossoDaCollegioSindacale" type="eBoolean"/>
+                                                  <xs:element name="VotoConsiglierePromossoDaConsiglieriGestione" type="eBoolean"/>
+                                                  <xs:element name="VotoConsiglierePromossoDaConsiglioSorveglianza" type="eBoolean"/>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:extension>
+                                      </xs:complexContent>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="DataImpugnazioneDeliberaAventeInteresse" type="xs:date"/>
+            <xs:element name="NumeroDeliberazioniAventeInteresseImpugnate" type="xs:integer"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AzioneSocialeResponsabilitaNeiConfronti">
+    <xs:annotation>
+      <xs:documentation>Azione sociale di responsabilit�</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="PromossoNeiConfronti">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="AzioneSocialeResponsabilitaAmministratore" type="eBoolean"/>
+                  <xs:element name="AzioneSocialeResponsabilitaConfrontiDirettoreGenerale" type="eBoolean"/>
+                  <xs:element name="AzioneSocialeResponsabilitaConfrontiSindaco" type="eBoolean"/>
+                  <xs:element name="AzioneSocialeResponsabilitaConfrontiSoggettoIncaricatoControlloContabile" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>soggetto incaricato del controllo contabile</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AzioneSocialeResponsabilitaConfrontiConsigliereGestione">
+                    <xs:annotation>
+                      <xs:documentation>consigliere di gestione</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="ResponsabilitaGestioneSociale">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="DeliberazioneAssemblea" type="eBoolean"/>
+                                  <xs:element name="AttoCitazionePropostoDa">
+                                    <xs:complexType>
+                                      <xs:complexContent>
+                                        <xs:extension base="eBoolean">
+                                          <xs:sequence>
+                                            <xs:element name="UnQuintoCapitaleSociale" type="eBoolean"/>
+                                            <xs:element name="DiversaPercentualePartecipazione" type="eBoolean">
+                                              <xs:annotation>
+                                                <xs:documentation>la diversa percentuale di partecipazione al capitale sociale prevista statutariamente</xs:documentation>
+                                              </xs:annotation>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:extension>
+                                      </xs:complexContent>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="AzionePropostaAmministratoreGiudiziario" type="eBoolean">
+                                    <xs:annotation>
+                                      <xs:documentation>azione proposta dallAmministratore Giudiziario ex art. 2409, comma 5 c.c.</xs:documentation>
+                                    </xs:annotation>
+                                  </xs:element>
+                                  <xs:element name="DeliberazioneConsiglioSorveglianza" type="eBoolean">
+                                    <xs:annotation>
+                                      <xs:documentation>deliberazione del consiglio di sorveglianza ex art. 2409 terdecies, comma 1, lett. d)</xs:documentation>
+                                    </xs:annotation>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="DataImpugnazione" type="xs:date"/>
+            <xs:element name="NumeroDeliberazioniImpugnate" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di azioni promosse</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AzioneSocialeResponsabilitaCreditoreSociale">
+    <xs:annotation>
+      <xs:documentation>Azione sociale di responsabilit� promossa dal creditore sociale</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="AzioneSocialeResponsabilitaCreditoreSocialeNeiConfronti">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="AzioneSocialeResponsabilitaCreditoreSocialeAmministratore" type="eBoolean"/>
+                  <xs:element name="AzioneSocialeResponsabilitaCreditoreSocialeConfrontiDirettoreGenerale" type="eBoolean"/>
+                  <xs:element name="AzioneSocialeResponsabilitaCreditoreSocialeConfrontiSindaco" type="eBoolean"/>
+                  <xs:element name="AzioneSocialeResponsabilitaCreditoreSocialeSoggettoIncaricatoControlloContabile" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>soggetto incaricato del controllo contabile</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AzioneSocialeResponsabilitaCreditoreSocialeConsigliereGestione" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>consigliere di gestione</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DataImpugnazione" type="xs:date"/>
+                  <xs:element name="NumeroDeliberazioniImpugnate" type="xs:integer">
+                    <xs:annotation>
+                      <xs:documentation>numero complessivo di azioni promosse</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AzioneSocialeResponsabilita">
+    <xs:annotation>
+      <xs:documentation>Azione sociale di responsabilit�;</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="AzioneSocialeResponsabilitaPromossaDa">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="SingoloSocio" type="eBoolean"/>
+                  <xs:element name="Terzo">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="AzioneSocialeResponsabilitaNeiConfronti">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="AzioneSocialeTerzoNeiConfrontiAmministratore" type="eBoolean"/>
+                                  <xs:element name="AzioneSocialeTerzoNeiConfrontiDirettoreGenerale" type="eBoolean"/>
+                                  <xs:element name="AzioneSocialeTerzoNeiConfrontiSindaco" type="eBoolean"/>
+                                  <xs:element name="AzioneSocialeTerzoNeiConfrontiSoggettoIncaricatoControlloContabile" type="eBoolean">
+                                    <xs:annotation>
+                                      <xs:documentation>soggetto incaricato del controllo contabile</xs:documentation>
+                                    </xs:annotation>
+                                  </xs:element>
+                                  <xs:element name="AzioneSocialeTerzoNeiConfrontiConsigliereGestione" type="eBoolean">
+                                    <xs:annotation>
+                                      <xs:documentation>consigliere di gestione</xs:documentation>
+                                    </xs:annotation>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="DataImpugnazione" type="xs:date"/>
+                  <xs:element name="NumeroDeliberazioniImpugnate" type="xs:integer">
+                    <xs:annotation>
+                      <xs:documentation>numero complessivo di azioni promosse</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AzioneRecuperoCrediti">
+    <xs:annotation>
+      <xs:documentation>Azione di recupero credito</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="DataAzioneRecuperoCrediti" type="xs:date"/>
+            <xs:element name="NumeroAzioniRecuperoCrediti" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di azioni di recupero crediti</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AzioneRevocatoriaOrdinaria">
+    <xs:annotation>
+      <xs:documentation>Azione revocatoria ordinari</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="DataAzioneRevocatoriaOrdinaria" type="xs:date"/>
+            <xs:element name="NumeroAzioniRevocatoriaOrdinaria" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di azioni revocatorie</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AzioneRisarcimentoDanni">
+    <xs:annotation>
+      <xs:documentation>Azione di risarcimento danni</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="Promossa">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DallaSocieta" type="eBoolean"/>
+                  <xs:element name="ControSocieta" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="DataAzioneRisarcimentoDanni" type="xs:date"/>
+            <xs:element name="NumeroAzioniDallaSocieta" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di azioni promosse dalla societ�</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="NumeroAzioniControSocieta" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di azioni promosse contro la societ�</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EsistenzaAttiDaImpugnare">
+    <xs:annotation>
+      <xs:documentation>Esistenza di atti del fallito o della societ� fallita che si intendono impugnare</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="Specificare" type="xs:string"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DenunziaFattiCensurabili">
+    <xs:annotation>
+      <xs:documentation>Denunzia di fatti censurabili</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="DenuziaAl">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DenunziaFattiAlCollegioSindacale" type="eBoolean"/>
+                  <xs:element name="DenunziaFattiAlConsiglioSorveglianza" type="eBoolean"/>
+                  <xs:element name="DenunziaFattiAlComitatoControlloGestione">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="DenunziaFattiPresentataDa">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="DenunziaSingoloSocio" type="eBoolean"/>
+                                  <xs:element name="DenunziaTantiSociRappresentati">
+                                    <xs:complexType>
+                                      <xs:complexContent>
+                                        <xs:extension base="eBoolean">
+                                          <xs:sequence>
+                                            <xs:element name="DenunziaDiUnVentesimoCapitaleSociale" type="eBoolean"/>
+                                            <xs:element name="DenunziaDiUnaMinorePercentualePrevista" type="eBoolean">
+                                              <xs:annotation>
+                                                <xs:documentation>la minore percentuale di partecipazione al capitale sociale prevista statutariamente</xs:documentation>
+                                              </xs:annotation>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:extension>
+                                      </xs:complexContent>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="DataDenunziaFattiCensurabili" type="xs:date"/>
+            <xs:element name="NumeroDenunzieFattiCensurabiliPresentate" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di denunzie presentate</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DenunziaNeiConfrontiAmministratori">
+    <xs:annotation>
+      <xs:documentation>Denunzia al tribunale nei confronti degli amministratori</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="PresentataDa">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DenunziaAmministratoriPresentataDaTantiSociRappresentati">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="UnDecimoCapitaleSociale" type="eBoolean"/>
+                            <xs:element name="MinorePercentualePrevista" type="eBoolean">
+                              <xs:annotation>
+                                <xs:documentation>la minore percentuale di partecipazione al capitale sociale prevista statutariamente</xs:documentation>
+                              </xs:annotation>
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="DenunziaAmministratoriPresentataDaCollegioSindacale" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>collegio sindacale (anche ex art. 152 T.U.F.)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DenunziaAmministratoriPresentataDaConsiglioSorveglianza" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>consiglio di sorveglianza ex art. 2409 terdecies c.c. (ed ex art. 152 T.U.F.)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DenunziaAmministratoriPresentataDaComitatoControlloGestione" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>comitato per il controllo sulla gestione (ed ex art. 152 T.U.F.)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DenunziaAmministratoriPresentataDaPubblicoMinistero" type="eBoolean"/>
+                  <xs:element name="DataDenunziaAmministratori" type="xs:date"/>
+                  <xs:element name="NumeroDenunzieAmministratoriPresentate" type="xs:integer">
+                    <xs:annotation>
+                      <xs:documentation>numero complessivo di denunzie presentate</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DenunziaPropostaDaConsob">
+    <xs:annotation>
+      <xs:documentation>Denunzia al tribunale proposta dalla Consob ex art 152 T.U.F.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eBoolean">
+          <xs:sequence>
+            <xs:element name="NeiConfronti">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DelCollegioSindacale" type="eBoolean"/>
+                  <xs:element name="DelConsiglioSorveglianza" type="eBoolean"/>
+                  <xs:element name="DelComitatoControlloGestione" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Data" type="xs:date"/>
+            <xs:element name="NumeroAzionirecuperoCrediti" type="xs:integer">
+              <xs:annotation>
+                <xs:documentation>numero complessivo di denunzie presentate</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VicendeGiudiziarie">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element ref="ImpugnazioneDeliberazione" minOccurs="0"/>
+            <xs:element ref="AnnullamentoDeliberazioneApprovazioneBilancio"/>
+            <xs:element ref="NullitaDeliberazione"/>
+            <xs:element ref="AnnullamentoDeliberazioneLesivaDirittiSoci"/>
+            <xs:element ref="ImpugnazioneDeliberazioneAventeInteresse"/>
+            <xs:element ref="AzioneSocialeResponsabilitaNeiConfronti"/>
+            <xs:element ref="AzioneSocialeResponsabilitaCreditoreSociale"/>
+            <xs:element ref="AzioneSocialeResponsabilita"/>
+            <xs:element ref="AzioneRisarcimentoDanni"/>
+            <xs:element ref="AzioneRevocatoriaOrdinaria"/>
+            <xs:element ref="AzioneRecuperoCrediti"/>
+            <xs:element ref="EsistenzaAttiDaImpugnare"/>
+            <xs:element ref="DenunziaFattiCensurabili"/>
+            <xs:element ref="DenunziaNeiConfrontiAmministratori"/>
+            <xs:element ref="DenunziaPropostaDaConsob"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

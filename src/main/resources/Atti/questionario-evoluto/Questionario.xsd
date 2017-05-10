@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:include schemaLocation="tipi/TipiGlobali.xsd"/>
+  <xs:include schemaLocation="elementi/Elementi.xsd"/>
+  <xs:include schemaLocation="sezioni/DatiFallito.xsd"/>
+  <xs:include schemaLocation="sezioni/Classificazione.xsd"/>
+  <xs:include schemaLocation="sezioni/ProfiloProduttivo.xsd"/>
+  <xs:include schemaLocation="sezioni/AssettoGoverno.xsd"/>
+  <xs:include schemaLocation="sezioni/CauseFallimento.xsd"/>
+  <xs:include schemaLocation="sezioni/Diligenza.xsd"/>
+  <xs:include schemaLocation="sezioni/ElementiBilancio.xsd"/>
+  <xs:include schemaLocation="sezioni/AnalisiMezzoIndici.xsd"/>
+  <xs:include schemaLocation="sezioni/ProceduraFallimento.xsd"/>
+  <xs:include schemaLocation="sezioni/ComportamentiOpportunistici.xsd"/>
+  <xs:include schemaLocation="sezioni/OrganiGestione.xsd"/>
+  <xs:include schemaLocation="sezioni/VicendeGiudiziarie.xsd"/>
+  <xs:include schemaLocation="sezioni/VicendeSocietarie.xsd"/>
+  <xs:include schemaLocation="sezioni/VicendeAziendali.xsd"/>
+  <xs:include schemaLocation="sezioni/RapportiGiuridiciPendenti.xsd"/>
+  <xs:element name="Questionario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Fallito"/>
+        <xs:element ref="Classificazione"/>
+        <xs:element ref="ProfiloProduttivo"/>
+        <xs:element ref="AssettoGoverno"/>
+        <xs:element ref="CauseFallimento"/>
+        <xs:element ref="Diligenza"/>
+        <xs:element ref="ElementiBilancio"/>
+        <xs:element ref="AnalisiMezzoIndici"/>
+        <xs:element ref="ProceduraFallimento"/>
+        <xs:element ref="ComportamentiOpportunistici"/>
+        <xs:element ref="OrganiGestione"/>
+        <xs:element ref="VicendeGiudiziarie"/>
+        <xs:element ref="VicendeSocietarie"/>
+        <xs:element ref="VicendeAziendali"/>
+        <xs:element ref="RapportiGiuridiciPendenti"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

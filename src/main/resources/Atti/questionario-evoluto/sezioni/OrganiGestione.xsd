@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="Amministratori">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Amministratore" type="eAmministratore" minOccurs="0" maxOccurs="unbounded">
+        </xs:element>
+        <xs:element name="ResponsabilitaAmministratori" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>specificare eventuali responsabilità degli amministratori</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CollegioSindacale">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TreMembriEffettivi" type="eSioNo">
+        </xs:element>
+        <xs:element name="CinqueMembriEffettivi" type="eSioNo">
+        </xs:element>
+        <xs:element name="Sindaci">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Sindaco" type="eSindaco" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ResponsabilitaSindaci" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>specificare eventuali responsabilità dei sindaci</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ControlloContabile">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eAnnotazione">
+          <xs:sequence>
+            <xs:element name="EsercizioControlloContabile">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Revisore" type="eSioNo">
+                  </xs:element>
+                  <xs:element name="Societa" type="eSioNo">
+                  </xs:element>
+                  <xs:element name="Collegio" type="eSioNo">
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="RevisoriContabili" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="RevisoreContabile" type="eRevisoreContabile" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ResponsabilitaControllori" type="xs:string" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>specificare eventuali responsabilità dei soggetti preposti al controllo contabile</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AssistenzaDiProfessionisti">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eAnnotazione">
+          <xs:sequence>
+            <xs:element name="Assistenza" type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>Assistenza alla società da parte di professionisti</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Professionisti">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Professionista" type="eProfessionista" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ResponsabilitaProfessionisti" type="xs:string" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>specificare eventuali responsabilità dei soggetti preposti al controllo contabile</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+	
+  <xs:element name="OrganiGestione">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element name="SociOcculti" type="eSioNo">
+            </xs:element>
+            <xs:element name="SocioUnico">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="PersonaFisica" type="eSioNo">
+                      </xs:element>
+                      <xs:element name="PersonaGiuridica" type="eSioNo">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ProprietaRiconducibileSocioUnico" type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>Proprietà di fatto del capitale sociale riconducibile a socio unico</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="IntestazioneFiduciaria" type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>Intestazione fiduciaria del capitale sociale</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="AdozioneSistema">
+              <xs:annotation>
+                <xs:documentation>Adozione da parte della società del sistema</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="SistemaTradizionale">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eSioNo">
+                          <xs:sequence>
+                            <xs:element name="AmministratoreUnico" type="eSioNo">
+                            </xs:element>
+                            <xs:element name="ConsiglioAmministrazione" type="eSioNo">
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="SistemaDualistico">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="ConsiglioGestioneSorveglianza" type="eSioNo">
+                        </xs:element>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="SistemaMonistico">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="SorveglianzaNelCda" type="eSioNo">
+                        </xs:element>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ComitatiEsecutivi">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="Specificare" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>specificare per quali deleghe di funzioni</xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="AmministratoriDelegati">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="Specificare" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>specificare per quali deleghe di funzioni</xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ProcuratoriGenerali" type="eSioNo">
+            </xs:element>
+            <xs:element name="ProcuratoriSpeciali">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="Specificare" type="xs:string">
+                        <xs:annotation>
+                          <xs:documentation>specificare per quali tipologie di atti significati</xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="AmministratoriDiFatto" type="eSioNo">
+            </xs:element>
+            <xs:element ref="Amministratori" minOccurs="0"/>
+            <xs:element ref="CollegioSindacale" minOccurs="0"/>
+            <xs:element ref="ControlloContabile" minOccurs="0"/>
+            <xs:element ref="AssistenzaDiProfessionisti" minOccurs="0"/>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

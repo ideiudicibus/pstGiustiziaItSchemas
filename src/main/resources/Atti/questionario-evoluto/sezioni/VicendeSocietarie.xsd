@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="StipulazionePattiParasociali">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="OggettoPattiParasociali">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="EsercizioDirittoVotoOggettoPattiParasociali" type="eBoolean"/>
+                  <xs:element name="LimitaizoneTrasferimento" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="EffettoPattiParasociali">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="EsercizioDirittoVotoEffettoPattiParasociali" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="InoltrePattiParaSociali">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="IstituisconoObblighiPreventivaConsultazione" type="eBoolean"/>
+                  <xs:element name="PongonoLimitiTrasferimentoStrumentiFinanziari" type="eBoolean"/>
+                  <xs:element name="PrevedonoAcquistoStrumentiFinanziari" type="eBoolean"/>
+                  <xs:element name="AventiOggettoEffettoEsercizioinfluenzaDominante" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmissioneAzioniRisparmioSedeConversioneAzioni" type="eSioNo">
+    <xs:annotation>
+      <xs:documentation>Emissione di azioni di risparmio ex art. 145 T.U.F. in sede di conversione di azioni già emesse</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="EmissioneTitoliDebito">
+    <xs:annotation>
+      <xs:documentation>Emissione di titoli di debito</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="AlPortatore" type="eBoolean"/>
+            <xs:element name="Nominativi" type="eBoolean"/>
+            <xs:element name="ConvertibiliInAzioni" type="eBoolean"/>
+            <xs:element name="SpecificareSe">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="GarantiteDaIpoteca" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="NumeroComplessivoEmissioni" type="xs:integer"/>
+            <xs:element name="ImportoComplessivoEmissioni" type="xs:decimal"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmissioneTitoliDebitoEstero">
+    <xs:annotation>
+      <xs:documentation>Emissione di titoli di debito all'estero</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="DaParteDellaSocieta" type="eBoolean"/>
+            <xs:element name="DaParteDellaSocietaControllante" type="eBoolean"/>
+            <xs:element name="DaParteDellaSocietaControllata" type="eBoolean"/>
+            <xs:element name="DaParteDellaSocietaCollegata" type="eBoolean"/>
+            <xs:element name="NumeroComplessivoEmissioniEstero" type="xs:integer"/>
+            <xs:element name="ImportoComplessivoEmissioniEstero" type="xs:decimal"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AumentoCapitale">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="AumentoCapitaleMediante">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="EmissioneNuoveAzioni">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="OfferteInOpzioneAiSoci" type="eBoolean"/>
+                            <xs:element name="OfferteATerzi" type="eBoolean"/>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="ConferimentiBeniNatura" type="eBoolean"/>
+                  <xs:element name="ConferimentoCrediti" type="eBoolean"/>
+                  <xs:element name="ImputazioneACapitaleDiRiserve">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="AumentoValoreNominaleAzioni" type="eBoolean"/>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="EmissioneAzioniRisparmioArt145TUF" type="eBoolean"/>
+                  <xs:element name="DataAumentoCapitale" type="xs:date"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RiduzioneCapitale">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="RiduzioneCapitaleMediante">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="LiberazioneSociObbligoVersamento" type="eBoolean"/>
+                  <xs:element name="RimborsoCapitaleSoci" type="eBoolean"/>
+                  <xs:element name="PerPerdite">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="AMenoDiUnTerzo" type="eBoolean"/>
+                            <xs:element name="InProporzioneAPerditeAccertateDaAssembleaOrdinaria" type="eBoolean"/>
+                            <xs:element name="InProporzioneAPerditeAccertateDaConsiglioSorveglianza" type="eBoolean"/>
+                            <xs:element name="InRagionePerditeRisultantiBilancioDecretoTribunale" type="eBoolean"/>
+                            <xs:element name="InRagionePerditeRisultantiBilanciodeliberaCda" type="eBoolean"/>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="AlDiSottoMinimoLegale">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eBoolean">
+                          <xs:sequence>
+                            <xs:element name="ContemporaneoAumentoCapitaleMinimoLegale" type="eBoolean"/>
+                            <xs:element name="TrasformazioneSocieta" type="eBoolean"/>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="DataRiduzioneCapitale" type="xs:date"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CostituzionePatrimonioSpecificoAffare" type="eSioNo"/>
+  <xs:element name="StipulazioneContrattoSpecificoAffare">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="RimborsatoTotalmente">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="RimborsatoTotalmenteConProventiDelloStesso" type="eSioNo"/>
+                      <xs:element name="RimborsatoTotalmenteConParteDeiProventiDelloStesso" type="eSioNo"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="RimborsatoParzialmente">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="RimborsatoParzialmenteConProventiDelloStesso" type="eSioNo"/>
+                      <xs:element name="RimborsatoParzialmenteConParteDeiProventiDelloStesso" type="eSioNo"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScioglimentoSocieta">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="CausaSciogliemnto">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="CausaPrevistaDallaLegge">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="eSioNo">
+                          <xs:sequence>
+                            <xs:element name="DecorsoDelTermine" type="eBoolean"/>
+                            <xs:element name="ConseguimentoOggettoSocialeImpossibilitaPerseguirlo" type="eBoolean"/>
+                            <xs:element name="ImpossibilitaFunzionamentoInattivitaAssemblea" type="eBoolean"/>
+                            <xs:element name="RiduzioneCapitaleSocialeSottoMinimoLegale" type="eBoolean"/>
+                            <xs:element name="AccoglimentoOpposizioneCreditoriSociali" type="eBoolean"/>
+                            <xs:element name="IncapacitaPatrimonialeSocieta" type="eBoolean"/>
+                            <xs:element name="DeliberaAssemblea" type="eBoolean"/>
+                            <xs:element name="Altro" type="eBoolean"/>
+                          </xs:sequence>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="PrevistaAttoCostitutivo" type="eBoolean"/>
+                  <xs:element name="PrevistaStatuto" type="eBoolean"/>
+                  <xs:element name="DataScioglimentoSocieta" type="xs:date"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VicendeSocietarie">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element ref="StipulazionePattiParasociali"/>
+            <xs:element ref="EmissioneAzioniRisparmioSedeConversioneAzioni"/>
+            <xs:element ref="EmissioneTitoliDebito"/>
+            <xs:element ref="EmissioneTitoliDebitoEstero"/>
+            <xs:element ref="AumentoCapitale"/>
+            <xs:element ref="RiduzioneCapitale"/>
+            <xs:element ref="CostituzionePatrimonioSpecificoAffare"/>
+            <xs:element ref="StipulazioneContrattoSpecificoAffare"/>
+            <xs:element ref="ScioglimentoSocieta"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

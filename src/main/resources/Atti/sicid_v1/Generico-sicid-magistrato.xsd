@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by MARIANNA (RENEGADE) -->
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/magistrato/Generico/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" xmlns:evt="http://schemi.processotelematico.giustizia.it/eventi/magistrato" targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/magistrato/Generico/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/eventi/magistrato" schemaLocation="../eventi-magistrato.xsd"/>
+	<xs:element name="VistoAttoGenerico">
+		<xs:annotation>
+			<xs:documentation>Deposito Visto</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AttoGenerico">
+		<xs:annotation>
+			<xs:documentation>Deposito atto generico</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:AccordoParti"/>
+									<xs:element ref="evt:ParereGT"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

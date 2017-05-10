@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by TEAM (RENEGADE) -->
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/magistrato/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/magistrato/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="./tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="./tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="./eventi.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI  DEL GIUDICE DELEGATO</xs:documentation>
+		<xs:documentation>Gli atti qui definiti si riferiscono a procedimenti in essere</xs:documentation>
+		<xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+	</xs:annotation>
+	<xs:element name="DecretoGenerico">
+		<xs:annotation>
+			<xs:documentation>Decreto Generico</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:choice>
+						<xs:element name="dispositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:decretoTrasferimento"/>
+									<xs:element ref="evt:accoglimentoSostituzioneCreditore"/>
+									<xs:element ref="evt:accoglimentoProrogaPerizia"/>
+									<xs:element ref="evt:accoglimentoIstanza41TUB"/>
+									<xs:element ref="evt:rigettoSostituzioneCreditore"/>
+									<xs:element ref="evt:rigettoIstanza41TUB"/>
+									<xs:element ref="evt:rigettoProrogaPerizia"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DichiarazioneEstinzione">
+		<xs:annotation>
+			<xs:documentation>Dichiarazione di estinzione</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="dispositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:estinzionePerRinuncia"/>
+									<xs:element ref="evt:estinzionePerInattivitaParti"/>
+									<xs:element ref="evt:estinzionePerMancataComparizione"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DichiarazioneSospensione">
+		<xs:annotation>
+			<xs:documentation>Dichiarazione di Sospensione</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence minOccurs="0">
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:sospensionePerGiudizioDivisorio"/>
+									<xs:element ref="evt:sospensioneSuIstanzaParti"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FissazioneUdienza">
+		<xs:annotation>
+			<xs:documentation>Provvedimento di Fissazione o Rinvio di Udienza</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="dispositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:fissazionePrimaUdienza"/>
+									<xs:element ref="evt:fissazioneUdienzaOpposizione"/>
+									<xs:element ref="evt:fissazioneUdienzaGenerica"/>
+									<xs:element ref="evt:rinvioUdienza"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProgettoDistribuzione">
+		<xs:annotation>
+			<xs:documentation>Decreto di esecutività progetto di distribuzione</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:accoglimentoPianoRipartoParziale"/>
+									<xs:element ref="evt:accoglimentoPianoRiparto"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="st:dettagliRiparto" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AggiudicazioneLotto">
+		<xs:annotation>
+			<xs:documentation>Aggiudicazione lotto (verbale di vendita)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence minOccurs="0">
+						<xs:element name="Lotto" type="xs:positiveInteger">
+							<xs:annotation>
+								<xs:documentation>Ideintificazione numerica del lotto oggetto di aggiudicazione</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:choice>
+							<xs:element name="SenzaIncanto">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ImportoAumento" type="bt:Valuta">
+											<xs:annotation>
+												<xs:documentation>Importo fissato per le offerte in aumento</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Offerte" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="st:importo"/>
+													<xs:element name="Cauzione" type="bt:Valuta"/>
+													<xs:element name="Spese" type="bt:Valuta" nillable="true"/>
+													<xs:element name="Offerente" type="at:Soggetto"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Aggiudicatario" type="at:RiferimentoSoggetto">
+											<xs:annotation>
+												<xs:documentation>I dati dell'aggiudicatario sono dedotti dai dati degli offerenti, qui viene riportato il solo codice fiscale che deve avere una ed una sola occorrenza nell'insieme degli offerenti</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ConIncanto">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="BaseAsta" type="bt:Valuta"/>
+										<xs:element name="ImportoAumento" type="bt:Valuta">
+											<xs:annotation>
+												<xs:documentation>Importo fissato per le offerte in aumento</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element ref="st:importo"/>
+										<xs:element name="Cauzione" type="bt:Valuta"/>
+										<xs:element name="Spese" type="bt:Valuta" nillable="true"/>
+										<xs:element name="Aggiudicatario" type="at:Soggetto"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="TermineConguaglio" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Termine per il versamento del conguaglio</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TermineDecreto" type="xs:date" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Termine per l’emissione del decreto di trasferimento</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdinanzaVendita">
+		<xs:annotation>
+			<xs:documentation>Ordinanza di Vendita</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:choice>
+							<xs:sequence>
+								<xs:element ref="st:importo"/>
+								<xs:element name="UdienzaSenzaIncanto" type="xs:dateTime"/>
+								<xs:element name="UdienzaIncanto" type="xs:dateTime" nillable="true"/>
+								<xs:element name="Cauzione" type="bt:Percentuale" default="10"/>
+								<xs:element name="Spese" type="bt:Percentuale" nillable="true"/>
+							</xs:sequence>
+							<xs:element name="Delegata">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:complexContent>
+										<xs:extension base="at:Soggetto">
+											<xs:sequence>
+												<xs:element name="TipologiaDelega">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="IVG"/>
+															<xs:enumeration value="Commissionario"/>
+															<xs:enumeration value="Notaio"/>
+															<xs:enumeration value="Professionista"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:extension>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="Lotto" type="xs:positiveInteger">
+								<xs:annotation>
+									<xs:documentation>Ideintificazione numerica del lotto oggetto di ordinanza se noto e già censito nel sistema informativo</xs:documentation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+							</xs:element>
+							<xs:choice>
+								<xs:annotation>
+									<xs:documentation>Beni che costituiscono il lotto di cui all'ordinanza in oggetto nell'ipotesi in cui il lotto non sia ancora stato costituito</xs:documentation>
+								</xs:annotation>
+								<xs:element ref="st:beneImmobile" maxOccurs="unbounded"/>
+								<xs:element ref="st:beneMobile" maxOccurs="unbounded"/>
+							</xs:choice>
+						</xs:choice>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ControfirmaAttoDelegato">
+		<xs:annotation>
+			<xs:documentation>Controfirma dell'atto depositato dal delegato</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="dispositivo" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:approvazioneProgetto"/>
+									<xs:element ref="evt:rigettoProgetto"/>
+									<xs:element ref="evt:approvazioneMinuta"/>
+									<xs:element ref="evt:rigettoMinuta"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Fallito">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element name="Denominazione" type="xs:string" />
+            <xs:element name="Codicefiscale" type="xs:string" />
+            <xs:element name="PartitaIVA" type="xs:string" />
+            <xs:element name="SedeLegale" type="xs:string" />
+            <xs:element name="SedelegaleUgualeSedeEffettiva" type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>Coincidenza sede sociale e sede effettiva</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="SediSecondarie">
+              <xs:annotation>
+                <xs:documentation>Sedi secondarie se esistono</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent mixed="false">
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="SedeSecondaria" type="xs:string" />
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="IscrizioneRI" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Numero dell'iscrizione al Registro delle Imprese</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="OggettoSociale" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Da non riportare per le imprese individuali</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="CapitaleSociale" type="tEuro">
+              <xs:annotation>
+                <xs:documentation>Capitale sociale da indicare in migliaia di euro</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="LiquiditaAperturaFallimento" type="tEuro">
+              <xs:annotation>
+                <xs:documentation>Liquidità all'atto dell'apertura del fallimento</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="NatalitaContrattuale" type="xs:date">
+              <xs:annotation>
+                <xs:documentation>Da non riportare per le imprese individuali</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="NatalitaOpertiva" type="xs:date">
+              <xs:annotation>
+                <xs:documentation>Da non riportare per le imprese individuali</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="DataCessazioneAnteFallimento" type="xs:date">
+              <xs:annotation>
+                <xs:documentation>Data Cessazione operativa ante fallimento</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="DataDichirazioneFallimento" type="xs:date">
+              <xs:annotation>
+                <xs:documentation>Data sentenza dichiarativa di fallimento</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

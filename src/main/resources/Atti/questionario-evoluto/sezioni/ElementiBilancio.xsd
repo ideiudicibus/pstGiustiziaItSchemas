@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="ElementiBilancio">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element name="ContoEconomico">
+              <xs:annotation>
+                <xs:appinfo>
+                  <strong>Conto economico</strong>
+                </xs:appinfo>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eAnnotazione">
+                    <xs:sequence>
+                      <xs:element name="Vendite" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="AltriRicavi" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="VariazioneMagazzino" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="CostiIndustriali" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="CostiCommerciali" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="CostiAmministrativi" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="OneriAccessoriStraordinari" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="OneriTributari" type="eSottoSopraValutazione">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="StatoPatrimoniale">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eAnnotazione">
+                    <xs:sequence>
+                      <xs:element name="Liquidita" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="CreditiCommerciali" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="Magazzino" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="CostiCapitalizzati" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="Partecipazioni" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="ImmobilizzazioniMateriali" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="ImmobilizzazioniImmateriali" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="Fornitori" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="IndebitamentoFinanziario" type="eSottoSopraValutazione">
+                      </xs:element>
+                      <xs:element name="CapitaleRiserve" type="eSottoSopraValutazione">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

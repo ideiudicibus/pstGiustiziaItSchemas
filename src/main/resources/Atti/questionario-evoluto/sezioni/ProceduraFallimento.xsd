@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Nik (.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="InformazioniProcedura">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eAnnotazione">
+          <xs:sequence>
+            <xs:element name="DataChiusura" type="xs:date"/>
+            <xs:element name="StimaAttivoLiquidabile" type="xs:decimal">
+              <xs:annotation>
+                <xs:documentation>stima dell'attivo liquidabile (migliaia di euro)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ModalitaChiusuraProcedura">
+              <xs:annotation>
+                <xs:documentation>Modalità effettiva prevista di chiusura della procedura</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="RendicontoModalitaChiusuraPresentato" type="eBoolean"/>
+                  <xs:element name="RendicontoModalitaChiusuraNonPresentato" type="eBoolean"/>
+                  <xs:element name="PagamentoIntegraleCreditori" type="eBoolean"/>
+                  <xs:element name="ConcordatoFallimentare" type="eBoolean"/>
+                  <xs:element name="LiquidazioneAttivo" type="eBoolean"/>
+                  <xs:element name="InsufficienzaAttivo" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ModalitaRipartizioneAttivo">
+              <xs:annotation>
+                <xs:documentation>Modalità effettiva prevista di ripartizione dell'attivo tra i creditori</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="RendicontoModalitaRipartizioneAttivoPresentato" type="eBoolean"/>
+                  <xs:element name="RendicontoModalitaRipartizioneAttivoNonPresentato" type="eBoolean"/>
+                  <xs:element name="AttivoLiquidabile">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="PrimoAnno" type="xs:decimal"/>
+                        <xs:element name="SecondoAnno" type="xs:decimal"/>
+                        <xs:element name="TerzoAnno" type="xs:decimal"/>
+                        <xs:element name="QuartoAnno" type="xs:decimal"/>
+                        <xs:element name="QuintoAnno" type="xs:decimal"/>
+                        <xs:element name="AltriAnni" type="xs:decimal"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ModalitaGestioneProcedura">
+              <xs:annotation>
+                <xs:documentation>Modalità di gestione della procedura</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="EsercizioProvvisorio" type="eBoolean"/>
+                  <xs:element name="CessioneAzienda" type="eBoolean"/>
+                  <xs:element name="CessioneIndividuale">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="CessioneBeniMobili" type="eBoolean"/>
+                        <xs:element name="CessioneImmobili" type="eBoolean"/>
+                        <xs:element name="CessioneCrediti" type="eBoolean"/>
+                        <xs:element name="CessioneAzioni" type="eBoolean"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="AffittoAzienda" type="eBoolean"/>
+                  <xs:element name="AffittoAzienda" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StimaCosti">
+    <xs:annotation>
+      <xs:documentation>Stima dei costi diretti del fallimento</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eAnnotazione">
+          <xs:sequence>
+            <xs:element name="CompensiOnorari" type="eStimaCosti"/>
+            <xs:element name="SpeseAmministrative" type="eStimaCosti"/>
+            <xs:element name="Altri" type="eStimaCosti"/>
+            <xs:element name="Totale" type="eStimaCosti"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProceduraFallimento">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element ref="InformazioniProcedura"/>
+            <xs:element ref="StimaCosti"/>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

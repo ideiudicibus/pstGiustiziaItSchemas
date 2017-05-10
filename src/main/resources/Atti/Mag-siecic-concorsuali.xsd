@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/magistrato/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/magistrato/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="./tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="./tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="./eventi.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI  DEL GIUDICE DELEGATO PER LE PROCEDURE CONCORSUALI</xs:documentation>
+		<xs:documentation>Gli atti qui definiti si riferiscono a procedimenti in essere</xs:documentation>
+		<xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+	</xs:annotation>
+	<xs:element name="FissazioneUdienza">
+		<xs:annotation>
+			<xs:documentation>Fissazione prima udienza giudice relatore e fissazione udienza nuovo rito per tardive (convocazione creditori)</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="dispositivo" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:fissazionePrimaUdienza"/>
+									<xs:element ref="evt:fissazioneUdienzaTardiva"/>
+									<xs:element ref="evt:rinvioUdienza"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DecretoGenerico">
+		<xs:annotation>
+			<xs:documentation>Decreto Generico</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="dispositivo" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:decretoRigettoFallimento"/>
+									<xs:element ref="evt:decretoEsecutivitaStatoPassivo"/>
+									<xs:element ref="evt:decretoChiusura"/>
+									<xs:element ref="evt:approvazioneRipartoParziale"/>
+									<xs:element ref="evt:approvazioneRipartoFinale"/>
+									<xs:element ref="evt:approvazioneProgrammaLiquidazione"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RigettoDomanda">
+		<xs:annotation>
+			<xs:documentation>Rigetto domanda di ammissione al passivo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence minOccurs="0">
+						<xs:element name="Insinuazione" type="st:RiferimentoCronologico">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AmmissionePassivo">
+		<xs:annotation>
+			<xs:documentation>Ammissione stato passivo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence minOccurs="0">
+						<xs:element name="Domanda" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="st:RiferimentoCronologico">
+										<xs:sequence>
+											<xs:element ref="pt:ModificheAnagrafica" minOccurs="0"/>
+											<xs:choice>
+												<xs:element ref="st:precisazioneCredito" minOccurs="0" maxOccurs="unbounded"/>
+												<xs:element name="ElencoBeni" type="st:BeneMobile" minOccurs="0" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Elenco dei beni rivendicati dai creditori insinuati</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:choice>
+											<xs:element name="Motivazioni" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdinanzaVendita">
+		<xs:annotation>
+			<xs:documentation>Ordinanza di vendita vecchio rito e progetto di liquidazione nuovo rito</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:choice>
+							<xs:sequence>
+								<xs:element ref="st:importo"/>
+								<xs:element name="UdienzaSenzaIncanto" type="xs:dateTime"/>
+								<xs:element name="UdienzaIncanto" type="xs:dateTime" nillable="true"/>
+								<xs:element name="Cauzione" type="bt:Percentuale" default="10"/>
+								<xs:element name="Spese" type="bt:Percentuale" nillable="true"/>
+							</xs:sequence>
+							<xs:element name="Delegata">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:complexContent>
+										<xs:extension base="at:Soggetto">
+											<xs:sequence>
+												<xs:element name="TipologiaDelega">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="IVG"/>
+															<xs:enumeration value="Commissionario"/>
+															<xs:enumeration value="Notaio"/>
+															<xs:enumeration value="Professionista"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:extension>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ComplessoAziendale">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="st:importo"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="Lotto" type="xs:positiveInteger">
+								<xs:annotation>
+									<xs:documentation>Ideintificazione numerica del lotto oggetto di ordinanza se noto e già censito nel sistema informativo</xs:documentation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+							</xs:element>
+							<xs:choice>
+								<xs:annotation>
+									<xs:documentation>Beni che costituiscono il lotto di cui all'ordinanza in oggetto nell'ipotesi in cui il lotto non sia ancora stato costituito</xs:documentation>
+								</xs:annotation>
+								<xs:element ref="st:beneImmobile" maxOccurs="unbounded"/>
+								<xs:element ref="st:beneMobile" maxOccurs="unbounded"/>
+							</xs:choice>
+						</xs:choice>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SentenzaFallimento">
+		<xs:annotation>
+			<xs:documentation>Dichiarazione di fallimento</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence minOccurs="0">
+						<xs:element ref="pt:ModificheAnagrafica" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="EstensioneAnagrafica" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DatiDebitore" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="formaSocietaria" type="st:FormaSocietaria"/>
+											</xs:sequence>
+											<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DatiSoci" nillable="true" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+											<xs:documentation>L'assenza di soci responsabili è indicata dall'attributo nillable</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="GiudiceDelegato" type="at:RiferimentoSoggetto" nillable="true">
+							<xs:annotation>
+								<xs:documentation>Se impostato a nillable indica che il giudice delegato è il medesimo che effettua il deposito delle sentenza</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Curatore" type="at:RiferimentoSoggetto" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Il curatore deve già essere censito nella base dati dell'uffico. Se impostato a nillable il curatore non è nomincato contestualemtne alla sentenza</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="UdienzaVerifica" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TermineDeposito" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Decisione" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

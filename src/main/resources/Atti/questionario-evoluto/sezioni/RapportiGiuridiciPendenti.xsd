@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Nik (.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="RapportiPendentiTipici">
+    <xs:annotation>
+      <xs:documentation>Presenza di rapporti pendenti tipici disciplinati dagli artt. 72 bis - 83 bis l.f.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="ContrattoImmobiliCostruire" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto relativi ad immobili da costruire</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoFinanziamentoPerAffare" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di finanziamento destinati ad uno specifico affare</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoLocazioneFinanziaria">
+              <xs:annotation>
+                <xs:documentation>contratto di locazione finanziaria (c.d. leasing finanziario)</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="TradizionaleGodimento" type="eBoolean">
+                        <xs:annotation>
+                          <xs:documentation>tradizionale o di godimento</xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                      <xs:element name="Traslativo" type="eBoolean">
+                        <xs:annotation>
+                          <xs:documentation>traslativo</xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ContrattoVenditaRiservaProprieta" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di vendita con riserva di propriet?</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoEsecuzioneContinuataPeriodica">
+              <xs:annotation>
+                <xs:documentation>contratto ad esecuzione continuata o periodica</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="ContrattoSomministrazione" type="eBoolean">
+                        <xs:annotation>
+                          <xs:documentation>contratto di somministrazione</xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                      <xs:element name="ContrattoSubFornitura" type="eBoolean">
+                        <xs:annotation>
+                          <xs:documentation>contratto di subfornitura</xs:documentation>
+                        </xs:annotation>
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ContrattoBorsaTermine" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di borsa a termine</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoAssociazionePartecipazione" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di associazione in partecipazione</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoContoCorrente" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di conto corrente</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoMandato" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di mandato</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoCommisione" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di commissione</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoAffittoAzienda" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di affitto di azienda</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattolocazioneImmobili" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di locazione di immobili</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoAppalto" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di appalto</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoAssicurazione" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di assicurazione</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoEdizione" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto di edizione</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoClausolaCompromissoria" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto con clausola compromissoria</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Indicare">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="NumeroTotaleRapportiPendenti" type="xs:integer">
+                    <xs:annotation>
+                      <xs:documentation>numero totale di rapporti pendenti (per ogni tipologia contrattuale interessata)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DichirazioneCuratore">
+                    <xs:annotation>
+                      <xs:documentation>dichiarazione curatore (per ogni rapporto pendente)</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="DichiarazioneSubentro" type="eBoolean"/>
+                        <xs:element name="DichiarazioneScioglimento" type="eBoolean"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RapportiPendentiDisciplinatiIpotesiGenerale">
+    <xs:annotation>
+      <xs:documentation>Presenza di rapporti pendenti disciplinati dallipotesi generale prevista dallart. 72 l.f. (ipotesi diverse da quelle tipiche previste ex artt. 72 bis - 83 bis l.f.)</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eSioNo">
+          <xs:sequence>
+            <xs:element name="ContrattoPreliminareVendita" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>contratto preliminare di vendita immobiliare trascritto ex art. 2645 bis c.c</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ContrattoVendita">
+              <xs:annotation>
+                <xs:documentation>contratto di vendita</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="CoseMobili" type="eBoolean"/>
+                      <xs:element name="BeniConsumo" type="eBoolean"/>
+                      <xs:element name="Immobiliare" type="eBoolean"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ContrattoRiporto" type="eBoolean"/>
+            <xs:element name="ContrattoPermuta" type="eBoolean"/>
+            <xs:element name="ContrattoBorsaPronti" type="eBoolean"/>
+            <xs:element name="ContrattoEstimatorio" type="eBoolean"/>
+            <xs:element name="ContrattoLocazione">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="BeniMobili" type="eBoolean"/>
+                      <xs:element name="BeniProduttivi" type="eBoolean"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ContrattoTrasporto" type="eBoolean"/>
+            <xs:element name="ContrattoSpedizione" type="eBoolean"/>
+            <xs:element name="ContrattoAgenzia" type="eBoolean"/>
+            <xs:element name="ContrattoMediazione" type="eBoolean"/>
+            <xs:element name="ContrattoDeposito">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="DepositoRegolare" type="eBoolean"/>
+                      <xs:element name="DepositoIrregolare" type="eBoolean"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ContrattoSequestro" type="eBoolean"/>
+            <xs:element name="ContrattoComodato" type="eBoolean"/>
+            <xs:element name="ContrattoMutuo" type="eBoolean"/>
+            <xs:element name="ContrattoDepositoBancario" type="eBoolean"/>
+            <xs:element name="ContrattoAperturaCredito" type="eBoolean"/>
+            <xs:element name="ContrattoAnticipazioneBancaria" type="eBoolean"/>
+            <xs:element name="ContrattoScontoBancario" type="eBoolean"/>
+            <xs:element name="ContrattoRendita">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="RenditaPerpetua" type="eBoolean"/>
+                      <xs:element name="RenditaVitalizia" type="eBoolean"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ContrattoFideiussione">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="FideiussioneOmnibus" type="eBoolean"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ContrattoGaranziaPrimaRichiesta" type="eBoolean"/>
+            <xs:element name="ContrattoMandatoCredito" type="eBoolean"/>
+            <xs:element name="ContrattoAnticresi" type="eBoolean"/>
+            <xs:element name="ContrattoTraslazione" type="eBoolean"/>
+            <xs:element name="ContrattoCessioneBeniCeditori" type="eBoolean"/>
+            <xs:element name="ContrattoAssociazioneTemporaneaImpresa" type="eBoolean"/>
+            <xs:element name="ContrattoOpera" type="eBoolean"/>
+            <xs:element name="ContrattoCartolarizzazione" type="eBoolean"/>
+            <xs:element name="ContrattoProjectFinancing" type="eBoolean"/>
+            <xs:element name="ContrattoAtipico">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eBoolean">
+                    <xs:sequence>
+                      <xs:element name="ContrattoFactoring" type="eBoolean"/>
+                      <xs:element name="ContrattoLeasingOperativo">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eBoolean">
+                              <xs:sequence>
+                                <xs:element name="ContrattoSaleAndLeaseBack" type="eBoolean"/>
+                                <xs:element name="ContrattoPubblico" type="eBoolean"/>
+                                <xs:element name="ContrattoInternazionale" type="eBoolean"/>
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ContrattoFranchising" type="eBoolean"/>
+                      <xs:element name="StrumentiFinanziariDerivati">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eBoolean">
+                              <xs:sequence>
+                                <xs:element name="Futures" type="eBoolean"/>
+                                <xs:element name="Options" type="eBoolean"/>
+                                <xs:element name="CoveredWarrant" type="eBoolean"/>
+                                <xs:element name="Swap">
+                                  <xs:complexType>
+                                    <xs:complexContent>
+                                      <xs:extension base="eBoolean">
+                                        <xs:sequence>
+                                          <xs:element name="InterestRateSwapp" type="eBoolean"/>
+                                          <xs:element name="CurrencySwap" type="eBoolean"/>
+                                          <xs:element name="CreditDefaultSwap" type="eBoolean"/>
+                                        </xs:sequence>
+                                      </xs:extension>
+                                    </xs:complexContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ContrattoEngineering">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eBoolean">
+                              <xs:sequence>
+                                <xs:element name="ConsultingEngineering" type="eBoolean"/>
+                                <xs:element name="CommercialEngineering" type="eBoolean"/>
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ContrattoSponsorizzazione" type="eBoolean"/>
+                      <xs:element name="ContrattoBartering" type="eBoolean"/>
+                      <xs:element name="ContrattoMechandising" type="eBoolean"/>
+                      <xs:element name="ContrattoBrokeraggio" type="eBoolean"/>
+                      <xs:element name="ContrattoConcessioneVendita" type="eBoolean"/>
+                      <xs:element name="ContrattoCatering" type="eBoolean"/>
+                      <xs:element name="ContrattoInformatica" type="eBoolean"/>
+                      <xs:element name="ContrattoJointVenture">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eBoolean">
+                              <xs:sequence>
+                                <xs:element name="IncorporatedJointVentures" type="eBoolean"/>
+                                <xs:element name="ContractualJointVentures" type="eBoolean"/>
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="ContrattoCessioneCubatura" type="eBoolean"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Indicare">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="NumeroTotaleRapportiPendenti" type="xs:integer">
+                    <xs:annotation>
+                      <xs:documentation>numero totale di rapporti pendenti (per ogni tipologia contrattuale interessata)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="DichirazioneCuratore">
+                    <xs:annotation>
+                      <xs:documentation>dichiarazione curatore (per ogni rapporto pendente)</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="DichiarazioneSubentro" type="eBoolean"/>
+                        <xs:element name="DichiarazioneScioglimento" type="eBoolean"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RapportiGiuridiciPendenti">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element ref="RapportiPendentiTipici"/>
+            <xs:element ref="RapportiPendentiDisciplinatiIpotesiGenerale">
+              <xs:annotation>
+                <xs:documentation>Presenza di rapporti pendenti disciplinati dall'ipotesi generale prevista dall'art. 72 l.f. (ipotesi diverse da quelle tipiche previste ex artt. 72 bis - 83 bis l.f.)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

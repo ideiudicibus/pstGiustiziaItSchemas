@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="VicendeAziendali">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element name="Cessione">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="CessioneAzienda" type="eBoolean">
+                      </xs:element>
+                      <xs:element name="CessioneRamoAzienda" type="eBoolean">
+                      </xs:element>
+                      <xs:element name="DataCessione" type="xs:date">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Usufrutto">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="UsufruttoAzienda" type="eBoolean">
+                      </xs:element>
+                      <xs:element name="UsufruttoRamoAzienda" type="eBoolean">
+                      </xs:element>
+                      <xs:element name="DataUsufrutto" type="xs:date">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Affitto">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="AffittoAzienda" type="eBoolean">
+                      </xs:element>
+                      <xs:element name="AffittoRamoAzienda" type="eBoolean">
+                      </xs:element>
+                      <xs:element name="DataAffitto" type="xs:date">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

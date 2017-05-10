@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="CauseSoggettive">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="PercentualeCausaFallimento">
+          <xs:sequence>
+            <xs:element name="ComportamentiFraudolenti" type="eBoolean"/>
+            <xs:element name="VicendeGiudiziarieDirigenti" type="eBoolean"/>
+            <xs:element name="AsservimentoInteressiGruppoAppartenenza" type="eBoolean"/>
+            <xs:element name="PerditaCompetenza" type="eBoolean"/>
+            <xs:element name="PassaggioGenerazionale" type="eBoolean"/>
+            <xs:element name="Altre" type="xs:string"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ErroriImpostazioneStrategica">
+    <xs:annotation>
+      <xs:documentation>Errori nell'impostazione delle scelte strategiche</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="PercentualeCausaFallimento">
+          <xs:sequence>
+            <xs:element name="RigiditaStrutturale" type="eBoolean"/>
+            <xs:element name="CarenzaPianificazioneControllo" type="eBoolean"/>
+            <xs:element name="CarenzaInnovazione" type="eBoolean"/>
+            <xs:element name="ErroriCrescita" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>Errori di crescita (mancata verifica della sostenibilit� dello sviluppo tramite acquisizioni,conquista di nuovi mercati, espansione fattutrato)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="RischiEccessivi" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>Assunzione di rischi eccessivi, gestione speculativa</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="IncoerenzaBusiness" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>Incoerenza del business (diversificazione non equilibrata)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Altre" type="xs:string"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InefficienzeInterne">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="PercentualeCausaFallimento">
+          <xs:sequence>
+            <xs:element name="MancatoControlloRedditivita" type="eBoolean"/>
+            <xs:element name="InefficienzaOrganizzativaInformativa" type="eBoolean"/>
+            <xs:element name="MancatoControlloCosti">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Produttivi" type="eBoolean"/>
+                  <xs:element name="Commerciali" type="eBoolean"/>
+                  <xs:element name="AmministrativiGenerali" type="eBoolean"/>
+                  <xs:element name="Finanziari" type="eBoolean"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="GestioneFinanziaria">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Indebitamento" type="eBoolean"/>
+                  <xs:element name="Squilibri" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>squilibri tra struttura degli investimenti e durata dei finanziamenti</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ScarsoAutoFinanziamento" type="eBoolean"/>
+                  <xs:element name="SquilibriPatrimoniali" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>squilibri patrimoniali (inadeguatezza dei mezzi propri)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="SquilibriGestioneAccessorie" type="eBoolean">
+                    <xs:annotation>
+                      <xs:documentation>squilibri nelle gestione accessorie</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="AltreInefficienzeInterne" type="xs:string">
+                    <xs:annotation>
+                      <xs:documentation>altre inefficienze interne (precisare)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CauseEsterne">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="PercentualeCausaFallimento">
+          <xs:sequence>
+            <xs:element name="CrisiMercato" type="eBoolean"/>
+            <xs:element name="InstabilitaCambiCostoDenaro" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>instabilità dei cambi valutari e del costo del denaro</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="VariabilitaCostoFattoriProduttivi" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>variabilit� del costo dei fattori prosuttivi</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="FattoriPoliticiCircostanzeEsterne" type="eBoolean">
+              <xs:annotation>
+                <xs:documentation>Fattori politici ed altre circostanze esterne (calamità naturali)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Altre" type="xs:string"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CauseFallimento">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element ref="CauseSoggettive"/>
+            <xs:element ref="ErroriImpostazioneStrategica"/>
+            <xs:element ref="InefficienzeInterne"/>
+            <xs:element ref="CauseEsterne"/>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

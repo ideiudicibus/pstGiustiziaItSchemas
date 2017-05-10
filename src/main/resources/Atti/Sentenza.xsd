@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 3 U (http://www.xmlspy.com) by Nicola (..) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:evt="http://schemi.processotelematico.giustizia.it/eventi/magistrato" xmlns="http://schemi.processotelematico.giustizia.it/atti/Sentenza" targetNamespace="http://schemi.processotelematico.giustizia.it/atti/Sentenza" elementFormDefault="qualified" attributeFormDefault="unqualified"  version="1.1">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/eventi/magistrato" schemaLocation="./eventi-magistrato.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DEL MAGISTRATO</xs:documentation>
+		<xs:documentation>Atti di definizione del procedimento. Sentenze e dispositivi</xs:documentation>
+	</xs:annotation>
+	<xs:element name="SentenzaDefinitiva">
+		<xs:annotation>
+			<xs:documentation>Atto per il deposito della minuta della sentenza definitiva</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice minOccurs="0">
+									<xs:element ref="evt:DepositoMinutaSentenzaDefinitiva"/>
+									<xs:element ref="evt:LetturaDispositivo"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="opzioni" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence minOccurs="0" maxOccurs="unbounded">
+									<xs:group ref="evt:tOrdinanzeComuni"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="pubblicazioneRichiesta" type="xs:boolean"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SentenzaNonDefinitiva">
+		<xs:annotation>
+			<xs:documentation>Atto per il deposito della minuta della sentenza non definitiva</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice minOccurs="0">
+									<xs:element ref="evt:DepositoMinutaSentenzaNonDefinitiva"/>
+									<xs:element ref="evt:LetturaDispositivoNonDefinitivo"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="opzioni" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:OrdinanzaRimessioneCollegio"/>
+									<xs:group ref="evt:tOrdinanzeComuni"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

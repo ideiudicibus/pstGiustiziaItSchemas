@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns="http://www.giustizia.it/Concorsuali/Questionario" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.giustizia.it/Concorsuali/Questionario" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Riclassificati">
+    <xs:annotation>
+      <xs:documentation>riclassificati di stato patrimoniale e conto economico</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

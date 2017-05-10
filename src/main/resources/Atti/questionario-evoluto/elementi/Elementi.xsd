@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Nik (.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:simpleType name="tSioNo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SI"/>
+      <xs:enumeration value="NO"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="eSioNo">
+    <xs:attribute name="SiNo" type="tSioNo" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="eBoolean">
+    <xs:attribute name="VeroFalso" type="xs:boolean" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="eTotale">
+    <xs:attribute name="Totale" type="xs:integer" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="PercentualeCausaFallimento">
+    <xs:attribute name="Primarie" type="tPercentuale"/>
+    <xs:attribute name="Secondarie" type="tPercentuale"/>
+  </xs:complexType>
+  <xs:complexType name="eSottoSopraValutazione">
+    <xs:attribute name="SottoValutazione" type="xs:decimal"/>
+    <xs:attribute name="SopraValutazione" type="xs:decimal"/>
+  </xs:complexType>
+  <xs:complexType name="eParteDescrittivaCuratore">
+    <xs:annotation>
+      <xs:documentation>Considerazioni del curatore(ove necessario)</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="eIndicePercentuale">
+    <xs:attribute name="Percentuale" type="xs:decimal" use="required"/>
+    <xs:attribute name="PrimoEsercizio" type="xs:decimal" use="required"/>
+    <xs:attribute name="SecondoEsercizio" type="xs:decimal" use="required"/>
+    <xs:attribute name="TerzoEsercizio" type="xs:decimal" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="eIndice">
+    <xs:attribute name="Percentuale" type="xs:decimal" use="required"/>
+    <xs:attribute name="PrimoEsercizio" type="xs:decimal" use="required"/>
+    <xs:attribute name="SecondoEsercizio" type="xs:decimal" use="required"/>
+    <xs:attribute name="TerzoEsercizio" type="xs:decimal" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="eIndiceNumerico">
+    <xs:attribute name="Valore" type="xs:decimal" use="required"/>
+    <xs:attribute name="PrimoEsercizio" type="xs:decimal" use="required"/>
+    <xs:attribute name="SecondoEsercizio" type="xs:decimal" use="required"/>
+    <xs:attribute name="TerzoEsercizio" type="xs:decimal" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="eBassoMedioElevato">
+    <xs:attribute name="Basso" type="xs:boolean"/>
+    <xs:attribute name="Medio" type="xs:boolean"/>
+    <xs:attribute name="Elevato" type="xs:boolean"/>
+  </xs:complexType>
+  <xs:complexType name="eStimaCosti">
+    <xs:attribute name="Sostenuti" type="xs:decimal" use="required"/>
+    <xs:attribute name="DaSostenere" type="xs:decimal" use="required"/>
+    <xs:attribute name="Totale" type="xs:decimal" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="eAmministratore">
+    <xs:sequence>
+      <xs:element name="CognomeNome" type="xs:string"/>
+      <xs:element name="Carica" type="xs:string"/>
+      <xs:element name="Dal" type="xs:date"/>
+      <xs:element name="Al" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eSindaco">
+    <xs:sequence>
+      <xs:element name="CognomeNome" type="xs:string"/>
+      <xs:element name="Carica" type="xs:string"/>
+      <xs:element name="Dal" type="xs:date"/>
+      <xs:element name="Al" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eRevisoreContabile">
+    <xs:sequence>
+      <xs:element name="SocietaRevisione" type="xs:string"/>
+      <xs:element name="Dal" type="xs:date"/>
+      <xs:element name="Al" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eProfessionista">
+    <xs:sequence>
+      <xs:element name="CognomeNome" type="xs:string"/>
+      <xs:element name="Incarico" type="xs:string"/>
+      <xs:element name="Dal" type="xs:date"/>
+      <xs:element name="Al" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eCapitolo"/>
+  <xs:complexType name="eAnnotazione"/>
+</xs:schema>

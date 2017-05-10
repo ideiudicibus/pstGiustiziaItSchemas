@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Nik (.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:complexType name="eInformazioneExtraContabile">
+    <xs:attribute name="PrimoEsercizio" type="xs:string"/>
+    <xs:attribute name="SecondoEsercizio" type="xs:string"/>
+    <xs:attribute name="TerzoEsercizio" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="IndiciRedditivitaGlobale">
+    <xs:annotation>
+      <xs:documentation>Indici di redditività globale</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="IndiceROE" type="eIndicePercentuale"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IndiciOnerositaFinanziaria">
+    <xs:annotation>
+      <xs:documentation>Gli indici di onerosit� segnalano il peso relativo degli oneri finanziari in relazione rispettivamente al debito e al fatturato</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="IndiceIp" type="eIndicePercentuale"/>
+        <xs:element name="IndiceIr" type="eIndicePercentuale"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IndiciRedditivitaOperativa">
+    <xs:annotation>
+      <xs:documentation>Indici di redditivit� operativa</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="IndiceROI" type="eIndicePercentuale"/>
+        <xs:element name="IndiceROS" type="eIndicePercentuale"/>
+        <xs:element name="IndiceT" type="eIndicePercentuale"/>
+        <xs:element name="RelazioneDuPont">
+          <xs:complexType>
+            <xs:complexContent>
+              <xs:extension base="eAnnotazione">
+                <xs:sequence>
+                  <xs:element name="RotazioneAttivoCircolante" type="eIndice"/>
+                  <xs:element name="RotazioneMagazzino" type="eIndice"/>
+                  <xs:element name="RotazioneCrediti" type="eIndice"/>
+                  <xs:element name="RotazioneDebitiCommerciali" type="eIndice"/>
+                </xs:sequence>
+              </xs:extension>
+            </xs:complexContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IndiciSoliditaPatrimoniale">
+    <xs:annotation>
+      <xs:documentation>Indici di solidit� patrimoniale</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="RapportoIndebitamento" type="eIndiceNumerico"/>
+        <xs:element name="IndiceCopertura" type="eIndiceNumerico"/>
+        <xs:element name="IndiceSolvibilitaFinale" type="eIndiceNumerico"/>
+        <xs:element name="IncidenzaPassivoFatturato" type="eIndiceNumerico"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IndiciLiquidita">
+    <xs:annotation>
+      <xs:documentation>Indici di liquidit�</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="IndiceLiquiditaGenerale" type="eIndicePercentuale"/>
+        <xs:element name="AcidTest" type="eIndicePercentuale"/>
+        <xs:element name="CapitaleCircolanteNetto" type="eIndicePercentuale"/>
+        <xs:element name="IndiceCashFlow" type="eIndicePercentuale"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IndiciEfficienzaProduttivita">
+    <xs:annotation>
+      <xs:documentation>Indici di efficienza e produttivit�</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FatturatoPerAddetto" type="eIndicePercentuale"/>
+        <xs:element name="ValoreAggiuntoProcapite" type="eIndicePercentuale"/>
+        <xs:element name="CostoLavoroProcapite" type="eIndicePercentuale"/>
+        <xs:element name="ProduttivitaLavoro" type="eIndicePercentuale"/>
+        <xs:element name="ProduttivitaCapitale" type="eIndicePercentuale"/>
+        <xs:element name="PropensioneDecentramento" type="eIndicePercentuale"/>
+        <xs:element name="EfficienzaLavoro" type="eIndicePercentuale"/>
+        <xs:element name="gradoAmmortamentoImmobilizzazioni" type="eIndicePercentuale"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InformazioniExtraContabili">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DiversificazioneProdotti" type="eInformazioneExtraContabile">
+          <xs:annotation>
+            <xs:documentation>Diversificazione di prodotti (n. di prodotti o linee di prodotti diversi)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="NumeroClienti" type="eInformazioneExtraContabile"/>
+        <xs:element name="VariazioneNumeroClienti" type="eInformazioneExtraContabile">
+          <xs:annotation>
+            <xs:documentation>Variazione del numero di clienti rispetto allanno precedente (in %)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="NumeroFornitori" type="eInformazioneExtraContabile"/>
+        <xs:element name="DurataLeadTime" type="eInformazioneExtraContabile">
+          <xs:annotation>
+            <xs:documentation>Durata del lead-time (dallordine alla consegna)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="PoliticheCanale">
+          <xs:complexType>
+            <xs:complexContent>
+              <xs:extension base="eInformazioneExtraContabile">
+                <xs:sequence>
+                  <xs:element name="ClientelaInCommitenza" type="eInformazioneExtraContabile"/>
+                  <xs:element name="ClientelaInDettaglio" type="eInformazioneExtraContabile"/>
+                  <xs:element name="ClientelaGrandeDistribuzione" type="eInformazioneExtraContabile"/>
+                  <xs:element name="ClientelaGrossistiIntermediari" type="eInformazioneExtraContabile"/>
+                  <xs:element name="ClientelaPostaInternet" type="eInformazioneExtraContabile"/>
+                  <xs:element name="ClientelaAltriCanali" type="eInformazioneExtraContabile"/>
+                </xs:sequence>
+              </xs:extension>
+            </xs:complexContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VetustaMediaImpianti" type="xs:decimal">
+          <xs:annotation>
+            <xs:documentation>Vetust� media degli impianti (in anni)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="AnzianitaAziendaleMediaDipendenti" type="xs:decimal">
+          <xs:annotation>
+            <xs:documentation>Anzianit� aziendale media dei dipendenti (in anni)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="EtaMediaDipendenti" type="xs:decimal">
+          <xs:annotation>
+            <xs:documentation>Et� media dipendenti (in anni)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="InformatizzazioneFunzioniAziendali">
+          <xs:annotation>
+            <xs:documentation>Grado di informatizzazione delle funzioni aziendali</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Produzione" type="eBassoMedioElevato"/>
+              <xs:element name="LogisticaInterna" type="eBassoMedioElevato"/>
+              <xs:element name="Vendita" type="eBassoMedioElevato"/>
+              <xs:element name="CicloPassivo" type="eBassoMedioElevato">
+                <xs:annotation>
+                  <xs:documentation>ciclo passivo (ordini fornitori - ricevimento)</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="CicloAttivo" type="eBassoMedioElevato">
+                <xs:annotation>
+                  <xs:documentation>ciclo attivo (ordini clienti - consegna)</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Amministrazione" type="eBassoMedioElevato"/>
+              <xs:element name="GestioneBanche" type="eBassoMedioElevato"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ManutenzioneIimmobilizzazioniTecniche" type="eBassoMedioElevato">
+          <xs:annotation>
+            <xs:documentation>Grado di manutenzione delle immobilizzazioni tecniche</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnalisiMezzoIndici">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element ref="IndiciRedditivitaGlobale"/>
+            <xs:element ref="IndiciOnerositaFinanziaria"/>
+            <xs:element ref="IndiciRedditivitaOperativa"/>
+            <xs:element ref="IndiciSoliditaPatrimoniale"/>
+            <xs:element ref="IndiciLiquidita"/>
+            <xs:element ref="IndiciEfficienzaProduttivita"/>
+            <xs:element ref="InformazioniExtraContabili"/>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

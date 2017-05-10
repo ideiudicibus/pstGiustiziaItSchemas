@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 3 U (http://www.xmlspy.com) by Nicola (..) -->
+<xs:schema targetNamespace="http://schemi.processotelematico.giustizia.it/eventi/udienza" xmlns="http://schemi.processotelematico.giustizia.it/eventi/udienza" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Eventi scaricabili durante l'udienza.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="AccoglimentoIstanza" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Accoglimento Istanza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AccoglimentoIstanzaRimessioneInTermini" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Accoglimento Istanza Di Rimessione In Termini</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AccoglimentoParziale" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Accoglimento Parziale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AccoglimentoTotale" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Accoglimento Totale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AccoglimentoTotale-FissazioneUdienzaDiComparizioneParti" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Accoglimento Totale E Fissazione Udienza Di Comparizione Parti</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AnnullamentoIncaricoCTU" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Annullamento Incarico Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AnticipazioneUdienza" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Anticipazione Udienza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Archiviazione" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Archiviazione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AutorizzazionePagamentoSommeNonContestate-Convalida" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Autorizzazione Pagamento Somme Non Contestate E Convalida (Art.666 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Cancellazione" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Cancellazione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ChiarimentiCTU" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Chiarimenti Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ConcessioneTermineProvaDelegata" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Concessione Nuovo Termine Per Prova Delegata</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ConcessioneProrogaCTU" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Concessione Proroga Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ConcessioneProvvisoriaEsecuzione" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Concessione Provvisoria Esecuzione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ConcessioneTerminiDiGrazia-FissazioneUdienzaArt55L39278" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Concessione Termini Di Grazia E Fissazione Udienza (Art.55 L.392/78)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Conciliazione" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Conciliazione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ConciliazioneParziale" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Conciliazione Parziale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ConvocazionePerSommarieInformazioni" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Convocazione Per Sommarie Informazioni</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DelegaAlGiudiceRelatorePerIstruttoria" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Delega Al Giudice Relatore Per Istruttoria</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoCitazioneChiamataDiTerzo" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Citazione Chiamata Di Terzo</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoComparseConclusionali" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Comparse Conclusionali</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoDeduzioniEProveContrarie" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Deduzioni E Prove Contrarie (Art.184,1 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoDeduzioniIstruttorie" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Deduzioni Istruttorie (Art.184,1 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaCitazioneInRiassunzione" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Citazione In Riassunzione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaCongiuntaTrasformazioneInConsensuale" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Congiunta  Per Trasformazione In Consensuale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaAnticipazioneDifferimentoUdienza" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Di Anticipazione O Differimento Udienza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaRicusazioneGiudice" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Di Ricusazione Giudice</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaRinuncia" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Di Rinuncia</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaDiscussioneOrale" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Discussione Orale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaExArt186Bis" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Ex Art 186 Bis</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaExArt186Quater" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Ex Art 186 Quater</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaExArt186Ter" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Ex Art 186 Ter</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaExArt243Cpc" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Ex Art 243 Cpc</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaRicusazioneCTU" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Ricusazione Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaRimessioneInIstruttoria" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Rimessione In Istruttoria</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoIstanzaSospensioneProvvisoriaEsecuzione" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Istanza Sospensione Provvisoria Esecuzione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoMemorie" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Memorie</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoMemorieDiReplica" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Memorie Di Replica</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoMemorieExArt183Cpc" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Memorie Ex Art. 183 C.P.C</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoMinutaSentenza-DispositivoLettoInUdienza" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Minuta Sentenza (Dispositivo Letto In Udienza)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoProveExArt210Cpc" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Prove Ex Art. 210 Cpc</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoRichiestaChiamataDiTerzo" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Richiesta Chiamata Di Terzo (Art.269 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoRicorsoRiassunzione" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Ricorso Di Riassunzione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoRicorsoPerFissazioneUdienzaDiProsecuzioneProcedimento" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Deposito Ricorso Per Fissazione Udienza Di Prosecuzione Procedimento</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DesignazioneGiudicePerLaFaseIstruttoria-FissazionePrimaUdienza" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Designazione Giudice Per La Fase Istruttoria E Fissazione Prima Udienza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DichiarazioneContumacia" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Dichiarazione Di Contumacia</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DichiarazioneInefficacia" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Dichiarazione Di Inefficacia</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DifferimentoDiscussioneOrale" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Differimento Discussione Orale (Art.281sexies Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DifferimentoUdienzaPerChiamataDiTerzo" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Differimento Udienza Per Chiamata Di Terzo</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DomandaAstensioneGiudice" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Domanda Di Astensione Giudice</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Estinzione">
+    <xs:annotation>
+      <xs:documentation>Estinzione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="FissazioneUdienzaCamerale" type="pt:IstanzaEvento">
+    <xs:annotation>
+      <xs:documentation>Fissazione Udienza Camerale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="FissazioneUdienzaCorrezioneErroreMateriale">
+    <xs:annotation>
+      <xs:documentation>Fissazione Udienza Di Correzione Errore Materiale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="FissazioneUdienzaDiscussioneOrale">
+    <xs:annotation>
+      <xs:documentation>Fissazione Udienza Di Discussione Orale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="FissazioneUdienzaExArt274DavantiAlGiudice">
+    <xs:annotation>
+      <xs:documentation>Fissazione Udienza Ex Art.274 Davanti Al Giudice</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="GiuramentoCTU">
+    <xs:annotation>
+      <xs:documentation>Giuramento Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Improcedibilita">
+    <xs:annotation>
+      <xs:documentation>Improcedibilita'</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="InAttesaOmologazione">
+    <xs:annotation>
+      <xs:documentation>In Attesa Omologazione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="InDecisione">
+    <xs:annotation>
+      <xs:documentation>In Decisione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="InDecisioneCollegiale">
+    <xs:annotation>
+      <xs:documentation>In Decisione Collegiale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="InDecisioneConRinunciaTerminiPerConclusionali">
+    <xs:annotation>
+      <xs:documentation>In Decisione Con Rinuncia Termini Per Conclusionali</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Inammissibilita">
+    <xs:annotation>
+      <xs:documentation>Inammissibilita</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="IncompetenzaTerritorio">
+    <xs:annotation>
+      <xs:documentation>Incompetenza Per Territorio</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Interruzione">
+    <xs:annotation>
+      <xs:documentation>Interruzione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="InterruzionePerMorteIncapacitaAvvocato">
+    <xs:annotation>
+      <xs:documentation>Interruzione Per Morte O Incapacita' Avvocato</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="InterruzionePerMorteIncapacitaParte">
+    <xs:annotation>
+      <xs:documentation>Interruzione Per Morte O Incapacita' Parte</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="InterventoInCausaDelTerzo">
+    <xs:annotation>
+      <xs:documentation>Intervento O Chiamata In Causa Del Terzo</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="IstanzaCongiuntaDiCorrezioneErroreMateriale">
+    <xs:annotation>
+      <xs:documentation>Istanza Congiunta Di Correzione Errore Materiale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="IstanzaDiEstromissione">
+    <xs:annotation>
+      <xs:documentation>Istanza Di Estromissione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="IstanzaDiParteDiCorrezioneErroreMateriale">
+    <xs:annotation>
+      <xs:documentation>Istanza Di Parte Di Correzione Errore Materiale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="IstanzaDiRimessioneInTermini">
+    <xs:annotation>
+      <xs:documentation>Istanza Di Rimessione In Termini</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="LetturaDispositivo">
+    <xs:annotation>
+      <xs:documentation>Lettura Dispositivo</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="LetturaDispositivoNonDefinitivo-OrdinanzaDiRemissioneInIstruttoria">
+    <xs:annotation>
+      <xs:documentation>Lettura Dispositivo Non Definitivo E Ordinanza Di Remissione In Istruttoria</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="LiquidazioneCTU">
+    <xs:annotation>
+      <xs:documentation>Liquidazione Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MancatoPagamento-ConvalidaSfratto">
+    <xs:annotation>
+      <xs:documentation>Mancato Pagamento E Convalida Sfratto (Art. 55 L.392/78)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ModificaRito">
+    <xs:annotation>
+      <xs:documentation>Modifica Rito</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ModificaRitoExArt669Novies">
+    <xs:annotation>
+      <xs:documentation>Modifica Rito (Ex Art. 669 Novies Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MutamARitoOrdRimessGiudiceCompetenteEFissazTerminePerDepRicorso">
+    <xs:annotation>
+      <xs:documentation>Mutam. A Rito Ord, Rimess. Giudice Competente E Fissaz. Termine Per Dep.Ricorso </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MutamentoARitoOrdinarioExArt427CpcIscrizioneFascicolo">
+    <xs:annotation>
+      <xs:documentation>Mutamento A Rito Ordinario Ex Art. 427 Cpc (Iscrizione Fascicolo)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MutamentoRito-RimessioneAlPresidenteDelTribunale">
+    <xs:annotation>
+      <xs:documentation>Mutamento Rito E Rimessione Al Presidente Del Tribunale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NominaConsulenteParte">
+    <xs:annotation>
+      <xs:documentation>Nomina Consulente Di Parte</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NominaCtu">
+    <xs:annotation>
+      <xs:documentation>Nomina Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NominaCustode">
+    <xs:annotation>
+      <xs:documentation>Nomina Custode</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Nomina-GiuramentoContestualeCTU">
+    <xs:annotation>
+      <xs:documentation>Nomina E Giuramento Contestuale Ctu (Art.193 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NominaEsperto">
+    <xs:annotation>
+      <xs:documentation>Nomina Esperto</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NominaTutoreProvvisorio">
+    <xs:annotation>
+      <xs:documentation>Nomina Tutore Provvisorio</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NonLuogoAProvvedere">
+    <xs:annotation>
+      <xs:documentation>Non Luogo A Provvedere</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaAffrancazione">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Affrancazione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaConfermaProvvedimentoPrecedente">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Conferma Provvedimento Precedente</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaConvalidaDiSfratto">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Convalida Di Sfratto</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaConvalidaDiSfrattoELicenza">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Convalida Di Sfratto E Licenza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaEstromissione">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Estromissione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaModificaProvvedimentoPrecedente">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Modifica Provvedimento Precedente</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaRevocaProvvedimentoPrecedente">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Revoca Provvedimento Precedente</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaRilascio-ModificaRito-IscrizioneCausaOrdinaria">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Rilascio, Modifica Rito E Iscrizione Causa Ordinaria</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaDiRimessioneAlCollegio">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Rimessione Al Collegio</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaDiRimessioneInFaseIstruttoria">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Di Rimessione In Fase Istruttoria</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaExArt186BisCpc">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Ex Art.186 Bis Cpc</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaExArt186QuaterCpc">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Ex Art.186 Quater Cpc</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaExArt186TerCpc">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Ex Art.186 Ter Cpc</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaSuQuestioniPregiudizialiIntegritaContraddAmmissibilitaProve">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Su Questioni Pregiudiziali, Integrita' Contradd., Ammissibilita' Prove</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdinanzaAmmissibilitaTerzo">
+    <xs:annotation>
+      <xs:documentation>Ordinanza Sull'Ammissibilita Del Terzo</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdineEsibizioneProveTerzo">
+    <xs:annotation>
+      <xs:documentation>Ordine Di Esibizione Prove Al Terzo (Art.210 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrdineEsibizioneProveParte">
+    <xs:annotation>
+      <xs:documentation>Ordine Di Esibizione Prove Alla Parte (Art.210 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PagamentoCondizionato-MutamentoRito-IscrizioneCausaOrdinaria">
+    <xs:annotation>
+      <xs:documentation>Pagamento Condizionato,Mutamento Rito E Iscr. Causa Ordinaria (Art.55 L.392/78)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PagamentoIntegraleEdEstinzioneGiudizioArt55L39278">
+    <xs:annotation>
+      <xs:documentation>Pagamento Integrale Ed Estinzione Giudizio (Art. 55 L.392/78)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RevocaCtu">
+    <xs:annotation>
+      <xs:documentation>Revoca Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RevocaDichiarazioneContumacia">
+    <xs:annotation>
+      <xs:documentation>Revoca Dichiarazione Di Contumacia</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RevocaProvvisoriaEsecuzione">
+    <xs:annotation>
+      <xs:documentation>Revoca Provvisoria Esecuzione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RichiestaInefficaciaMisuraCautelare">
+    <xs:annotation>
+      <xs:documentation>Richiesta Di Inefficacia Misura Cautelare</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RichiestaInformazioni">
+    <xs:annotation>
+      <xs:documentation>Richiesta Informazioni</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Rigetto">
+    <xs:annotation>
+      <xs:documentation>Rigetto</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RigettoDomandaAstensioneCtu">
+    <xs:annotation>
+      <xs:documentation>Rigetto Domanda Di Astensione Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RigettoIstanza">
+    <xs:annotation>
+      <xs:documentation>Rigetto Istanza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RigettoIstanza-MutamentoRito-IscrizioneCausaOrdinaria">
+    <xs:annotation>
+      <xs:documentation>Rigetto Istanza, Mutamento Rito E Iscrizione Causa Ordinaria</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RigettoIstanzaProvvisoriaEsecuzione">
+    <xs:annotation>
+      <xs:documentation>Rigetto Istanza Provvisoria Esecuzione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RigettoIstanzaRimessioneInTermini">
+    <xs:annotation>
+      <xs:documentation>Rigetto Istanza Rimessione In Termini</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RigettoIstanzaSospensione">
+    <xs:annotation>
+      <xs:documentation>Rigetto Istanza Sospensione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RigettoRicorsoCautelare-FissazioneUdienza">
+    <xs:annotation>
+      <xs:documentation>Rigetto Ricorso Cautelare E Fissazione Udienza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RigettoRiunione">
+    <xs:annotation>
+      <xs:documentation>Rigetto Riunione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RimessioneAlCollegio-FissazioneUdienzaDiscussioneCollegiale">
+    <xs:annotation>
+      <xs:documentation>Rimessione Al Collegio E Fissazione Udienza Di Discussione Collegiale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RimessioneAlPresidenteTribunaleCorte">
+    <xs:annotation>
+      <xs:documentation>Rimessione Al Presidente Del Tribunale/Corte</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RimessioneAlPresidenteSezione">
+    <xs:annotation>
+      <xs:documentation>Rimessione Al Presidente Della Sezione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RimessioneCorteCee">
+    <xs:annotation>
+      <xs:documentation>Rimessione Corte Cee</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RimessioneCorteCostituzionale">
+    <xs:annotation>
+      <xs:documentation>Rimessione Corte Costituzionale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioAltraUdienza">
+    <xs:annotation>
+      <xs:documentation>Rinvio Ad Altra Udienza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioAltraUdienzaCollegiale">
+    <xs:annotation>
+      <xs:documentation>Rinvio Ad Altra Udienza Collegiale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioAltraUdienzaDiComparizione">
+    <xs:annotation>
+      <xs:documentation>Rinvio Ad Altra Udienza Di Comparizione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioAltraUdienzaConvalida">
+    <xs:annotation>
+      <xs:documentation>Rinvio Ad Altra Udienza Di Convalida</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioAltraUdienzaDiscussione">
+    <xs:annotation>
+      <xs:documentation>Rinvio Ad Altra Udienza Di Discussione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioAltraUdienzaIstruttoria">
+    <xs:annotation>
+      <xs:documentation>Rinvio Ad Altra Udienza Istruttoria</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioAltraUdienzaComparizioneCTU">
+    <xs:annotation>
+      <xs:documentation>Rinvio Ad Altra Udienza Per Comparizione Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioUdienzaAmmissioneProve">
+    <xs:annotation>
+      <xs:documentation>Rinvio All'Udienza Di Ammissione Prove (Art.184 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioUdienzaPrecisazioneConclusioni">
+    <xs:annotation>
+      <xs:documentation>Rinvio All'Udienza Di Precisazione Conclusioni (Art.189 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioUdienzaTrattazioneArt183">
+    <xs:annotation>
+      <xs:documentation>Rinvio All'Udienza Di Trattazione (Art. 183 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioUdienzaTrattazioneArt183-comma5">
+    <xs:annotation>
+      <xs:documentation>Rinvio All'Udienza Di Trattazione (Art. 183 Cpc Comma 5)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioUdienzaExArt180-350Cpc">
+    <xs:annotation>
+      <xs:documentation>Rinvio All'Udienza Ex Art.180/350 Cpc</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioUdienza">
+    <xs:annotation>
+      <xs:documentation>Rinvio D'Ufficio</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioMancataComparizioneParti">
+    <xs:annotation>
+      <xs:documentation>Rinvio Mancata Comparizione Parti (Art.348 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPer186Bis">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per 186 Bis</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerDeduzioniIstruttorieArt184">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Deduzioni Istruttorie (Art.184 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerDepositoPeriziaCTU">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Deposito Perizia Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerEscussioneTesti">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Escussione Testi</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerInterrogatorioFormale">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Interrogatorio Formale (Art.230 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerMancataComparizioneParti">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Mancata Comparizione Parti (Art.181/348 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerRinnovazioneNotificaCitazione">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Rinnovazione Notifica O Citazione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerTrattativePendenti">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Trattative Pendenti</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerVerificaPagamentoSommeNonContestate">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Verifica Pagamento Somme Non Contestate (Art.666 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RinvioPerVerificaSanatoriaMorosita">
+    <xs:annotation>
+      <xs:documentation>Rinvio Per Verifica Sanatoria Morosita' (Art.55 L.392/78)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Riserva">
+    <xs:annotation>
+      <xs:documentation>Riserva</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Riunione">
+    <xs:annotation>
+      <xs:documentation>Riunione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RiunioneUfficio">
+    <xs:annotation>
+      <xs:documentation>Riunione D'Ufficio (Art. 274 Comma 1 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SentenzaAVerbale">
+    <xs:annotation>
+      <xs:documentation>Sentenza A Verbale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SentenzaNonDefinitivaAVerbale">
+    <xs:annotation>
+      <xs:documentation>Sentenza Non Definitiva A Verbale</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SollecitoCTU">
+    <xs:annotation>
+      <xs:documentation>Sollecito Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Sospensione">
+    <xs:annotation>
+      <xs:documentation>Sospensione</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SospensionePerPregiudizialita">
+    <xs:annotation>
+      <xs:documentation>Sospensione Per Pregiudizialita' (Art.295 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SospensionePerRegolamentoCompetenza">
+    <xs:annotation>
+      <xs:documentation>Sospensione Per Regolamento Di Competenza</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SospensionePerRegolamentoGiurisdizione">
+    <xs:annotation>
+      <xs:documentation>Sospensione Per Regolamento Di Giurisdiz.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SospensionePerRicusazioneGiudice">
+    <xs:annotation>
+      <xs:documentation>Sospensione Per Ricusazione Giudice</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SostituzioneGiudice">
+    <xs:annotation>
+      <xs:documentation>Sostituzione Giudice</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SupplementoCTU">
+    <xs:annotation>
+      <xs:documentation>Supplemento Ctu</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="TrasformazioneInDivorzioCongiunto">
+    <xs:annotation>
+      <xs:documentation>Trasformazione In Divorzio Congiunto</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="TrasformazioneInSeparazioneConsensuale">
+    <xs:annotation>
+      <xs:documentation>Trasformazione In Separazione Consensuale (In Attesa Omologazione)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="VerificaPagamentoSommeNonContestate">
+    <xs:annotation>
+      <xs:documentation>Verifica Pagamento Somme Non Contestate E Mutamento Rito (Art.666 Cpc)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DepositoAttoNonCodificato">
+    <xs:annotation>
+      <xs:documentation>Deposito Atto Non Codificato</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

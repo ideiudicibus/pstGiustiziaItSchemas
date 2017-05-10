@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:complexType name="eContrattiSolidarieta">
+    <xs:sequence>
+      <xs:element name="DataFall" type="eSioNo"/>
+      <xs:element name="PrimoEsercizio" type="eSioNo"/>
+      <xs:element name="SecondoEsercizio" type="eSioNo"/>
+      <xs:element name="TerzoEsercizio" type="eSioNo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eProcedureMobilita">
+    <xs:sequence>
+      <xs:element name="DataFall">
+        <xs:complexType>
+          <xs:attributeGroup ref="aAddettiInterni"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PrimoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aAddettiInterni"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SecondoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aAddettiInterni"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TerzoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aAddettiInterni"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:attributeGroup name="aNumeroAddetti">
+    <xs:attribute name="NumeroAddetti" type="xs:integer"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="aAddettiInterni">
+    <xs:attribute name="AddettiInterni" type="xs:integer"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="aAddettiOre">
+    <xs:attribute name="NumeroAddetti" type="xs:integer"/>
+    <xs:attribute name="NumeroOre" type="xs:integer"/>
+    <xs:attribute name="TotaleOre" type="xs:integer"/>
+  </xs:attributeGroup>
+  <xs:complexType name="eNumeroAddetti">
+    <xs:sequence>
+      <xs:element name="DataFall">
+        <xs:complexType>
+          <xs:attributeGroup ref="aNumeroAddetti"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PrimoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aNumeroAddetti"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SecondoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aNumeroAddetti"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TerzoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aNumeroAddetti"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eAddettiOre">
+    <xs:sequence>
+      <xs:element name="DataFall">
+        <xs:complexType>
+          <xs:attributeGroup ref="aAddettiOre"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PrimoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aAddettiOre"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SecondoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aAddettiOre"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TerzoEsercizio">
+        <xs:complexType>
+          <xs:attributeGroup ref="aAddettiOre"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FormaComposizione">
+    <xs:annotation>
+      <xs:documentation>Forma e composizione societaria</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eAnnotazione">
+          <xs:sequence>
+            <xs:element name="TipoSocieta">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="spa" type="eBoolean" minOccurs="0"/>
+                  <xs:element name="sapa" type="eBoolean" minOccurs="0"/>
+                  <xs:element name="socCoopPa" type="eBoolean" minOccurs="0"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="SocietaQuotata">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="MercatoItaliano" type="eSioNo"/>
+                      <xs:element name="MercatoEuropeo" type="eSioNo"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="SocietaIndipendente" type="eSioNo"/>
+            <xs:element name="SocietaDipendente">
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="GruppoAppartenenza" type="xs:string" minOccurs="0"/>
+                      <xs:element name="EsercitanteDirezioneCoordinamento" minOccurs="0">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eSioNo"/>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="AltruiDirezioneCoordinamento" minOccurs="0">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eSioNo"/>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="SocietaControllante" minOccurs="0">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eSioNo">
+                              <xs:sequence>
+                                <xs:element name="SocietaControllanteArt2359comma1n1" type="eSioNo"/>
+                                <xs:element name="SocietaControllanteArt2359comma1n2" type="eSioNo"/>
+                                <xs:element name="SocietaControllanteArt2359comma1n3" type="eSioNo"/>
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="SocietaControllata" minOccurs="0">
+                        <xs:complexType>
+                          <xs:complexContent>
+                            <xs:extension base="eSioNo">
+                              <xs:sequence>
+                                <xs:element name="SocietaControllatAart2359comma1n1" type="eSioNo"/>
+                                <xs:element name="SocietaControllatAart2359comma1n2" type="eSioNo"/>
+                                <xs:element name="SocietaControllatAart2359comma1n3" type="eSioNo"/>
+                              </xs:sequence>
+                            </xs:extension>
+                          </xs:complexContent>
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="SocietaCollegata" type="eSioNo"/>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerticeStrategico">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eAnnotazione">
+          <xs:sequence>
+            <xs:element name="ComposizioneAssettoProprietario">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="UnicoAzionista" type="eSioNo"/>
+                  <xs:element name="NumSoci" type="xs:integer"/>
+                  <xs:element name="NumSociCapitaleMaggiornaza" type="xs:integer"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Soci" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Socio" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Nome" type="xs:string"/>
+                        <xs:element name="PartecipazioneAzionaria" type="xs:decimal"/>
+                        <xs:element name="Dal" type="xs:date"/>
+                        <xs:element name="Al" type="xs:date"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="VariazioniCompagineAzionaria" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                      <xs:documentation>specificare rilevanti variazioni della compagine azionaria ed eventuali responsabilità dei soci</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Addetti">
+    <xs:annotation>
+      <xs:documentation>Numero totale degli addetti alla data del fallimento ed al 31 dicembre dei tre anni precedenti</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Dirigenti" type="eNumeroAddetti"/>
+        <xs:element name="QuadriTempoIndeterminato" type="eNumeroAddetti"/>
+        <xs:element name="QuadriTempoDeterminato" type="eNumeroAddetti"/>
+        <xs:element name="ImpiegatiTempoInteterminato" type="eNumeroAddetti"/>
+        <xs:element name="ImpiegatiTempoDeterminato" type="eNumeroAddetti"/>
+        <xs:element name="OperaiTempoIndeterminato" type="eNumeroAddetti"/>
+        <xs:element name="OperaiTempoDeterminato" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriSomministrati" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriAppalto" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriDistaccati" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriIntermittenti" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriRipartiti" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriPartTime" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriDomicilio" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriInserimento" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriProgetto" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriOccasionali" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriAccessori" type="eNumeroAddetti"/>
+        <xs:element name="AssociatiInPartecipazione" type="eNumeroAddetti"/>
+        <xs:element name="CollaboratoriAutonomi" type="eNumeroAddetti"/>
+        <xs:element name="Apprendisti" type="eNumeroAddetti"/>
+        <xs:element name="Tirocinanti" type="eNumeroAddetti"/>
+        <xs:element name="LavoratoriNero" type="eNumeroAddetti"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AmmortizzatoriSociali">
+    <xs:annotation>
+      <xs:documentation>Ammortizzatori sociali alla data del fallimento e nel triennio precedente</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="CassaIntegrazioneOrdinara" type="eAddettiOre"/>
+        <xs:element name="CassaIntegrazioneStraordinaria" type="eAddettiOre"/>
+        <xs:element name="ContrattiSolidarieta" type="eContrattiSolidarieta"/>
+        <xs:element name="ProcedureMobilita" type="eProcedureMobilita"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AssettoGoverno">
+    <xs:complexType mixed="false">
+      <xs:complexContent mixed="false">
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element ref="FormaComposizione"/>
+            <xs:element ref="VerticeStrategico"/>
+            <xs:element ref="Addetti"/>
+            <xs:element ref="AmmortizzatoriSociali"/>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

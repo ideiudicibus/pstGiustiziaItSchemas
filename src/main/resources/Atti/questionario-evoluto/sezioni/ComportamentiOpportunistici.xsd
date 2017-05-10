@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="ComportamentiOpportunistici">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element name="ComportamentiDilatatori" type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>Ritardata presentazione dell’istanza di fallimento e comportamenti dilatori in genere, ritenuti responsabili dell’aggravamento dello stato di dissesto</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="OperazioniVantaggiPersonali " type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>Operazioni poste in essere contro l’interesse del ceto creditorio e a vantaggio degli intereressi personali di amministratori sindaci e/o terzi coinvolti nelle vicende societarie</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="TrattamentiPreferenziali" type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>Trattamenti preferenziali riservati a talune categorie di creditori o a singoli creditori (violazioni della par condicio creditorum</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="MancatiProgettiRedditizzi" type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>L’impresa ha evitato di intraprendere progetti redditizi (underinvestment)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ProgettiRischiosi" type="eSioNo">
+              <xs:annotation>
+                <xs:documentation>L’impresa ha intrapreso progetti troppo rischiosi (overinvestment)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="AltriComportamenti">
+              <xs:annotation>
+                <xs:documentation>Comportamenti opportunistici di altro tipo</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="eSioNo">
+                    <xs:sequence>
+                      <xs:element name="SpecificareAltriComportamenti" type="xs:string">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

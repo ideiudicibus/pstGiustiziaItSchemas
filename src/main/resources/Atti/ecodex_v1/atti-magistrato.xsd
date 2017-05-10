@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" xmlns="http://schemi.processotelematico.giustizia.it/ecodex/magistrato/v1" targetNamespace="http://schemi.processotelematico.giustizia.it/ecodex/magistrato/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DEL MAGISTRATO SISTEMA e-CODEX</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="Indirizzo">
+		<xs:annotation>
+			<xs:documentation>Dati indirizzo</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="via" type="xs:string"/>
+			<xs:element name="cap" type="xs:string"/>
+			<xs:element name="localita" type="xs:string"/>
+			<xs:element name="provincia" type="xs:string"/>
+			<xs:element name="nazione" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttoProcedimentoExt">
+		<xs:annotation>
+			<xs:documentation>Estensione delle informazioni del procedimento</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pt:AttoProcedimento">
+				<xs:sequence>
+					<xs:element name="Tribunale">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Nome" type="xs:string"/>
+								<xs:element name="Indirizzo" type="Indirizzo"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Provvedimento">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Giudice">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Cognome" type="xs:string"/>
+											<xs:element name="Nome" type="xs:string"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Luogo" type="xs:string"/>
+								<xs:element name="Data" type="xs:date"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RichiestaCorrezioneDomanda">
+		<xs:annotation>
+			<xs:documentation>Modulo B - Richiesta al ricorrente di completare eo correggere la domanda di ingiunzione di pagamento europea</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AttoProcedimentoExt">
+					<xs:sequence>
+						<xs:element name="Termine" type="xs:date"/>
+						<xs:element name="Lingua" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="01">
+										<xs:annotation>
+											<xs:documentation>Bulgaro</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="02">
+										<xs:annotation>
+											<xs:documentation>Ceco</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="03">
+										<xs:annotation>
+											<xs:documentation>Tedesco</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="04">
+										<xs:annotation>
+											<xs:documentation>Estone</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="05">
+										<xs:annotation>
+											<xs:documentation>Spagnolo</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="06">
+										<xs:annotation>
+											<xs:documentation>Greco</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="07">
+										<xs:annotation>
+											<xs:documentation>Francese</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="08">
+										<xs:annotation>
+											<xs:documentation>Italiano</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="09">
+										<xs:annotation>
+											<xs:documentation>Lettone</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="10">
+										<xs:annotation>
+											<xs:documentation>Lituano</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="11">
+										<xs:annotation>
+											<xs:documentation>Ungherese</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="12">
+										<xs:annotation>
+											<xs:documentation>Maltese</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="13">
+										<xs:annotation>
+											<xs:documentation>Olandese</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="14">
+										<xs:annotation>
+											<xs:documentation>Polacco</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="15">
+										<xs:annotation>
+											<xs:documentation>Portoghese</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="16">
+										<xs:annotation>
+											<xs:documentation>Rumeno</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="17">
+										<xs:annotation>
+											<xs:documentation>Slovacco</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="18">
+										<xs:annotation>
+											<xs:documentation>Sloveno</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="19">
+										<xs:annotation>
+											<xs:documentation>Finlandese</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="20">
+										<xs:annotation>
+											<xs:documentation>Svedese</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="21">
+										<xs:annotation>
+											<xs:documentation>Inglese</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="22">
+										<xs:annotation>
+											<xs:documentation>Altra</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Correzioni" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Codice">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="01">
+													<xs:annotation>
+														<xs:documentation>Parti e loro rappresentanti</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="02">
+													<xs:annotation>
+														<xs:documentation>Motivi di competenza</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="03">
+													<xs:annotation>
+														<xs:documentation>Carattere transfrontaliero della causa</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="04">
+													<xs:annotation>
+														<xs:documentation>Informazioni bancarie</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="05">
+													<xs:annotation>
+														<xs:documentation>Credito principale</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="06">
+													<xs:annotation>
+														<xs:documentation>Interessi</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="07">
+													<xs:annotation>
+														<xs:documentation>Penalità contrattuali</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="08">
+													<xs:annotation>
+														<xs:documentation>Spese</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="09">
+													<xs:annotation>
+														<xs:documentation>Prove</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="10">
+													<xs:annotation>
+														<xs:documentation>Dichiarazioni aggiuntive</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="11">
+													<xs:annotation>
+														<xs:documentation>Firma</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="Precisazione" type="xs:string"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropostaModificaDomanda">
+		<xs:annotation>
+			<xs:documentation>Modulo C - Proposta al ricorrente di modificare una domanda di ingiunzione di pagamento europea </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AttoProcedimentoExt">
+					<xs:sequence>
+						<xs:element name="Termine" type="xs:date"/>
+						<xs:element name="ModificaDomanda" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RigettoDomanda">
+		<xs:annotation>
+			<xs:documentation>Modulo D - Decisione di rifiuto di una domanda di ingiunzione di pagamento europea </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AttoProcedimentoExt">
+					<xs:sequence>
+						<xs:element name="Motivi" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Codice">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="01">
+													<xs:annotation>
+														<xs:documentation>La domanda non rientra nel campo d'applicazione dell'articolo 2 del regolamento (articolo 11, paragrafo 1, lettera a)).</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="02">
+													<xs:annotation>
+														<xs:documentation>La domanda non riguarda una controversia transfrontaliera ai sensi dell'articolo 3 del regolamento (articolo 11, paragrafo 1, lettera a)).</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="03">
+													<xs:annotation>
+														<xs:documentation>La domanda non riguarda un credito pecuniario esigibile di uno specifico importo di cui all'articolo 4 del regolamento (articolo 11, paragrafo1,lettera a)).</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="04">
+													<xs:annotation>
+														<xs:documentation>Il giudice non è competente a norma dell'articolo 6 del regolamento (articolo 11, paragrafo 1, lettera a)).</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="05">
+													<xs:annotation>
+														<xs:documentation>La domanda non soddisfa le condizioni di cui all'articolo 7 del regolamento (articolo 11, paragrafo 1, lettera a)).</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="06">
+													<xs:annotation>
+														<xs:documentation>Il credito è manifestamente infondato (articolo 11, paragrafo 1, lettera b).</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="07">
+													<xs:annotation>
+														<xs:documentation>La domanda non è stata completata o rettificata entro il termine stabilito dal giudice (articolo 9, paragrafo 2, e articolo 11, paragrafo 1, lettera c)).</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+												<xs:enumeration value="08">
+													<xs:annotation>
+														<xs:documentation>La domanda non è stata modificata entro il termine stabilito dal giudice (articolo 10 e articolo 11, paragrafo 1, lettera d)).</xs:documentation>
+													</xs:annotation>
+												</xs:enumeration>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="Descrizione" type="xs:string"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AccoglimentoDomanda">
+		<xs:annotation>
+			<xs:documentation>Modulo E - Ingiunzione di pagamento europea </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AttoProcedimentoExt">
+					<xs:sequence>
+						<xs:element name="IntimazionePagamento" maxOccurs="2">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Convenuto">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Denominazione" type="xs:string">
+													<xs:annotation>
+														<xs:documentation>Cognome o denominazione del convenuto</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="Nome" type="xs:string" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="CreditoPrincipale" type="bt:Valuta"/>
+									<xs:element name="Interesse" type="xs:date" minOccurs="0"/>
+									<xs:element name="PenaliContrattuali" type="bt:Valuta" minOccurs="0"/>
+									<xs:element name="Spese" type="bt:Valuta" minOccurs="0"/>
+									<xs:element name="ImportoTotale" type="bt:Valuta"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ReponsabilitaInSolido" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DichiarazioneEsecutivita">
+		<xs:annotation>
+			<xs:documentation>Modulo G - Dichiarazione di esecutività</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AttoProcedimentoExt">
+					<xs:sequence>
+						<xs:element name="DataAccoglimento" type="xs:date"/>
+						<xs:element name="Convenuto" type="xs:string"/>
+						<xs:element name="DataNotifica" type="xs:date"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

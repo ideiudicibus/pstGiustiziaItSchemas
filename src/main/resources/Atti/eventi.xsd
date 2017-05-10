@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns="http://schemi.processotelematico.giustizia.it/siecic/eventi" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="./tipi-anagrafiche.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+    <xs:annotation>
+        <xs:documentation>Eventi correlati all'estensione del PCT alle procedure esecutive individuali e concorsuali.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType name="DecretoChiusura">
+        <xs:annotation>
+            <xs:documentation>Decreti di chiusura ex artt 102 e 118</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="pt:IstanzaEvento">
+                <xs:attribute name="Tipologia" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="MancateInsinuazioni"/>
+                            <xs:enumeration value="ChiusuraAnticipata"/>
+                            <xs:enumeration value="CompiutaRipartizioneFinale"/>
+                            <xs:enumeration value="InsufficienzaAttivo"/>
+                            <xs:enumeration value="InsufficienzaRealizzo"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="EventiDelegato">
+        <xs:annotation>
+            <xs:documentation>Operazioni delegate</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="pt:IstanzaEvento">
+                <xs:attribute name="lotto" type="xs:string" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Identificatico del lotto al quale si riferisce l'evento, deve fare riferimento al numero del lotto nel sistema SIECIC se il lotto è predisposto.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Sospensione">
+        <xs:annotation>
+            <xs:documentation>Evento di sospensione</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="pt:IstanzaEvento">
+                <xs:attribute name="dataTermine" type="xs:date"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="FissazioneUdienza">
+        <xs:annotation>
+            <xs:documentation>Eventi di fissazione udienza</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="pt:IstanzaEvento">
+                <xs:attribute name="data" type="xs:dateTime" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Data fissata per l'udienza da tenere</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DataUdienza">
+        <xs:simpleContent>
+            <xs:extension base="xs:dateTime">
+                <xs:attribute name="straordinaria" type="xs:boolean" use="optional" default="false"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="RinvioUdienza">
+        <xs:annotation>
+            <xs:documentation>Evento di rinvio udienza</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="FissazioneUdienza">
+                <xs:attribute name="dataUdienza" type="xs:dateTime" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Data udienza da rinviare</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="SostituzioneSoggetto">
+        <xs:annotation>
+            <xs:documentation>Generico evento di sostituzione soggetto coinvolto nel procedimento</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="riferimento" type="at:RiferimentoSoggetto" minOccurs="0">
+                <xs:annotation>
+                    <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DepositoAtto">
+        <xs:annotation>
+            <xs:documentation>Evento di generico deposito di atti della parte</xs:documentation>
+        </xs:annotation>
+        <xs:all>
+            <xs:element name="parte" type="at:RiferimentoSoggetto" minOccurs="0">
+                <xs:annotation>
+                    <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                </xs:annotation>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType name="DepositoPianoRipartoParziale">
+        <xs:annotation>
+            <xs:documentation>Deposito piano riparto parziale con specifica dell'accantonamento</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="accantonamento" type="bt:Valuta" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MotivoRimessionePresidente">
+        <xs:sequence>
+            <xs:element name="motivo" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="depositoIstanza41TUB" type="DepositoAtto">
+        <xs:annotation>
+            <xs:documentation>Istanza ex. art. 41 TUB</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoAttoInUdienza" type="DepositoAtto">
+        <xs:annotation>
+            <xs:documentation>Deposito atto in udienza</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="costituzioneAvvocato" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Costituzione Avvocato</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="sostituzioneProcuratore" type="SostituzioneSoggetto">
+        <xs:annotation>
+            <xs:documentation>Sostituzione del Procuratore Costituito</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoRinunciaEsecuzione" type="DepositoAtto">
+        <xs:annotation>
+            <xs:documentation>Rinuncia all'Esecuzione</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoRinunciaMandato" type="DepositoAtto">
+        <xs:annotation>
+            <xs:documentation>Rinuncia al mandato</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoMemorie" type="DepositoAtto">
+        <xs:annotation>
+            <xs:documentation>Deposito memorie di parte</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoMandato">
+        <xs:annotation>
+            <xs:documentation>Deposito  Mandato per Creditore Insinuato</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoRelazioneCTU" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito Relazione CTU</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoIntegrazioneCTU" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito integrazione consulenza tecnica</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoIstanzaFissazioneVendita" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Istanza per fissazione vendita (v.r.) e programma di liquidazione</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="accoglimentoSostituzioneCreditore" type="SostituzioneSoggetto">
+        <xs:annotation>
+            <xs:documentation>Accoglimento della domanda di sostituzione Creditore</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rigettoSostituzioneCreditore" type="SostituzioneSoggetto">
+        <xs:annotation>
+            <xs:documentation>Rigetto della domanda di sostituzione Creditore</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="accoglimentoIstanza41TUB" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Accoglimento istanza ex art. 41 TUB</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rigettoIstanza41TUB" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Rigetto istanza ex art. 41 TUB</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="accoglimentoProrogaPerizia" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Accoglimento della richiesta di proroga deposito perizia</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rigettoProrogaPerizia" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Rigetto della richiesta di proroga deposito perizia</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="decretoTrasferimento" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Decreto di trasferimento</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="decretoRigettoFallimento" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Decreto di rigetto istanza di fallimento</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="decretoEsecutivitaStatoPassivo" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Decreto di esecutività dello stato passivo</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="decretoChiusura" type="DecretoChiusura">
+        <xs:annotation>
+            <xs:documentation>Decreti di chiusura ex artt 102 e 118</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="approvazioneRipartoParziale" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Approvazione del riparto parziale o finale con decreto di esecutività</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="fissazionePrimaUdienza" type="FissazioneUdienza">
+        <xs:annotation>
+            <xs:documentation>Fissazione prima udienza giudice relatore</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="fissazioneUdienzaGenerica" type="FissazioneUdienza">
+        <xs:annotation>
+            <xs:documentation>Fissazione di udienza generica</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="fissazioneUdienzaTardiva" type="FissazioneUdienza">
+        <xs:annotation>
+            <xs:documentation>Fissazione udienza nuovo rito per tardive (convocazione creditori)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="fissazioneUdienzaOpposizione" type="FissazioneUdienza">
+        <xs:annotation>
+            <xs:documentation>Fissazione udienza di opposizione</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rinvioUdienza" type="RinvioUdienza">
+        <xs:annotation>
+            <xs:documentation>Rinvio generico di udienza</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoElencoInsinuazioni" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito elenco insinuazioni</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoProgettoPassivo" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito progetto stato passivo</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoStatoPassivo" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito stato passivo</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="sospensionePerGiudizioDivisorio" type="Sospensione">
+        <xs:annotation>
+            <xs:documentation>Sospensione per giudizio divisorio (ex art. 601)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="sospensioneSuIstanzaParti" type="Sospensione">
+        <xs:annotation>
+            <xs:documentation>Sospensione su istanza delle parti (ex art. 624 bis)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="accoglimentoPianoRiparto" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Accoglimento del piano di riparto</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="accoglimentoPianoRipartoParziale" type="DepositoPianoRipartoParziale">
+        <xs:annotation>
+            <xs:documentation>Accoglimento del piano di riparto parziale</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoPianoRipartoParziale" type="DepositoPianoRipartoParziale">
+        <xs:annotation>
+            <xs:documentation>Deposito piano di riparto parziale del professionista</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoPianoRiparto">
+        <xs:annotation>
+            <xs:documentation>Deposito piano di riparto finale del professionista</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoIstanzaFissazioneVenditaProgrammaLiquidazione" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito di istanza fissazione di vendita programma di liquidazione</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="estinzionePerRinuncia" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Estinzione per rinuncia (ex. art. 629)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="estinzionePerInattivitaParti" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Estinzione per inattività parti (ex. art. 630)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="estinzionePerMancataComparizione" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Estinzione per mancata comparizione delle parti (ex. art. 631)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="approvazioneProgrammaLiquidazione" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Approvazione del programma di liquidazione</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="approvazioneRipartoFinale" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Approvazione del riparto finale e decreto di esecutività</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="relazionePeriodicaDelegato" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Relazione periodica del delegato</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="avvisoVendita" type="EventiDelegato">
+        <xs:annotation>
+            <xs:documentation>Avviso di vendita (art. 570 cpc)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="verbaleAggiudicazione" type="EventiDelegato">
+        <xs:annotation>
+            <xs:documentation>Verbale di aggiudicazione</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="depositoPrezzo" type="EventiDelegato">
+        <xs:annotation>
+            <xs:documentation>Deposito prezzo</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="istanzaRevocaDecadenzaAggiudicatario" type="EventiDelegato">
+        <xs:annotation>
+            <xs:documentation>Istanza di revoca/decadenza aggiudicatario</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="approvazioneMinuta" type="EventiDelegato">
+        <xs:annotation>
+            <xs:documentation>Controfirma per approvazione della minuta di decreto di trasferimento del delegato (puo essere in riferimento ad un singolo lotto)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rigettoMinuta" type="EventiDelegato">
+        <xs:annotation>
+            <xs:documentation>Rigetto della minuta di decreto di trasferimento del delegato (puo essere riferita ad un singolo lotto)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="approvazioneProgetto" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Controfirma per approvazione della progetto di distribuzione del delegato</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rigettoProgetto" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Rigetto del progetto di distribuzione del delegato</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="istanzaGenericaCustode" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Istanza generica del custode</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rendicontoCustode" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito relazione periodice (rendiconto) custode</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rendicontoDelegato" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito relazione periodice (rendiconto) delegato</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="istanzaLiquidazioneCustode" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Istanza di liquidazione custode</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="attoNonCodificato">
+        <xs:annotation>
+            <xs:documentation>Atto non codificato</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:IstanzaEvento">
+                    <xs:attribute name="descrizione" type="xs:string"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="accoglimentoIstanza" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Accoglimento generico di un'istanza</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="rigettoIstanza" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Rigetto generico di un'istanza</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="autorizzazioneSostituzioneTitolo">
+        <xs:annotation>
+            <xs:documentation>Autorizzazione alla sostituzione del titolo (art. 488, co. 2 c.p.c.)</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="istanzaAssociata" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Identificativo dell'istanza collegata al provvedimento del magistrato</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="costituzioneTerzo" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Costituzione Terzo</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="fissazioneUdienzaComparizioneParti" type="FissazioneUdienza">
+        <xs:annotation>
+            <xs:documentation>Fissazione udienza comparizione parti</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="OrdinanzaDiAssegnazione" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Ordinanza di assegnazione (art. 530, co. 3, 529, co. 2, 539)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="IntegrazionePignoramento">
+        <xs:annotation>
+            <xs:documentation>Integrazione del pignoramento (art. 518 e 540 bis)</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="istanzaAssociata" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Identificativo dell'istanza collegata al provvedimento del magistrato</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LiquidazioneCompensoCommissario" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Liquidazione compenso commissionario (art. 533, ult. co.)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="LiquidazioneCompensoCustode" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Liquidazione compenso custode (d.m. 80/2009)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="LiquidazioneStimatore" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Liquidazione stimatore (d.m. 30.5.2002)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="RigettoIstanzaAssegnazione">
+        <xs:annotation>
+            <xs:documentation>Rigetto istanza di assegnazione dei beni</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="istanzaAssociata" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Identificativo dell'istanza collegata al provvedimento del magistrato</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SospensioneGenerica" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Sospensione per sospensione dell’efficacia esecutiva del titolo (art. 623 c.p.c.)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="estinzionePerenzione" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Perenzione (art. 497 c.p.c.)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ImprocedibilitaSottrazioneBeni" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Improcedibilità per sottrazione dei beni mobili</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ImprocedibilitaDichiarazioneFallimento" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Improcedibilita dichiarazione fallimento (art. 51 l.f.)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ImprocedibilitaAmmissioneConcordato" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Improcedibilità ammissione al concordato preventivo (artt. 488, co. 2, c.p.c.)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="IntroduzioneAccertamentoIncidentale" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Introduzione accertamento incidentale (nuovo art. 549 c.p.c.)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="OpposizioneAlleEsecuzioni" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>DEPOSITO RICORSO PER OPPOSIZIONE ALLA ESECUZIONE (EX ART. 615)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="AssegnazioneGiudice" type="pt:IstanzaEvento"/>
+    <xs:element name="AssegnazioneGiudiceUdie" type="pt:IstanzaEvento"/>
+    <xs:element name="AssegnazioneSezioneGiudice" type="pt:IstanzaEvento"/>
+    <xs:element name="ConfermaGiudice" type="pt:IstanzaEvento"/>
+    <xs:element name="ConfermaSezione" type="pt:IstanzaEvento"/>
+    <xs:element name="ConfermaSezioneGiudice" type="pt:IstanzaEvento"/>
+    <xs:element name="SostituzioneSezione" type="pt:IstanzaEvento"/>
+    <xs:element name="SostituzioneGiudice" type="pt:IstanzaEvento"/>
+    <xs:element name="SostituzioneSezioneGiudice" type="pt:IstanzaEvento"/>
+    <xs:element name="ConfermaSezioneSostituzioneGiudice" type="pt:IstanzaEvento"/>
+    <xs:element name="SostituzioneSezioneAssegnazioneGiudice" type="pt:IstanzaEvento"/>
+    <xs:element name="RimessionePresidenteSezione" type="MotivoRimessionePresidente"/>
+    <xs:element name="RimessionePresidenteCorte" type="MotivoRimessionePresidente"/>
+    <xs:element name="RimessionePresidenteTribunale" type="MotivoRimessionePresidente"/>
+    <xs:element name="OpposizioneAllaDistribuzione" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito Ricorso per Opposizione alla Distribuzione (EX ART. 512)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="OpposizioneAttiEsecutivi" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito Ricorso per Opposizione agli Atti Esecutivi (EX ART. 617)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="OpposizioneDiTerzi" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito Ricorso per Opposizione di Terzi (EX ART. 619)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="OpposizioneAllaEsecuzione" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito Ricorso per Opposizione alla Esecuzione (EX ART. 615)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="OpposizioneCumuloMezziEspropiazione" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Deposito Opposizione per Cumulo dei Mezzi di Espropriazione (EX ART. 483)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="RicorsoExArt534Ter" type="pt:IstanzaEvento">
+        <xs:annotation>
+            <xs:documentation>Estinzione per mancata comparizione delle parti (ex. art. 631)</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

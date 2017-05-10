@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/magistrato/Decreto/v1" xmlns:tns="http://schemi.processotelematico.giustizia.it/sicid/magistrato/Decreto/v1" xmlns:evt="http://schemi.processotelematico.giustizia.it/eventi/magistrato" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi/base" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/magistrato/Decreto/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version ="1.1">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="../tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/eventi/magistrato" schemaLocation="../eventi-magistrato.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DEL MAGISTRATO</xs:documentation>
+		<xs:documentation>Decreti</xs:documentation>
+		<xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+	</xs:annotation>
+	<xs:group name="DecisioniStandard">
+		<xs:annotation>
+			<xs:documentation>Decisioni standard in materia di decreti</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="evt:AccoglimentoTotale"/>
+			<xs:element ref="evt:AccoglimentoParziale"/>
+			<xs:element ref="evt:Rigetto"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="GestioneSezioneGiudiceUdie">
+		<xs:annotation>
+			<xs:documentation>Evento di assegnazione Sezione e o Giudice e fissazione prima udienza</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="idSezione" type="xs:string" minOccurs="0"/>
+			<xs:element name="codiceFiscale" type="xs:string" minOccurs="0"/>
+			<xs:element name="data" type="evt:DataUdienza" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CorrezioneErrMaterialeCongiunta">
+		<xs:annotation>
+			<xs:documentation>Provvedimento di correzione errore materiale</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:AccoglimentoIstanza"/>
+									<xs:element ref="evt:Rigetto"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DecretoIngiuntivo">
+		<xs:annotation>
+			<xs:documentation>Provvedimento in materia di decreti ingiuntivi e opposizione a decreto ingiuntivo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice minOccurs="0">
+									<xs:element ref="evt:EmissioneDecretoIngiuntivo"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Decreto">
+		<xs:annotation>
+			<xs:documentation>Generico decreto di rigetto, sospensione o rinvio udienza</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice minOccurs="0">
+									<xs:element ref="evt:Rigetto"/>
+									<xs:element ref="evt:Sospensione"/>
+									<xs:element ref="evt:RinvioUdienza"/>
+									<xs:element ref="evt:ConcessioneEsecutorietaExArt647"/>
+									<xs:element ref="evt:FissazionePrimaUdienza"/>
+									<xs:element ref="evt:AccoglimentoIstanza"/>
+									<xs:element ref="evt:RigettoIstanza"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DecretoSequestro">
+		<xs:annotation>
+			<xs:documentation>Decreto relativo a sequestri conservativi o giudiziali</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:group ref="DecisioniStandard"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+						<xs:element name="opzioni" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="evt:NominaCustode" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DecretoDomandaInibitoria">
+		<xs:annotation>
+			<xs:documentation>Secondo grado, decreto su domanda inibitoria</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:group ref="DecisioniStandard"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Decreto700cpc">
+		<xs:annotation>
+			<xs:documentation>Decreto/ordinanza ex art. 700 c.p.c.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice minOccurs="0">
+									<xs:group ref="DecisioniStandard"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+						<xs:element name="opzioni" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="evt:FissazioneUdienzaComparizione"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProvvedimentiMateriaCTU">
+		<xs:annotation>
+			<xs:documentation>Provvedimenti in materia di CTU. Nomine, revoche, chiarimenti riguardanti i CTU</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="Soggetti" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Definizione dei soggetti interessati dal provvedimento</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="CTU" type="at:CTU" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="dispositivo">
+							<xs:annotation>
+								<xs:documentation>Provvedimenti da applicare ai CTU del procedimento</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence minOccurs="0" maxOccurs="unbounded">
+									<xs:group ref="evt:tEventiCTU"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="pt:PQM" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="PK_CTU">
+			<xs:selector xpath="tns:Soggetti/tns:CTU"/>
+			<xs:field xpath="at:codiceFiscale"/>
+		</xs:key>
+		<xs:keyref name="FK_EVENTO_CTU" refer="PK_CTU">
+			<xs:selector xpath="tns:dispositivo/*/evt:ctu"/>
+			<xs:field xpath="@codiceFiscale"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="AssegnazioneSezioneGiudice">
+		<xs:annotation>
+			<xs:documentation>Provvedimento di assegnazione a Sezione e o Giudice del procedimento</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimentoMagistrato">
+					<xs:sequence>
+						<xs:element name="GestioneSezioneGiudiceUdie" type="GestioneSezioneGiudiceUdie"/>
+						<xs:choice>
+							<xs:element ref="evt:AssegnazioneSezione"/>
+							<xs:element ref="evt:AssegnazioneGiudice"/>
+							<xs:element ref="evt:AssegnazioneGiudiceUdie"/>
+							<xs:element ref="evt:AssegnazioneSezioneGiudice"/>
+							<xs:element ref="evt:ConfermaGiudice"/>
+							<xs:element ref="evt:ConfermaSezione"/>
+							<xs:element ref="evt:ConfermaSezioneGiudice"/>
+							<xs:element ref="evt:SostituzioneSezione"/>
+							<xs:element ref="evt:SostituzioneGiudice"/>
+							<xs:element ref="evt:SostituzioneSezioneGiudice"/>
+							<xs:element ref="evt:ConfermaSezioneSostituzioneGiudice"/>
+							<xs:element ref="evt:SostituzioneSezioneAssegnazioneGiudice"/>
+						</xs:choice>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

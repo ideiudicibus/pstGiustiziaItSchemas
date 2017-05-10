@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Classificazione">
+    <xs:complexType>
+      <xs:complexContent mixed="false">
+        <xs:extension base="eCapitolo">
+          <xs:sequence>
+            <xs:element name="Fatturato" type="tEuro" />
+            <xs:element name="TotaleAttivo" type="tEuro" />
+            <xs:element name="NumeroAddetti">
+              <xs:complexType>
+                <xs:complexContent mixed="false">
+                  <xs:extension base="eTotale">
+                    <xs:sequence>
+                      <xs:element name="TempoIndeterminato" type="xs:integer" />
+                      <xs:element name="TempoDeterminato" type="xs:integer" />
+                      <xs:element name="AltroTipo" type="xs:integer" />
+                    </xs:sequence>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="MacroSettore">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Industria" type="eBoolean" />
+                  <xs:element name="Commercio" type="eBoolean" />
+                  <xs:element name="Servizi" type="eBoolean" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Mercato">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Nazionale" type="xs:decimal" />
+                  <xs:element name="Comunitario" type="xs:decimal" />
+                  <xs:element name="Extracomunitario" type="xs:decimal" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="ParteDescrittivaCuratore" type="eParteDescrittivaCuratore" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

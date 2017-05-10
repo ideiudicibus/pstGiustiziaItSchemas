@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns="http://schemi.processotelematico.giustizia.it/eventi/magistrato" targetNamespace="http://schemi.processotelematico.giustizia.it/eventi/magistrato" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="./tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Eventi associabili ad atti del magistrato.</xs:documentation>
+		<xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="TipoDecreto">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PagamentoSomma"/>
+			<xs:enumeration value="ConsegnaBeni"/>
+			<xs:enumeration value="BeniSomma"/>
+			<xs:enumeration value="OneriCondominiali"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoDecisione">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="accoglimento-parziale"/>
+			<xs:enumeration value="accoglimento-totale"/>
+			<xs:enumeration value="rigetto"/>
+			<xs:enumeration value="competenza"/>
+			<xs:enumeration value="altro"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DataUdienza">
+		<xs:simpleContent>
+			<xs:extension base="xs:dateTime">
+				<xs:attribute name="straordinaria" type="xs:boolean" use="optional" default="false"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="tFissazioneUdienza">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="data" type="DataUdienza" minOccurs="0"/>
+					<xs:element name="durata" type="xs:time" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CollegioGiudici">
+		<xs:annotation>
+			<xs:documentation>Composizione del collegio dei giudici</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="giudice" minOccurs="3" maxOccurs="3">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="relatore" type="xs:boolean"/>
+							<xs:attribute name="presidente" type="xs:boolean"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tFissazionePrimaUdienza">
+		<xs:complexContent>
+			<xs:extension base="tFissazioneUdienza">
+				<xs:sequence>
+					<xs:element name="collegio" type="CollegioGiudici" minOccurs="0"/>
+					<xs:element name="sostituzioneGiudice" type="tSostituzioneSoggetto" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tFissazioneUdienzaTermine">
+		<xs:complexContent>
+			<xs:extension base="tFissazioneUdienza">
+				<xs:sequence>
+					<xs:element name="dataTermineNotifica" type="xs:date" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tFissazioneUdienzaMemorieRepliche">
+		<xs:complexContent>
+			<xs:extension base="tFissazioneUdienza">
+				<xs:sequence>
+					<xs:element name="dataTermineMemorie" type="xs:date" minOccurs="0"/>
+					<xs:element name="dataTermineRepliche" type="xs:date" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tOrdinanzaConvalidaSfratto">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="dataEsecuzione" type="xs:date" minOccurs="0"/>
+					<xs:element name="dataScadenza" type="xs:date" minOccurs="0"/>
+					<xs:element name="speseProcessuali" type="bt:Valuta" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="naturaAbitativa" type="xs:boolean" use="optional" default="true"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tOrdinanza186">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="parte" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="esecutiva" type="xs:boolean" use="optional" default="false"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tEmissioneDecretoIngiuntivo">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="spese" type="bt:Valuta" minOccurs="0"/>
+					<xs:element name="onorari" type="bt:Valuta" minOccurs="0"/>
+					<xs:element name="competenze" type="bt:Valuta" minOccurs="0"/>
+					<xs:choice minOccurs="0">
+						<xs:element name="pagamentoSolido"/>
+						<xs:element name="parteIngiunta" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:attribute name="idParte" type="xs:string" use="required"/>
+								<xs:attribute name="importoRichiesto" type="bt:Valuta" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="tipo" type="TipoDecreto" use="required"/>
+				<xs:attribute name="esecutivo" type="xs:boolean" use="required"/>
+				<xs:attribute name="importo" type="xs:float" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tAccoglimentoParziale">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="parte" type="xs:string" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tDesignazioneGiudice">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="giudice" type="xs:string" nillable="false" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tDepositoMinutaSentenza">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="dataDecisione" type="xs:date" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="decisione" type="TipoDecisione" use="optional"/>
+				<xs:attribute name="collegiale" type="xs:boolean" use="optional" default="false"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tDepositoMinutaSentenzaNonDefinitiva">
+		<xs:complexContent>
+			<xs:extension base="tDepositoMinutaSentenza">
+				<xs:attribute name="letturaDispositivo" type="xs:boolean" use="optional" default="true"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tLetturaDispositivo">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:attribute name="collegiale" type="xs:boolean" use="optional" default="false"/>
+				<xs:attribute name="sentenza" type="TipoDecisione" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tRichiestaIntegrazioneDocumenti">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="motivo" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tNominaCustode">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="denominazione" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tEventoCTU" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="ctu" type="at:RiferimentoCTU"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tMutamentoRito">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="nuovoRito" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tIncaricoCTU">
+		<xs:complexContent>
+			<xs:extension base="tEventoCTU">
+				<xs:sequence>
+					<xs:element name="incarico" type="xs:string" minOccurs="0"/>
+					<xs:element name="dataTermine" type="xs:date" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tNominaCTU">
+		<xs:complexContent>
+			<xs:extension base="tEventoCTU">
+				<xs:sequence>
+					<xs:element name="dataNomina" type="xs:date" minOccurs="0"/>
+					<xs:element name="dataGiuramento" type="xs:date" minOccurs="0"/>
+					<xs:element name="dataTermine" type="xs:date" minOccurs="0"/>
+					<xs:element name="quesito" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tLiquidazioneCTU">
+		<xs:complexContent>
+			<xs:extension base="tIncaricoCTU">
+				<xs:sequence>
+					<xs:element name="dataLiquidazione" type="xs:date" minOccurs="0"/>
+					<xs:element name="dataInizioPerizia" type="xs:date" minOccurs="0"/>
+					<xs:element name="dataFinePerizia" type="xs:date" minOccurs="0"/>
+					<xs:element name="dataDepositoPerizia" type="xs:date" minOccurs="0"/>
+					<xs:element name="pagatore" type="xs:string" minOccurs="0"/>
+					<xs:element name="iva" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="acconto" type="bt:Valuta" minOccurs="0"/>
+					<xs:element name="valorePerizia" type="bt:Valuta" minOccurs="0"/>
+					<xs:element name="vacazioni" type="xs:nonNegativeInteger" minOccurs="0"/>
+					<xs:element name="onorarioPerizia" type="bt:Valuta" minOccurs="0"/>
+					<xs:element name="speseLiquidate" type="bt:Valuta" minOccurs="0"/>
+					<xs:element name="compensoLiquidato" type="bt:Valuta" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tRevocaCTU">
+		<xs:complexContent>
+			<xs:extension base="tEventoCTU">
+				<xs:sequence>
+					<xs:element name="incarico" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tConcessioneEsecutorieta">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="parte" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:attribute name="idParte" type="xs:string" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tSostituzioneSoggetto">
+		<xs:annotation>
+			<xs:documentation>Generico evento di sostituzione soggetto coinvolto nel procedimento</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="codiceFiscale" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+        <xs:complexType name="RimessionePresidente">
+		<xs:sequence>
+			<xs:element name="motivo" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:group name="tEventiCTU">
+		<xs:annotation>
+			<xs:documentation>Eventi di provvedimento riguardanti i CTU</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="NominaCTU"/>
+			<xs:element ref="SupplementoNominaCTU"/>
+			<xs:element ref="IncaricoCTU"/>
+			<xs:element ref="ChiarimentiCTU"/>
+			<xs:element ref="SollecitoCTU"/>
+			<xs:element ref="SupplementoIncaricoCTU"/>
+			<xs:element ref="LiquidazioneCTU"/>
+			<xs:element ref="RevocaCTU"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="tEventiOrdinanza">
+		<xs:annotation>
+			<xs:documentation>Eventi che qualificano l'ordinanza in termini di evento gestito dai sistemi di cancelleria.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="OrdinanzaConvalidaSfratto"/>
+			<xs:element ref="OrdinanzaConvalidaSfrattoLicenza"/>
+			<xs:element ref="Ordinanza186BisCpc"/>
+			<xs:element ref="Ordinanza186TerCpc"/>
+			<xs:element ref="Ordinanza186QuaterCpc"/>
+			<xs:element ref="OrdinanzaInterruzione"/>
+			<xs:element ref="OrdinanzaIntegrazioneContraddittorio"/>
+			<xs:element ref="AnticipazioneUdienza"/>
+			<xs:element ref="RichiestaIntegrazioneDocumenti"/>
+			<xs:element ref="Rigetto"/>
+			<xs:element ref="Sospensione"/>
+			<xs:element ref="MutamentoRito"/>
+			<xs:element ref="RinvioUdienza"/>
+			<xs:element ref="OrdinanzaInammissibilita"/>
+            <xs:element ref="RimessionePresidenteTribunale"/>
+			<xs:element ref="RimessionePresidenteCorte"/>
+			<xs:element ref="RimessionePresidenteSezione"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="tOrdinanzeComuni">
+		<xs:annotation>
+			<xs:documentation>Ordinanze permesse all'interno di atti di definizione del procedimento</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="OrdinanzaRimessionePresidenteSezione"/>
+			<xs:element ref="OrdinanzaRimessionePresidenteTribunale"/>
+			<xs:element ref="OrdinanzaRimessioneInIstruttoria"/>
+			<xs:element ref="OrdinanzaIntegrazioneContraddittorio"/>
+			<xs:element ref="Sospensione"/>
+			<xs:element ref="OrdinanzaInterruzione"/>
+		</xs:choice>
+	</xs:group>
+	<xs:element name="EmissioneDecretoIngiuntivo" type="tEmissioneDecretoIngiuntivo">
+		<xs:annotation>
+			<xs:documentation>Emissione di un decreto ingiuntivo a seguito dell'accoglimento di una opposizione</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Rigetto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Evento di rigetto del ricorso</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AccoglimentoIstanza" type="pt:IstanzaEvento"/>
+	<xs:element name="RigettoIstanza" type="pt:IstanzaEvento"/>
+	<xs:element name="ParereGT" type="pt:IstanzaEvento"/>
+	<xs:element name="AccordoParti" type="pt:IstanzaEvento"/>
+	<xs:element name="AccoglimentoTotale" type="pt:IstanzaEvento"/>
+	<xs:element name="AccoglimentoParziale" type="tAccoglimentoParziale"/>
+	<xs:element name="AccoglimentoInAuditaAlteraParte" type="pt:IstanzaEvento"/>
+	<xs:element name="ConcessioneEsecutorietaExArt647" type="tConcessioneEsecutorieta">
+		<xs:annotation>
+			<xs:documentation>Concessione Esecutorieta' (ex art. 647 cpc)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DesignazioneGiudiceFaseIstruttoria" type="tDesignazioneGiudice">
+		<xs:annotation>
+			<xs:documentation>Designazione Giudice Per La Fase Istruttoria</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FissazionePrimaUdienza" type="tFissazionePrimaUdienza">
+		<xs:annotation>
+			<xs:documentation>Fissazione prima udienza del giudice assegnato</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FissazioneUdienzaComparizione" type="tFissazioneUdienza"/>
+	<xs:element name="FissazioneUdienzaPrimaComparizione" type="tFissazioneUdienza">
+		<xs:annotation>
+			<xs:documentation>Fissazione Udienza Di Prima Comparizione (Art.180/350 Cpc)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FissazioneUdienzaComparizioneParti" type="tFissazioneUdienzaTermine">
+		<xs:annotation>
+			<xs:documentation>Fissazione Udienza Di Comparizione Parti</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FissazioneUdienzaConvalida" type="tFissazioneUdienza">
+		<xs:annotation>
+			<xs:documentation>Fissazione Udienza Di Convalida</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FissazioneUdienzaCorrezioneErroreMateriale" type="tFissazioneUdienzaTermine"/>
+	<xs:element name="RinvioUdienza" type="tFissazioneUdienza">
+		<xs:annotation>
+			<xs:documentation>Rinvio d'ufficio dell'udienza</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OrdinanzaInammissibilita" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Evento Inammissibile</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RinvioAltraUdienza" type="tFissazioneUdienza">
+		<xs:annotation>
+			<xs:documentation>Generico rinvio ad altra udienza</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RinvioAltraUdienzaCollegiale" type="tFissazioneUdienza">
+		<xs:annotation>
+			<xs:documentation>Rinvio Ad Altra Udienza Collegiale</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Sospensione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Evento di sospensione</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OrdinanzaInterruzione" type="pt:IstanzaEvento"/>
+	<xs:element name="OrdinanzaEstinzione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Estinzione del procedimento</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OrdinanzaIntegrazioneContraddittorio" type="tFissazioneUdienza"/>
+	<xs:element name="OrdinanzaRimessioneInIstruttoria" type="tFissazioneUdienza"/>
+	<xs:element name="OrdinanzaRimessionePresidenteSezione" type="pt:IstanzaEvento"/>
+	<xs:element name="OrdinanzaRimessionePresidenteTribunale" type="pt:IstanzaEvento"/>
+	<xs:element name="OrdinanzaRimessioneCollegio" type="tFissazioneUdienza"/>
+	<xs:element name="Ordinanza186BisCpc" type="tOrdinanza186"/>
+	<xs:element name="Ordinanza186TerCpc" type="tOrdinanza186"/>
+	<xs:element name="Ordinanza186QuaterCpc" type="tOrdinanza186"/>
+	<xs:element name="Ordinanza423Cpc" type="pt:IstanzaEvento"/>
+	<xs:element name="OrdinanzaConvalidaSfratto" type="tOrdinanzaConvalidaSfratto"/>
+	<xs:element name="OrdinanzaConvalidaSfrattoLicenza" type="tOrdinanzaConvalidaSfratto"/>
+	<xs:element name="CessatiEffettiIntimazioneArt662Cpc" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Cessazione effetti dell'intimazione (Art. 662 cpc)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoMinutaSentenzaDefinitiva" type="tDepositoMinutaSentenza"/>
+	<xs:element name="DepositoMinutaSentenzaNonDefinitiva" type="tDepositoMinutaSentenzaNonDefinitiva"/>
+	<xs:element name="LetturaDispositivo" type="tLetturaDispositivo"/>
+	<xs:element name="LetturaDispositivoNonDefinitivo" type="tLetturaDispositivo"/>
+	<xs:element name="RichiestaIntegrazioneDocumenti" type="tRichiestaIntegrazioneDocumenti"/>
+	<xs:element name="TrasformazioneInDivorzioCongiunto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Trasformazione In Divorzio Congiunto</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TrasformazioneInSeparazioneConsensuale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Trasformazione In Separazione Consensuale (In Attesa Omologazione)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AnticipazioneUdienza" type="tFissazioneUdienza"/>
+	<xs:element name="NominaCustode" type="tNominaCustode"/>
+	<xs:element name="MutamentoRito" type="tMutamentoRito"/>
+	<xs:element name="NominaCTU" type="tNominaCTU"/>
+	<xs:element name="SupplementoNominaCTU" type="tNominaCTU"/>
+	<xs:element name="IncaricoCTU" type="tIncaricoCTU"/>
+	<xs:element name="ChiarimentiCTU" type="tIncaricoCTU"/>
+	<xs:element name="SollecitoCTU" type="tIncaricoCTU"/>
+	<xs:element name="SupplementoIncaricoCTU" type="tIncaricoCTU"/>
+	<xs:element name="LiquidazioneCTU" type="tLiquidazioneCTU"/>
+	<xs:element name="RevocaCTU" type="tRevocaCTU"/>
+	<xs:element name="AssegnazioneSezione" type="pt:IstanzaEvento"/>
+	<xs:element name="AssegnazioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="AssegnazioneGiudiceUdie" type="pt:IstanzaEvento"/>
+	<xs:element name="AssegnazioneSezioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="ConfermaGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="ConfermaSezione" type="pt:IstanzaEvento"/>
+	<xs:element name="ConfermaSezioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="SostituzioneSezione" type="pt:IstanzaEvento"/>
+	<xs:element name="SostituzioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="SostituzioneSezioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="ConfermaSezioneSostituzioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="SostituzioneSezioneAssegnazioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="RimessionePresidenteTribunale" type="RimessionePresidente"/>
+	<xs:element name="RimessionePresidenteCorte" type="RimessionePresidente"/>
+	<xs:element name="RimessionePresidenteSezione" type="RimessionePresidente"/>
+</xs:schema>

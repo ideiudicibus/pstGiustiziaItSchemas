@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/ecodex/sistema/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" targetNamespace="http://schemi.processotelematico.giustizia.it/ecodex/sistema/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DI SISTEMA ECODEX</xs:documentation>
+    <xs:documentation>Atti di servizio per il completamento dei flussi ECODEX</xs:documentation>
+  </xs:annotation>
+
+  <xs:complexType name="RiferimentoMessaggio">
+    <xs:sequence>
+      <xs:element name="Codice"      type="xs:string"/>
+      <xs:element name="Anno"        type="xs:string"/>
+      <xs:element name="Progressivo" type="xs:string"/> 
+    </xs:sequence>
+  </xs:complexType>  
+  
+  <xs:simpleType name="TipoRiscontro">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACK">
+        <xs:annotation>
+          <xs:documentation>Riscontro positivo, la comunicazione e' stata correttamente consegnata</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NACK">
+        <xs:annotation>
+          <xs:documentation>Riscontro negativo, la comunicazione non e' stata consegnata</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="DatiRiscontro">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="tipo" type="TipoRiscontro" use="required"/>
+        <xs:attribute name="data" type="xs:dateTime" use="required"/> 
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+	<xs:element name="Ricevuta">
+		<xs:annotation>
+			<xs:documentation>Riscontro relativo alla consegna o mancata consegna di una comnicazione</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+          <xs:sequence>
+            <xs:element name="messaggio" type="RiferimentoMessaggio"/>
+            <xs:element name="riscontro" type="DatiRiscontro"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

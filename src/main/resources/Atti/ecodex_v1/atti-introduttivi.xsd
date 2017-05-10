@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" xmlns="http://schemi.processotelematico.giustizia.it/ecodex/introduttivi/v1" targetNamespace="http://schemi.processotelematico.giustizia.it/ecodex/introduttivi/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI INTRODUTTIVI SISTEMA ECODEX</xs:documentation>
+		<xs:documentation>Gli atti qui definiti iscrivono una nuova causa al ruolo per citazione o ricorso</xs:documentation>
+	</xs:annotation>
+  
+	<xs:complexType name="DatiPagamento">
+		<xs:sequence>
+			<xs:element name="somma" type="bt:Valuta"/>
+      <xs:element name="interessi" type="bt:Valuta" minOccurs="0"/>
+      <xs:element name="penalitaContrattuali" type="bt:Valuta" minOccurs="0"/>
+      <xs:element name="spese" type="bt:Valuta" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="esecutivo" type="xs:boolean" use="required"/>
+	</xs:complexType>
+  
+  <xs:simpleType name="SubjectUUID">
+    <xs:annotation>
+      <xs:documentation>Identificatore univoco per il soggetto</xs:documentation>
+      <xs:documentation>La garanzia di univocita' e' responsabilita' del connector</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="16"/>
+      <xs:pattern value="UE::[0-9A-Z]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="Soggetto">
+    <xs:annotation>
+      <xs:documentation>Generico soggetto di anagrafica</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="uuid" type="SubjectUUID"/>
+      <xs:element name="cognome" type="xs:normalizedString"/>
+      <xs:element name="nome" type="xs:normalizedString" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Indirizzo">
+    <xs:annotation>
+      <xs:documentation>Dati indirizzo</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="via" type="xs:string"/>
+      <xs:element name="cap" type="xs:string"/>
+      <xs:element name="localita" type="xs:string"/>
+      <xs:element name="provincia" type="xs:string"/>
+      <xs:element name="nazione" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+ 
+	<xs:complexType name="AnagraficaProcedimento">
+		<xs:annotation>
+			<xs:documentation>Dati anagrafici relativi al procedimento da iscrivere</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Partecipanti">
+				<xs:annotation>
+					<xs:documentation>Parti in causa</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Parte" type="Parte" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Soggetto che introduce il procedimento. Ad esempio Attore/Ricorrente/Appellante nelle cause di contenzioso. Il primo elemento e' considerato il principale.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ControParte" type="Parte" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Parte opposta nel procedimento. Ad esempio Convenuto/Resistente/Appellato coinvolto nella causa di contenzioso. Il primo elemento e' considerato il principale</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Altro" type="Parte" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Altri partecipanti alla causa. Ad esempio chiamato in causa</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="Soggetti"/>
+		</xs:sequence>
+	</xs:complexType>
+  
+  <xs:complexType name="Parte">
+    <xs:annotation>
+      <xs:documentation>Parte del procedimento. Comprende le informazioni minimali necessarie per la creazione del fascicolo all'interno dei sistemi di cancelleria.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="uuid" type="SubjectUUID" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Identificativo univoco della parte</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="denominazione" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation>Cognome o denominazione della parte. Il dato viene utilizzato per l'identificazione all'interno del procedimento</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nome" type="xs:normalizedString" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Nome della parte. Il dato viene utiizzato per l'identificazione all'interno del procedimento.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="indirizzo" type="Indirizzo" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="naturaGiuridica" type="bt:NaturaGiuridica" use="required"/>
+    <xs:attribute name="ID" type="xs:NMTOKEN" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="Avvocato">
+    <xs:annotation>
+      <xs:documentation>Definizione dell'avvocato coinvolto nei procedimenti, comprende le informazioni minimali per l'aggiornamento delle anagrafiche dei sistemi di cancelleria.
+Non sono incluse le informazioni relative ai domicili dell'avvocato, in quanto in questo contesto si considera il solo indirizzo elettronico, come definito nel D.P.R. 13 febbraio
+2001, n. 123.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="Soggetto">
+        <xs:sequence>
+          <xs:element name="domicilio" type="Indirizzo" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Domicilio del rappresentante legale nel contesto del procedimento</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="indirizzo" type="Indirizzo" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Indirizzo del legale</xs:documentation>
+              <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="parteRappresentata" type="RiferimentoPartecipante" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Riferimenti alle parti rappresentate nel procedimento</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="RiferimentoPartecipante">
+    <xs:annotation>
+      <xs:documentation>Riferimento ad un partecipante al procedimento. Il riferimento e' da intendersi locale all'atto che lo definisce, per la valutazione dei vincoli di integrita' ma non ha nessun significato globale all'interno del sistema</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+  </xs:complexType>  
+  
+  <xs:element name="AnagraficaProcedimento" type="AnagraficaProcedimento">
+    <xs:annotation>
+      <xs:documentation>Descrizione delle parti e dei rappresentanti coinvolti nel procedimento.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  
+  <xs:element name="SicurezzaMessaggio">
+    <xs:annotation>
+      <xs:documentation>Contiene informazioni riassuntive relative alla sicurezza ed al trust del messaggio arrivato al Connector</xs:documentation>
+      <xs:documentation>Evita di trasferire l'intero TRUST-TOKEN ai sistemi di cancelleria.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+    
+	<xs:element name="OrdinePagamentoEuropeo">
+		<xs:annotation>
+			<xs:documentation>Iscrizione a ruolo di un Ordine di Pagamento Europeo, assimilabili a Ricorsi per Decreto Ingiuntivo.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element ref="SicurezzaMessaggio"/>
+						<xs:element ref="AnagraficaProcedimento"/>
+						<xs:element name="DatiPagamento" type="DatiPagamento"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+  
+	<xs:element name="Soggetti">
+		<xs:annotation>
+			<xs:documentation>Difensori delle parti.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Avvocato" type="Avvocato" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Avvocato coinvolto nel procedimento. I gli avvocati qui definiti referenziano  i partecipanti al procedimento.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

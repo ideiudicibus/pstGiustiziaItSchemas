@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/sistema/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/sistema/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Atti generati dal sistema o dai sistemi utilizzati dal Gestore locale</xs:documentation>
+		<xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+	</xs:annotation>
+	<xs:attributeGroup name="SistemaSorgente">
+		<xs:attribute name="sorgente" type="xs:NMTOKEN" use="required">
+			<xs:annotation>
+				<xs:documentation>Codice del sistema sorgente della trasmissione</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="atto" type="pt:RiferimentoAtto"/>
+	<xs:element name="TrasmissioneAttiUfficio">
+		<xs:annotation>
+			<xs:documentation>Trasmissione di atti da un ufficio all'altro</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element ref="atto" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attributeGroup ref="SistemaSorgente"/>
+					<xs:attribute name="idRichiesta" type="xs:NMTOKEN">
+						<xs:annotation>
+							<xs:documentation>Identiificativo di una eventuale richiesta da parte del sistema ricevente</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

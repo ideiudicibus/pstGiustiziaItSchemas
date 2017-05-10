@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/unep/v1" xmlns:tn="http://schemi.processotelematico.giustizia.it/unep/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:bu="http://schemi.processotelematico.giustizia.it/tipiBaseUnep" targetNamespace="http://schemi.processotelematico.giustizia.it/unep/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipiBaseUnep" schemaLocation="tipi-base-unep.xsd"/>
+	<xs:complexType name="HashType">
+		<xs:annotation>
+			<xs:documentation>Generico Hash per il riferimento ad un documento</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:base64Binary">
+				<xs:attribute name="algID" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="RichiestaParte">
+		<xs:annotation>
+			<xs:documentation>Estremi per la richiesta di notifica dell’atto di parte</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="false">
+			<xs:complexContent mixed="false">
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element name="DataRichiesta" type="xs:date"/>
+						<xs:element name="DataScadenza" type="xs:date" minOccurs="0"/>
+						<xs:element name="Istante">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:Soggetto">
+										<xs:sequence>
+											<xs:element name="indirizzo" type="at:Indirizzo" minOccurs="0"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Avvocato">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:Soggetto">
+										<xs:sequence>
+											<xs:element name="indirizzo" type="at:Indirizzo" minOccurs="0"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="TipoRichiesta"/>
+						<xs:element name="Destinatario" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="cognome" type="xs:string"/>
+									<xs:element name="nome" type="xs:string"/>
+									<xs:element name="codiceFiscale" type="xs:string" minOccurs="0"/>
+									<xs:element name="Indirizzo" type="at:Indirizzo"/>
+								</xs:sequence>
+								<xs:attribute name="progDestinatario" type="xs:positiveInteger" use="required"/>
+								<xs:attribute name="tipoNotifica" type="TipoNotifica" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="Protocollo" minOccurs="0"/>
+						<xs:element name="NaturaAtto">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="codiceNatura" type="bu:NaturaAtti" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Urgenza">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="codiceUrgenza" type="bu:Urgenza" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RelataNotifica">
+		<xs:annotation>
+			<xs:documentation>Relata di notifica per avvocato telematico</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Protocollo"/>
+				<xs:element name="DatiConsegna" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Esito" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="EsitoDes">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Positivo"/>
+													<xs:enumeration value="Negativo"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="NotizieReperibilita" type="xs:string" use="optional"/>
+									<xs:attribute name="MotiviMancataConsegna" type="bu:Motivi" use="optional"/>
+									<xs:attribute name="RicercheEffettuate" type="bu:Ricerche" use="optional"/>
+									<xs:attribute name="Note" type="xs:string" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="UfficialeGiudiziario">
+								<xs:complexType>
+									<xs:complexContent>
+										<xs:extension base="at:Soggetto"/>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="LuogoConsegna" type="xs:string" minOccurs="0"/>
+							<xs:sequence>
+								<xs:element name="ArticoloApplicato">
+									<xs:complexType>
+										<xs:simpleContent>
+											<xs:extension base="xs:string">
+												<xs:attribute name="codiceArticolo" type="bu:Articolo" use="required"/>
+											</xs:extension>
+										</xs:simpleContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Annotazioni" type="xs:string" minOccurs="0"/>
+								<xs:choice>
+									<xs:element name="ConsegnaAMezzoPosta">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="HashRelata" type="HashType"/>
+												<xs:element name="NRacc149" type="xs:string"/>
+												<xs:element name="NRaccAR149" type="xs:string" minOccurs="0"/>
+											</xs:sequence>
+											<xs:attribute name="dataSpedizione" type="xs:date" use="required"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="ConsegnaAMani">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="HashRelata" type="HashType"/>
+												<xs:element name="IrreperibilitaTemporanea" minOccurs="0">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="SpedizioneAvviso">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="NRacc139_140" type="xs:string"/>
+																		<xs:element name="NRaccAR139_140" type="xs:string" minOccurs="0"/>
+																		<xs:element name="NRacc660" type="xs:string" nillable="true" minOccurs="0"/>
+																	</xs:sequence>
+																	<xs:attribute name="data" type="xs:date" use="required"/>
+																	<xs:attribute name="data660" type="xs:date" use="optional"/>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="DepositoCasaComunale" nillable="true" minOccurs="0">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="UGAffissione">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="at:Soggetto"/>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="UGDeposito">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="at:Soggetto"/>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																	<xs:attribute name="dataAffissione" type="xs:date" use="required"/>
+																	<xs:attribute name="dataDeposito" type="xs:date" use="required"/>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="dataNotifica" type="xs:date" use="required"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="ConsegnaAMezzoPEC">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="IndirizzarioConsultato">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="ReGIndE"/>
+															<xs:enumeration value="Registro imprese"/>
+															<xs:enumeration value="CECPAC"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="HashRicevutaAccettazione" type="HashType"/>
+												<xs:element name="HashRicevutaAvvenutaConsegna" type="HashType"/>
+												<xs:element name="IndirizzoPEC">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:pattern value="[\p{L}_\-]+(\.[\p{L}_\-]+)*@[\p{L}_]+(\.[\p{L}_]+)+"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="dataAccettazione" type="xs:dateTime"/>
+											<xs:attribute name="dataAvvenutaConsegna" type="xs:dateTime"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+							</xs:sequence>
+							<xs:element name="Destinatario">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="cognome" type="xs:string"/>
+										<xs:element name="nome" type="xs:string"/>
+										<xs:element name="codiceFiscale" type="xs:string" minOccurs="0"/>
+										<xs:element name="Indirizzo" type="at:Indirizzo"/>
+									</xs:sequence>
+									<xs:attribute name="progDestinatario" type="xs:positiveInteger" use="required"/>
+									<xs:attribute name="tipoNotifica" type="TipoNotifica" use="required"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Consegnatario" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Qualita">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base="xs:string">
+														<xs:attribute name="codiceQualita" type="bu:Qualita" use="required"/>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Nominativo" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="HashAtto" type="HashType"/>
+				<xs:element name="DatiRichiesta">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataRichiesta" type="xs:date"/>
+							<xs:element name="DataScadenza" type="xs:date" minOccurs="0"/>
+							<xs:element name="Istante">
+								<xs:complexType>
+									<xs:complexContent>
+										<xs:extension base="at:Soggetto">
+											<xs:sequence>
+												<xs:element name="indirizzo" type="at:Indirizzo" minOccurs="0"/>
+											</xs:sequence>
+										</xs:extension>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Avvocato">
+								<xs:complexType>
+									<xs:complexContent>
+										<xs:extension base="at:Soggetto">
+											<xs:sequence>
+												<xs:element name="indirizzo" type="at:Indirizzo" minOccurs="0"/>
+											</xs:sequence>
+										</xs:extension>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element ref="TipoRichiesta"/>
+							<xs:element name="NaturaAtto">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="codiceNatura" type="bu:NaturaAtti" use="required"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Urgenza">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="codiceUrgenza" type="bu:Urgenza" use="required"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaAutoritaGiudiziaria">
+		<xs:annotation>
+			<xs:documentation>Richiesta di notifica da parte di un ufficio giudiziario</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="false">
+			<xs:complexContent mixed="false">
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element name="DataRichiesta" type="xs:date"/>
+						<xs:element name="DataScadenza" type="xs:date"/>
+						<xs:element name="UfficioGiudiziario">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="descrizione"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Procedimento" type="pt:RiferimentoProcedimento"/>
+						<xs:element name="Giudice" type="at:Soggetto"/>
+						<xs:element name="TipoRichiesta">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="AttoCivile"/>
+									<xs:element name="AttoPenale"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Destinatario" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="cognome"/>
+									<xs:element name="nome"/>
+									<xs:element name="Indirizzo" type="at:Indirizzo"/>
+								</xs:sequence>
+								<xs:attribute name="progDestinatario" type="xs:positiveInteger" use="required"/>
+								<xs:attribute name="tipoNotifica" type="TipoNotifica" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="NaturaAtto">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="codiceNatura" type="bu:NaturaAtti" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Urgenza">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="codiceUrgenza" type="bu:Urgenza" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaPignoramento">
+		<xs:annotation>
+			<xs:documentation>Estremi per la richiesta di pignoramento</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="false">
+			<xs:complexContent mixed="false">
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element name="inoltroUG" type="bt:UfficioTelematico">
+							<xs:annotation>
+								<xs:documentation>Ufficio Giudiziario al quale inoltrare l'atto</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Procedente" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:Parte">
+										<xs:sequence>
+											<xs:element name="Avvocato">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="at:Soggetto"/>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="domicilio" type="at:Indirizzo" minOccurs="0"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ImportoPrecetto" type="bt:Valuta"/>
+						<xs:element name="Debitore" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Dati di qualifica dei debitori</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:Parte">
+										<xs:sequence>
+											<xs:element name="Domicilio" type="at:Indirizzo"/>
+											<xs:element name="formaSocietaria" type="st:FormaSocietaria" default="N/A" minOccurs="0"/>
+											<xs:element name="dataNotificaPrecetto" type="xs:date"/>
+											<xs:element name="benePignorato" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="dirittiReali" type="st:Diritto" maxOccurs="unbounded"/>
+													</xs:sequence>
+													<xs:attribute name="refBene" type="xs:NMTOKEN" use="required"/>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Beni">
+							<xs:annotation>
+								<xs:documentation>Lista dei beni mobili o immobili pignorati</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="st:beneImmobile" maxOccurs="unbounded"/>
+									<xs:element ref="st:beneMobile" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Comproprietario" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:Parte">
+										<xs:sequence>
+											<xs:element name="benePignorato" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="dirittiReali" type="st:Diritto" maxOccurs="unbounded"/>
+													</xs:sequence>
+													<xs:attribute name="refBene" type="xs:NMTOKEN" use="required"/>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="TerzoPignorato" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:Parte"/>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Titolo" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="st:Titolo">
+										<xs:attribute name="ref" type="xs:NMTOKEN">
+											<xs:annotation>
+												<xs:documentation>Riferimento all'id della parte procedente</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="TipoRichiesta">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="Esecuzione"/>
+									<xs:element name="EsecuzioneEsenteLavoro" type="DatiFascicolo"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="NaturaAtto">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="codiceNatura" type="bu:NaturaAtti" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Urgenza">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="codiceUrgenza" type="bu:Urgenza" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<!--xs:key name="PK_BENE_R">
+			<xs:selector xpath="tn:Beni/*"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:unique name="PK_DEBITORE">
+			<xs:selector xpath="tn:Debitore"/>
+			<xs:field xpath="@ID"/>
+		</xs:unique>
+		<xs:keyref name="FK_DEBITORE_BENE" refer="PK_BENE_R">
+			<xs:selector xpath="tn:Debitore/tn:benePignorato"/>
+			<xs:field xpath="@refBene"/>
+		</xs:keyref>
+		<xs:keyref name="FK_TITOLO_DEBITORI" refer="tn:PK_DEBITORE">
+			<xs:selector xpath="st:titolo"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref-->
+	</xs:element>
+	<xs:element name="VerbalePignoramento">
+		<xs:annotation>
+			<xs:documentation>Verbale di pignoramento ed iscrizione a ruolo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="false">
+			<xs:complexContent mixed="false">
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element name="DataCitazione" type="xs:date" minOccurs="0"/>
+						<xs:element name="UfficialeGiudiziario" type="at:Soggetto"/>
+						<xs:element ref="Protocollo"/>
+						<xs:element ref="pt:AnagraficaProcedimento">
+							<xs:annotation>
+								<xs:documentation>Anagrafica delle parti e loro difensori</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Beni">
+							<xs:annotation>
+								<xs:documentation>Lista dei beni mobili o immobili pignorati</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="st:beneImmobile" maxOccurs="unbounded"/>
+									<xs:element ref="st:beneMobile" minOccurs="0" maxOccurs="unbounded"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="EstensioneAnagrafica" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DatiDebitore" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Dati di qualifica dei debitori</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="at:RiferimentoPartecipante">
+													<xs:sequence>
+														<xs:element name="formaSocietaria" type="st:FormaSocietaria" default="N/A" minOccurs="0"/>
+														<xs:element name="dataNotificaPrecetto" type="xs:date"/>
+														<xs:element name="dataNotificaPignoramento" type="xs:date" minOccurs="0"/>
+														<xs:element name="benePignorato" minOccurs="0" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="dirittiReali" type="st:Diritto" maxOccurs="unbounded"/>
+																</xs:sequence>
+																<xs:attribute name="refBene" type="xs:NMTOKEN" use="required"/>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DatiTerzo" minOccurs="0" maxOccurs="unbounded">
+										<xs:complexType mixed="false">
+											<xs:complexContent mixed="false">
+												<xs:extension base="at:RiferimentoPartecipante">
+													<xs:sequence>
+														<xs:element name="formaSocietaria" type="st:FormaSocietaria" default="N/A" minOccurs="0"/>
+														<xs:element name="dataNotificaPignoramento" type="xs:date"/>
+													</xs:sequence>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DatiProcedente">
+										<xs:annotation>
+											<xs:documentation>Indicazione del creditori procedente</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Titolo" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="st:Titolo">
+										<xs:attribute name="ref" type="xs:NMTOKEN">
+											<xs:annotation>
+												<xs:documentation>Riferimento all'id della parte procedente</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<!--xs:key name="PK_BENE">
+			<xs:selector xpath="tn:Beni/*"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:unique name="AK_CONTROPARTE">
+			<xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:ControParte"/>
+			<xs:field xpath="at:codiceFiscale"/>
+		</xs:unique>
+		<xs:keyref name="FK_PARTE_BENE" refer="PK_BENE">
+			<xs:selector xpath="tn:EstensioneAnagrafica/tn:DatiDebitore/tn:benePignorato"/>
+			<xs:field xpath="@refBene"/>
+		</xs:keyref>
+		<xs:keyref name="FK_DEBITORE_CONTROPARTE" refer="pt:PK_CONTROPARTE">
+			<xs:selector xpath="tn:EstensioneAnagrafica/tn:DatiDebitore"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+		<xs:keyref name="FK_PROCEDENTE_PARTE" refer="pt:PK_PARTE">
+			<xs:selector xpath="tn:EstensioneAnagrafica/tn:DatiProcedente"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+		<xs:keyref name="FK_TERZO_ALTRO" refer="pt:PK_ALTRO">
+			<xs:selector xpath="tn:EstensioneAnagrafica/tn:DatiTerzo"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+		<xs:keyref name="FK_TITOLO_DEBITORE" refer="tn:AK_CONTROPARTE">
+			<xs:selector xpath="st:titolo/st:debitore"/>
+			<xs:field xpath="@codiceFiscale"/>
+		</xs:keyref-->
+	</xs:element>
+	<xs:complexType name="DatiFascicolo">
+		<xs:sequence>
+			<xs:element name="Procedimento" type="pt:RiferimentoProcedimento"/>
+			<xs:element name="DataUdienza" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TipoNotifica">
+		<xs:annotation>
+			<xs:documentation>Tipo di notifiche previste (Mani,Posta,Estero,Telematica)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Mani"/>
+			<xs:enumeration value="Posta"/>
+			<xs:enumeration value="Estero"/>
+			<xs:enumeration value="Telematica"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Protocollo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Ufficio" nillable="false">
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="CodiceUfficio" type="bt:UfficioTelematico" use="required"/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Anno" type="xs:positiveInteger"/>
+				<xs:element name="Registro" type="xs:integer"/>
+				<xs:element name="Cronologico" type="xs:positiveInteger"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TipoRichiesta">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="AttoCivile">
+					<xs:annotation>
+						<xs:documentation>Atto civile a pagamento</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="AttoPenale">
+					<xs:annotation>
+						<xs:documentation>Atto penale a pagamento</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="AttoEsenteLavoro" type="DatiFascicolo" nillable="true">
+					<xs:annotation>
+						<xs:documentation>Atto materia lavoro esente</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="AttoEsenteGdp" type="DatiFascicolo" nillable="true">
+					<xs:annotation>
+						<xs:documentation>Giudice di pace esente</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
